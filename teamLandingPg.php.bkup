@@ -1,0 +1,273 @@
+<?
+session_start();
+$owneremail=$_SESSION['username']; //on login page we have user name field which is actually email entered at registration time
+$leaguename=$_SESSION['leaguename'];
+$pass=$_SESSION['pass'];
+$teamname=$_SESSION['teamname'];
+$teamownername=$_SESSION['teamownername'];
+$iplday=$_SESSION['iplday'];
+
+
+$serverName = "sg1-wsq1.a2hosting.com";
+$connectionInfo = array( "Database"=>"fantas10_mssql", "UID"=>"fantas10_avad", "PWD"=>"FLeague@2018");
+$conn = sqlsrv_connect( $serverName, $connectionInfo);
+
+// select from leaguedraw all matches only for this team
+$count=0;
+//$sql="select distinct(ld.ourmatchnum),ld.iplmatchnum,ld.team1name, ld.team2name, ip.matchstr ,ip.matchdate,  isnull(ld.score,'-')score, isnull(ld.whowon,'-') whowon from iplschedule ip , leaguedraw ld where ld.leaguename='$leaguename' and ( ld.team1name='$teamname' or ld.team2name='$teamname')and ld.iplmatchnum=ip.iplday ";
+$sql="select ld.ourmatchnum,ld.iplmatchnum,ld.team1name, ld.team2name, isnull(ld.score,'-') score, isnull(ld.whowon,'-') whowon,ld.actualiplmatch  from  leaguedraw ld where ld.leaguename='$leaguename' ";
+//echo $sql ;
+$result = sqlsrv_query($conn,$sql) ;
+while( $row = sqlsrv_fetch_array( $result ) )
+{
+	$iplmatchnum[$count]=$row[1];
+	$ourmatchnum[$count]=$row[0];
+	$team1name[$count]=$row[2];
+	$team2name[$count]=$row[3];
+	$iplmatchs[$count]=$row[6];
+//	$iplmatchdate[$count]=date_format($row[6],"yyyy-mm-dd");
+	$score[$count]=$row[4];
+	$whowon[$count]=$row[5];
+	$count++;
+	//echo "date is ". $iplmatchdate[$count] . " </br>";
+	//$logdate=date_format($row[4],"Y-m-d H:i:s");
+}
+sqlsrv_free_stmt($result);
+//select from iplschedule
+
+/*date_default_timezone_set('Asia/Kolkata');
+$today=date("z");
+
+echo "helo today is " . $today ;
+$startofIPL = 96; // ipl started on 4th apr so 96th day of the year
+$showfrom = ($today-$startofIPL)+1;
+echo "adnd we will show shecude from  " . $showfrom ;
+*/
+//if($_SESSION['username'])
+//{
+//	echo "user name is ". $_SESSION['username'] . " and pass is " . $_SESSION['pwd']. " and team name is " . $_SESSION['teamname']."and league ". $_SESSION['leaguename'] ;
+//}
+//echo " in teamlanding page";
+
+$isOwner='No';
+$sql="select leaguecreatorname,drawdone from league_mst where leaguename='$leaguename'";
+$result = sqlsrv_query($conn,$sql) ;
+while( $row = sqlsrv_fetch_array( $result ) )
+{
+	$Owner=$row[0];
+	$drawdone=$row[1];
+}
+//echo "league is " .$leaguename. " and teamowner is ". $isOwner;
+
+if ($Owner == $teamownername)
+{
+	$isOwner='Yes';
+}
+sqlsrv_free_stmt($result);
+
+$sql="select count(*) from leagueauctionresults where leaguename='$leaguename' and ownerteam='$teamname'";
+$result = sqlsrv_query($conn,$sql) ;
+while( $row = sqlsrv_fetch_array( $result ) )
+{
+	$numberofplayers=$row[0];
+}
+sqlsrv_free_stmt($result);
+
+$sql="select sum(currenthighestbid) from leagueauctionresults where leaguename='$leaguename' and ownerteam='$teamname'";
+$result = sqlsrv_query($conn,$sql) ;
+while( $row = sqlsrv_fetch_array( $result ) )
+{
+	$totalbidamt=$row[0];
+	$teamvirpp=15000000-$totalbidamt;
+}
+sqlsrv_free_stmt($result);
+
+$sqlupdt="update leagueteamsdetails set Currentbidamount=$totalbidamt , virtualpurchasepower=$teamvirpp, numberofplayers=$numberofplayers WHERE leaguename = '$leaguename' and teamname='$teamname' ";
+	if(! sqlsrv_query($conn,$sqlupdt) )
+		{
+			die('error sqlupdate');
+		}
+//
+
+//$sql="select virtualpurchasepower,numberofplayers from leagueteamsdetails where leaguename='$leaguename' and teamname='$teamname' ";
+//$result = sqlsrv_query($conn,$sql) ;
+//while( $row = sqlsrv_fetch_array( $result ) )
+//{
+//	$teamvirpp=$row[0];
+//	$numberofplayers=$row[1];
+//}
+//sqlsrv_free_stmt($result);
+
+?>
+
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<title>Team Bidder Details</title>
+</head>
+<body leftmargin="0" topmargin="0" ><br/><br/>
+<table width="950" border="0" cellspacing="0" cellpadding="0" align="Center" bgcolor="#FFFFFF">
+	<tr>
+		<td >
+		</td>
+	</tr>
+	<tr>
+   <td>
+		<table border="0" cellpadding="0"  cellspacing="0" width="60%" align="center" bordercolordark="#FFFFFF" bordercolorlight="#FFFFCC">
+			<Tr><td height="50px;"><br/></td></Tr>
+			<tr>
+				<td align="center" colspan="2" bgcolor="#CCCCCC"><h3>Team Home Page</h3>
+				</td>
+			</tr>
+			<TR>
+				<TD  bgcolor="#CCCFFF" ><strong>  Team name: </strong> </TD>
+				<TD  align="right" bgcolor="#CCCFFF"><strong> League name:   </strong></TD>
+			</TR>
+			<TR>
+				<TD  bgcolor="#CCCFFF"> <strong><? echo $teamname ; ?> </strong></TD>
+				<TD  align="right" bgcolor="#CCCFFF"><strong><? echo $leaguename ; ?></strong>   </TD>
+			</TR>
+			<tr ><td style="border-bottom: 2px solid #cdd0d4" ></td><td style="border-bottom: 2px solid #cdd0d4" ></td></tr>
+			<TR>
+				<TD  bgcolor="#CCCFFF" ><strong> Amount You have </strong> </TD>
+				<TD  align="right" bgcolor="#CCCFFF"><strong> #of Players you have  </strong></TD>
+			</TR>
+			<TR>
+				<TD  bgcolor="#CCCFFF"> <strong><? echo $teamvirpp ;?> </strong></TD>
+				<TD  align="right" bgcolor="#CCCFFF"><strong><? echo $numberofplayers; ?></strong>   </TD>
+			</TR>
+
+
+		</table>
+ </td>
+</tr>
+<tr>
+	<td>
+		<table  border="1" cellspacing="5" cellpadding="0" align="Center">
+			<tr>
+				<? if ($isOwner=='No') {?>
+						<td align="left" height="30" > <a href="LeagueRulesView.php">LeagueRules</a> </td>
+						<td> </td>
+			 <? } ?>
+			 <? if ($isOwner=='Yes') { ?>
+				 		<td align="left" height="30" > <a href="LeagueRules.php">LeagueRules</a> </td>
+						<td><a href="RandomAlloc.php">Auto Allocation</a></td>
+						<? if ($drawdone =='N') {?>
+						<td align="left" height="30" > <a href="NewLeagueDraw.php">Put up League Draws </a></td>
+					<? }?>
+			 <? }	?>
+		<td align="left" height="30"> <a href="PlayersListForBidding.php">Bidding </a></td>
+		<td align="left" height="30"> <a href="LeaguePointsTable.php">LeagueStanding </a></td>
+		</tr>
+		<tr>
+			<td align="left" height="30"> <a href="ShowLeagueDraws.php">League Schedule </a></td>
+		<td align="left" height="30"> <a href="ViewYourTeam.php">Your Team </a></td>
+		<td align="left" height="30"> <a href="PlayerPurchaseAfterBiddingOver.php">Player Purchase </a></td>
+		<td align="left" height="30"> <a href="Sellplayer.php">Player Sell </a></td>
+
+	</tr>
+	<tr>
+		<td> <a href="viewallplayersperf.php">All Players performance</a></td>
+	</tr>
+</table>
+</td>
+</tr>
+</table>
+<!-- lets show this teams draws and from there u can select team -->
+<table border="1" align="center">
+	<tr>
+			<td>
+			</td>
+
+	</tr>
+</table>
+<!-- showing only this teams matches -->
+<table align="center" width=950>
+	<tr>
+		<td width="90%">
+			 <table border="1" cellpadding="0" cellspacing="0" width="90%"  align="center" bgcolor="#FFFFCC" bordercolordark="#CCCCCC" bordercolorlight="#FFFFCC">
+				 <tr>
+					 <td align="center" colspan="6" bgcolor="#CCCCCC"><h3>Match Schedule for your team </h3></td>
+				 </tr>
+				<tr bgcolor="#339999">
+					<th align="center">Match#</th>
+					<th align="center">Team1</th>
+					<th align="center">Team2</th>
+					<!--<th align="center">Date</th> -->
+					<th align="center">Score</th>
+					<th align="center">Winner</th>
+			        <th align="center">IPL Matchup</th>
+
+				</tr>
+				<?
+			//	echo "rows are ". $count ."</br>";
+				for ($i=0; $i<$count ; $i++) {
+					if ($team1name[$i]==$teamname || $team2name[$i]==$teamname) {
+			?>
+			<tr bordercolor="#993300">
+					<td align="center"><? echo $ourmatchnum[$i] ; ?></td>
+					<? if ($team1name[$i] == $teamname) { ?>
+					 <td align="center"> <a href="SelectYourTeam.php?mnum=<? echo $iplmatchnum[$i] ; ?>"><strong><? echo $team1name[$i]; ?></strong></a> </td>
+					<td align="center"> <a href="ViewOtherTeam.php?nm=<? echo $team2name[$i] ?>&mnum=view"><? echo $team2name[$i] ;?></a> </td>
+					<td align="center"> <? echo $score[$i] ; ?> </td>
+
+				<? } ?>
+				<? if ($team2name[$i] == $teamname) { ?>
+					<td align="center"> <a href="ViewOtherTeam.php?nm=<? echo $team1name[$i] ?>&mnum=view"><? echo $team1name[$i] ;?></a> </td>
+				 <td align="center"> <a href="SelectYourTeam.php?mnum=<? echo $iplmatchnum[$i] ; ?>"><strong><? echo $team2name[$i]; ?></strong></a> </td>
+				 <td align="center"> <? echo $score[$i] ; ?> </td>
+			<? } ?>
+			<!--		<td align="right"> <? echo $iplmatchdate[$i] ; ?> </td> -->
+
+					<td align="center" bgcolor="#FFCC66"><strong> <? echo $whowon[$i] ; ?></strong></td>
+					<td align="center" bgcolor="#FFCC66"><?echo $iplmatchs[$i] ;?></td>
+
+			   </tr>
+			<? }
+				}	?>
+
+
+			</table>
+		</td>
+		<td>
+			<table valign="top" align="center" border="4" bordercolordark="#CC0066" >
+					<tr> <td> League Wall </td></tr>
+					<tr>
+						<td>
+							<form name="form1" method="post" action="wallpost.php" >
+								<input name="wallPost" type="text" id="wallPost" value="Type here" size="50" maxlength="400" align="middle">
+								<input type="submit" name="post" id="post" value="Submit">
+							</form>
+
+							<table border="0">
+
+								<?
+								 $sql1="select top 20 leaguename, teamname, post, posttime from leaguewall where leaguename='$leaguename' order by posttime desc ";
+								$i=0;
+								$result = sqlsrv_query($conn,$sql1) ;
+								while( $row = sqlsrv_fetch_array( $result ) )
+								{
+									$teamname[$i]=$row[1];
+									$post[$i]=$row[2];
+									?>
+									<tr> <td><font face="Lucida Console, Monaco, monospace" size="-1">
+									<? echo $teamname[$i] ; echo "::"?></font><font face="Comic Sans MS, cursive" size="-1">
+									<?echo $post[$i] ;?>	</font></td></tr>
+								<?$i++;
+
+								}
+								?>
+						</table>
+					</td>
+				</tr>
+				</table>
+			</td>
+		</tr>
+	</table>
+
+
+<!-- we can show trading action here , meaning who is getting tradded etc across leag  , we need to ready from TradingInfo
+even the league wall can go here */
+-->
+</body>
+</html>

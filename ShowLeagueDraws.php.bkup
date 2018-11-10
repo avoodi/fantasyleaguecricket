@@ -1,0 +1,128 @@
+
+<?
+/*session_start();
+	$username=$_SESSION['username'];
+	$team=$_SESSION['teamname'];
+	$teamowner = $_SESSION['username'];
+	$leaguename= $_SESSION['leaguename'];
+	*/
+	$serverName = "sg1-wsq1.a2hosting.com";
+	$connectionInfo = array( "Database"=>"fantas10_mssql", "UID"=>"fantas10_avad", "PWD"=>"FLeague@2018");
+	$conn = sqlsrv_connect( $serverName, $connectionInfo);
+
+$leaguename='l1';
+	$i=0;
+	$sql = "select *  from leaguedraw where leaguename='$leaguename'  " ;
+//echo $sql . " </br>" ;
+	$result = sqlsrv_query($conn,$sql) ;
+	while( $row = sqlsrv_fetch_array( $result ) )
+	{
+		$iplmatchnum[$i]=$row[1];
+		$ourmatchnum[$i]=$row[2];
+		$team1name[$i]=$row[3];
+		$team2name[$i]=$row[4];
+		$matchdate[$i]=$row[5];
+		$score[$i]=$row[7];
+		$whowon[$i]=$row[8];
+		$actualiplmatch[$i]=$row[9];
+		$prediction[$i]=$row[10];
+		$team1vote[$i]=$row[11];
+		$team2vote[$i]=$row[12];
+		$i++;
+	}
+	sqlsrv_free_stmt($result);
+
+?>
+
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<title>LEAGUE TEAMS DETAILS</title>
+</head>
+<body >
+<table width="950" border="0" cellspacing="0" cellpadding="0" align="Center" bgcolor="#FFFFFF">
+	<tr>
+		<td >
+			<table width="98%" border="0" cellspacing="0" cellpadding="0" align="Center">
+				<tr>
+					<td align="left" height="130">
+					Welcome to the <b><font size="5" color="#FFFFFF"> Fantasy</font></b>	Cricket league </td>
+				</tr>
+			</table>
+		</td>
+	</tr>
+	<tr>
+<table width="950" align="center">
+<tr>
+	<td width="40%"><a href="teamLandingPg.asp"><b>Main Team Page</b></a></td>
+</tr>
+</table>
+
+<table border="0" cellpadding="0" class="text" cellspacing="0" width="50%" align="center" bordercolordark="#FFFFFF" bordercolorlight="#FFFFCC">
+	<tr>
+		<td align="center" colspan="2" valign="top" bgcolor="#CCCCCC"><h3>Match Schedule for League <? echo $leaguename; ?></h3></td>
+	</tr>
+</table>
+ <table border="1" cellpadding="0" cellspacing="0" width="66%"  align="center" bgcolor="#FFFFCC" bordercolordark="#CCCCCC" bordercolorlight="#FFFFCC">
+	<tr bgcolor="#339999">
+		<th align="center">Match#</th>
+		<th align="center">RealMatch#</th>
+		<th align="center">Team1</th>
+		<th align="center">Team2</th>
+		<th align="center">Date</th>
+		<th align="center">Score</th>
+		<th align="center">Prediction</th>
+		<th align="center">Winner</th>
+        <th align="center">Matchup</th>
+	</tr>
+	<?
+	echo "rows are ". $i ."</br>";
+	for ($count=0; $count<=$i ; $count++) {
+//  echo "values are " . $iplmatchnum[$j] . " " .	$ourmatchnum[$j] . " " . $team1name[$j] . " ".	$team2name[$j] . " ". 	$matchdate[$j] . " ". $score[$j] . "</br> ";
+//	echo "and also " . $whowon[$j] . " " . $actualiplmatch[$j] ." " . $prediction[$j] . " " . $team1vote[$j] . " " . $team2vote[$j] . "</br>";
+?>
+<tr bordercolor="#993300">
+	 <td align="center"><? echo $iplmatchnum[$count] ;?></td>
+		<td align="center"><? echo $ourmatchnum[$count] ; ?></td>
+		 <td align="center">
+			 <a href="OtherTeamsView.php?nm=<? echo $team1name[$count] ?>&mnum=<? echo $iplmatchnum[$count] ?>"><? echo $team1name[$count]; ?></a>
+		 </td>
+		<td align="center">
+			<a href="OtherTeamsView.php?nm=<? echo $team2name[$count] ?>&mnum=view"><? echo $team2name[$count] ;?></a>
+		</td>
+
+		<td align="right"><? echo $matchdate[$count] ; ?></td>
+		<td align="center">&nbsp;<? echo $score[$count] ; ?></td>
+		<td align="center">&nbsp;<? echo $prediction[$count] ;?></td>
+		<td align="center" bgcolor="#FFCC66"><strong><? echo $whowon[$count] ; ?></strong></td>
+		<td align="center" bgcolor="#FFCC66">
+	<a href="viewmatchup.php?t1=<? echo $team1name[$count] ?>&t2=<? echo $team2name[$count] ?>&t3=<<? echo $ourmatchnum[$count] ?>">
+			  <strong>ViewMatchup</strong></a>
+			</td>
+   </tr>
+<?
+		$count++;
+	}	?>
+
+
+</table>
+</tr>
+<table width="950" align="center">
+<tr>
+	<td align="left" height="30"></td>
+</tr>
+	<tr>
+		<td >
+			<table width="98%" border="0" cellspacing="0" cellpadding="0" align="Center">
+				<tr>
+					<td align="left" height="30"></td>
+				</tr>
+			</table>
+		</td>
+	</tr>
+	<tr><td align="Right" class="text">&copy 2011 All Rights Reserved.</td></tr>
+</table>
+
+</table>
+</body>
+</html>
