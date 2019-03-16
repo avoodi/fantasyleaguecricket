@@ -22,10 +22,12 @@
 //echo $username . " " .$pwd . " " .$leaguename. "</br>";
 /* need ot add code for checking / validing pwd here  */
 
-$serverName = "sg1-wsq1.a2hosting.com";
-$connectionInfo = array( "Database"=>"fantas10_mssql", "UID"=>"fantas10_avad", "PWD"=>"FLeague@2018");
-$conn = sqlsrv_connect( $serverName, $connectionInfo);
+//$serverName = "sg1-wsq1.a2hosting.com";
+//$connectionInfo = array( "Database"=>"fantas10_mssql", "UID"=>"fantas10_avad", "PWD"=>"FLeague@2018");
+//$conn = sqlsrv_connect( $serverName, $connectionInfo);
 
+//MySQL Database Connect include 'dbConnect.php';
+<?php include "dbConnect.php" ?>
 $sql="SELECT teamname,teamownername  FROM LEAGUETEAMSDETAILS WHERE leaguename= '$leaguename' and TEAMOWNEREMAIL='$username' AND TEAM_PASSWORD ='$pwd' ";
 //echo $sql ;
 
