@@ -1,7 +1,7 @@
 <?php
 // Connects to my Database
 //mysql_connect("your.hostaddress.com", "username", "password") or die(mysql_error());
-$servername = "localhost:3306";
+$servername = "localhost";
 $dbusername = "fantaftp_avad";
 $dbpassword = "FLeague@2019";
 $dbname="fantaftp_avad";
