@@ -8,13 +8,11 @@ $teamownername=$_SESSION['teamownername'];
 
 //echo "ownername is ".$teamownername;
 
+include "dbConnect.php";
+global $conn;
 
-	$servername = "localhost:3306";
-	$dbusername = "fanta_avad";
-	$dbpassword = "FLeague@2018";
-	$dbname="fantas10_avad";
 	// Create connection
-	$conn = mysqli_connect($servername, $dbusername, $dbpassword,$dbname);
+	//$conn = mysqli_connect($servername, $dbusername, $dbpassword,$dbname);
 	// Check connection
 	if ($conn == false) {
 	  echo "Sorry, site is temporarily experiencing database connectivity issues; should be sorted soon, please check again in some time";

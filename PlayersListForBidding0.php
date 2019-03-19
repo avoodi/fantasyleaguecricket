@@ -7,29 +7,32 @@
     $teamowner = $_SESSION['username'];
     $leaguename= $_SESSION['leaguename'];
 
+    include "dbConnect.php";
+    global $conn;
+
 echo "all session " . $username . " and team " . $team . " and owner " . $teamowner . " and league ". $leaguename . "<br/>";
     $serverName = "sg1-wsq1.a2hosting.com";
     $connectionInfo = array( "Database"=>"fantas10_mssql", "UID"=>"fantas10_avad", "PWD"=>"FLeague@2018");
-    $conn = sqlsrv_connect( $serverName, $connectionInfo);
+  //  $conn = sqlsrv_connect( $serverName, $connectionInfo);
 //is null for virtual purchase power is to be removed
     $sql1="select isnull(t.virtualpurchasepower,0), isnull(t.currentbidamount,0) currentbidamount , t.numberofplayers from leagueteamsdetails T where t.teamname= '$team' and t.leaguename='$leaguename' ";
 echo $sql1 . "<br/>";
-  $result = sqlsrv_query($conn,$sql1) ;
-  while( $row = sqlsrv_fetch_array( $result ) )
+  $result = mysqli_query($conn,$sql1) ;
+  while( $row = mysqli_fetch_array( $result ) )
   {
     $virtualpurchasepower=$row[0];
     $currentbidamount=$row[1];
     $numberofplayers=$row[2];
   }
-  sqlsrv_free_stmt($result);
+  mysqli_free_result($result);
 
     $sql2 = "select biddingstatus from leaguerules  where leaguename='$leaguename'";
-    $result = sqlsrv_query($conn,$sql2) ;
-    while( $row = sqlsrv_fetch_array( $result ) )
+    $result = mysqli_query($conn,$sql2) ;
+    while( $row = mysqli_fetch_array( $result ) )
     {
       $biddingstatus=$row[0];
     }
-    sqlsrv_free_stmt($result);
+    mysqli_free_result($result);
 
 ?>
 <style>
@@ -122,8 +125,8 @@ table.sortable thead {
 $i=1;
 $sql="select x.playername,x.iplteam,x.speciality, x.reserveprice,isnull(t.currenthighestbid,x.reserveprice)currenthighestbid, t.ownerteam from LEAGUEAUCTIONRESULTS T, PLAYERMST X where t.playername = x.playername and (isnull(t.leaguename,'X')='$leaguename'  or t.leaguename is null)  and isnull(t.bidsoldyn,'N')='N' ";
 echo $sql . "<br/>";
-$result = sqlsrv_query($conn,$sql) ;
-while( $row = sqlsrv_fetch_array( $result ) )
+$result = mysqli_query($conn,$sql) ;
+while( $row = mysqli_fetch_array( $result ) )
 {
 echo "Values are " . $row[0] ." and ". $row[1]." and ". $row[2]." and ". $row[3]." and ". $row[4]." and ". $row[5] . "<br\>";
 }

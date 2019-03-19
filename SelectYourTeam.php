@@ -7,12 +7,11 @@ $pass=$_SESSION['pass'];
 $teamname=$_SESSION['teamname'];
 $iplday=$_GET['mnum'];
 //echo "ipl day is ".$iplday;
-$servername = "localhost:3306";
-$dbusername = "fanta_avad";
-$dbpassword = "FLeague@2018";
-$dbname="fantas10_avad";
+include "dbConnect.php";
+global $conn;
+
 // Create connection
-$conn = mysqli_connect($servername, $dbusername, $dbpassword,$dbname);
+//$conn = mysqli_connect($servername, $dbusername, $dbpassword,$dbname);
 // Check connection
 if ($conn == false) {
   echo "Sorry, site is temporarily experiencing database connectivity issues; should be sorted soon, please check again in some time";

@@ -12,12 +12,11 @@ session_start();
 	$leaguename= $_SESSION['leaguename'];
 	echo "user name is ". $_SESSION['username'] . " and pass is " . $_SESSION['pwd']. " and team name is " . $_SESSION['teamname']."and league ". $_SESSION['leaguename'] ;
 
-	$servername = "localhost:3306";
-	$dbusername = "fanta_avad";
-	$dbpassword = "FLeague@2018";
-	$dbname="fantas10_avad";
+	include "dbConnect.php";
+	global $conn;
+
 	// Create connection
-	$conn = mysqli_connect($servername, $dbusername, $dbpassword,$dbname);
+//	$conn = mysqli_connect($servername, $dbusername, $dbpassword,$dbname);
 	// Check connection
 	if ($conn == false) {
 		echo "Sorry, site is temporarily experiencing database connectivity issues; should be sorted soon, please check again in some time";

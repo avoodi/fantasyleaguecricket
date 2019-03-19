@@ -11,18 +11,15 @@ $leaguename=$_SESSION['leaguename'];
 $teamname=$_SESSION['teamname'];
 $playername=$_GET['nm'];
 //echo $playername ." is the player name passed </br>";
+include "dbConnect.php";
+global $conn;
 
-$servername = "localhost:3306";
-$dbusername = "fanta_avad";
-$dbpassword = "FLeague@2018";
-$dbname="fantas10_avad";
 // Create connection
-$conn = mysqli_connect($servername, $dbusername, $dbpassword,$dbname);
+//$conn = mysqli_connect($servername, $dbusername, $dbpassword,$dbname);
 // Check connection
 if ($conn == false) {
   echo "Sorry, site is temporarily experiencing database connectivity issues; should be sorted soon, please check again in some time";
 }
-
 
 // following query needs playername
 $sql="select x.playername, x.reserveprice,ifnull(t.currenthighestbid,x.reserveprice)currenthighestbid, t.ownerteam from LEAGUEAUCTIONRESULTS T, PLAYERMST X where t.playername = x.playername and ifnull(t.leaguename,'X')='$leaguename' AND x.playername='$playername'";
