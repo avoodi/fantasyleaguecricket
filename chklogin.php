@@ -1,5 +1,7 @@
 #!/usr/bin/php
 <?
+include "dbConnect.php";
+global $conn;
 //if ($_SERVER['REQUEST_METHOD'] === 'POST')
   //  {
         //Ok we got a POST, probably from a FORM, read from $_POST.
@@ -22,34 +24,35 @@
 //echo $username . " " .$pwd . " " .$leaguename. "</br>";
 /* need ot add code for checking / validing pwd here  */
 
-//$serverName = "sg1-wsq1.a2hosting.com";
-//$connectionInfo = array( "Database"=>"fantas10_mssql", "UID"=>"fantas10_avad", "PWD"=>"FLeague@2018");
-//$conn = sqlsrv_connect( $serverName, $connectionInfo);
 
-//MySQL Database Connect include 'dbConnect.php';
-<?php include "dbConnect.php" ?>
-$sql="SELECT teamname,teamownername  FROM LEAGUETEAMSDETAILS WHERE leaguename= '$leaguename' and TEAMOWNEREMAIL='$username' AND TEAM_PASSWORD ='$pwd' ";
-//echo $sql ;
+$servername = "103.21.58.5";
+$dbusername = "fantay5h_avad";
+$dbpassword = "FLeague@2019";
+$dbname="fantay5h_avad";
 
-//if(! sqlsrv_query($conn,$sql) {
-//  echo "here before" ;
-//  die('error sql');
-//}
+// Create connection
+//$conn = mysqli_connect($servername, $dbusername, $dbpassword,$dbname);
 
-$result = sqlsrv_query($conn,$sql) ;
-while( $row = sqlsrv_fetch_array( $result ) )
+// Check connection
+if (!$conn) {
+    die("Connection failed: " . mysqli_connect_error());
+}
+
+$sql="SELECT teamname,teamownername  FROM leagueteamsdetails WHERE leaguename= '$leaguename' and TEAMOWNEREMAIL='$username' AND TEAM_PASSWORD ='$pwd' ";
+echo $sql ;
+
+$result = mysqli_query($conn,$sql) ;
+while( $row = mysqli_fetch_array( $result ) )
 {
-  //echo " here" ;
+  echo " here in fetch" ;
   $teamname=$row[0];
   $teamownername=$row[1];
   $_SESSION['teamname']=$teamname;
   $_SESSION['teamownername']=$teamownername;
   $isPresent=1;
 }
-sqlsrv_free_stmt($result);
 
 if ($isPresent ==1) {
-
   date_default_timezone_set('Asia/Kolkata');
   $today=date("z");
   $startofIPL = 96; // ipl started on 4th apr so 96th day of the year
@@ -68,4 +71,6 @@ if ($isPresent ==0){
   echo ' window.location = "./LoginPg.php" ';
   echo ' </script>';
 }
+mysqli_free_result($result);
+
 ?>
