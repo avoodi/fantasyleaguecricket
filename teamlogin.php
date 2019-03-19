@@ -1,8 +1,7 @@
 <?
 //echo " in teamlogin page";
-$serverName = "sg1-wsq1.a2hosting.com";
-$connectionInfo = array( "Database"=>"fantas10_mssql", "UID"=>"fantas10_avad", "PWD"=>"FLeague@2018");
-$conn = sqlsrv_connect( $serverName, $connectionInfo);
+include "dbConnect.php";
+global $conn;
 
 if ($conn == false) {
 	echo "Sorry, site is temporarily experiencing database connectivity issues; should be sorted soon, please check again in some time";
@@ -10,8 +9,8 @@ if ($conn == false) {
 
 $sql="select leaguename from league_mst";
 
-$result = sqlsrv_query($conn,$sql) ;
-while( $row = sqlsrv_fetch_array( $result ) )
+$result = mysqli_query($conn,$sql) ;
+while( $row = mysqli_fetch_array( $result ) )
 {
 	$arr1[$i]=$row[0];
 	$i=$i+1;
