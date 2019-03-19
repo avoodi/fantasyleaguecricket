@@ -5,19 +5,23 @@ $owneremail=$_SESSION['username']; //on login page we have user name field which
 $leaguename=$_SESSION['leaguename'];
 $teamname=$_SESSION['teamname'];
 $iplday=$_SESSION['iplday'];
-$serverName = "sg1-wsq1.a2hosting.com";
-$connectionInfo = array( "Database"=>"fantas10_mssql", "UID"=>"fantas10_avad", "PWD"=>"FLeague@2018");
-$conn = sqlsrv_connect( $serverName, $connectionInfo);
+
+include "dbConnect.php";
+global $conn;
+
+//$serverName = "sg1-wsq1.a2hosting.com";
+//$connectionInfo = array( "Database"=>"fantas10_mssql", "UID"=>"fantas10_avad", "PWD"=>"FLeague@2018");
+//$conn = sqlsrv_connect( $serverName, $connectionInfo);
 
 $selectedcount=0;
 
 $sql2 = "select biddingstatus from leaguerules  where leaguename='$leaguename'";
-$result = sqlsrv_query($conn,$sql2) ;
-while( $row = sqlsrv_fetch_array( $result ) )
+$result = mysqli_query($conn,$sql2) ;
+while( $row = mysqli_fetch_array( $result ) )
 {
   $biddingstatus=$row[0];
 }
-sqlsrv_free_stmt($result);
+mysqli_free_result($result);
 
 $action=$_POST['specialaction'];
 if(!empty($_POST)) {
@@ -35,28 +39,28 @@ if(!empty($_POST)) {
      //we need to adjust/increase the virtualpp and reduce the count ofplayers for this teams, set owner team to null bidsoldynto 'N' and also mark currenthighestbid to reserve Price
      for ($i=0; $i<$selectedcount ; $i++) {
         $sql="select currenthighestbid from leagueauctionresults where leaguename='$leaguename' and pid=$pid[$i]";
-        $result = sqlsrv_query($conn,$sql) ;
-        while( $row = sqlsrv_fetch_array( $result ) )
+        $result = mysqli_query($conn,$sql) ;
+        while( $row = mysqli_fetch_array( $result ) )
         {
           $costofsoldplayers=$costofsoldplayers+$row[0];
         }
-        sqlsrv_free_stmt($result);
+        mysqli_free_result($result);
      }
      $sqlupdt="update leagueteamsdetails set numberofplayers=numberofplayers-$selectedcount , virtualpurchasepower=virtualpurchasepower+$costofsoldplayers where leaguename='$leaguename' and teamname='$teamname' ";
      //echo $sqlupdt;
-     if(! sqlsrv_query($conn,$sqlupdt) )
+     if(! mysqli_query($conn,$sqlupdt) )
        {
          die('error sqlupdt');
        }
       for ($i=0; $i<$selectedcount ; $i++) {
           $sqlupdt="update leagueauctionresults set bidsoldyn='N' , ownerteam = null where leaguename='$leaguename' and pid=$pid[$i]";
 
-          if(! sqlsrv_query($conn,$sqlupdt) )
+          if(! mysqli_query($conn,$sqlupdt) )
             {
               die('error sqlupdt 2');
             }
           $sqldel="delete from selectedplayers where leaguename='$leaguename' and pid=$pid[$i] and iplday>$iplday" ;
-          if(! sqlsrv_query($conn,$sqldel) )
+          if(! mysqli_query($conn,$sqldel) )
             {
               die('error sqldel');
             }
@@ -67,8 +71,8 @@ if(!empty($_POST)) {
 $playercount=0;
 $sql="select pid, playername,currenthighestbid from leagueauctionresults where leaguename='$leaguename' and ownerteam='$teamname' ";
 //echo $sql . "</br>";
-$result = sqlsrv_query($conn,$sql) ;
-while( $row = sqlsrv_fetch_array( $result ) )
+$result = mysqli_query($conn,$sql) ;
+while( $row = mysqli_fetch_array( $result ) )
 {
   $pid[$playercount]=$row[0];
   $playername[$playercount]=$row[1];
@@ -76,7 +80,7 @@ while( $row = sqlsrv_fetch_array( $result ) )
 
   $playercount++;
 }
-sqlsrv_free_stmt($result);
+mysqli_free_result($result);
 //for the above players get details from playermst
 
 for ($i=0 ; $i<$playercount ; $i++){
@@ -84,8 +88,8 @@ for ($i=0 ; $i<$playercount ; $i++){
   $sql1="select pid, playername,iplteam,score,numberof4,numberof6,numberofcatches,numberofrunouts,manofthematch,
 wickets,points,speciality from playermst where pid=$pid[$i] ";
   //echo $sql1 ."</br>";
-  $result = sqlsrv_query($conn,$sql1) ;
-  while( $row = sqlsrv_fetch_array( $result ) )
+  $result = mysqli_query($conn,$sql1) ;
+  while( $row = mysqli_fetch_array( $result ) )
   {
   $PM_pid[$i]=$row[0];
   $PM_playername[$i]=$row[1];
@@ -101,7 +105,7 @@ wickets,points,speciality from playermst where pid=$pid[$i] ";
   $PM_speciality[$i]=$row[11];
 
   }
-  sqlsrv_free_stmt($result);
+  mysqli_free_result($result);
 }
 
 ?>

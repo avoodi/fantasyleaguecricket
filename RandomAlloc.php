@@ -5,18 +5,16 @@ session_start();
 $leaguename=$_SESSION['leaguename'];
 echo "in here" .$leaguename ;
 
+include "dbConnect.php";
+global $conn;
 
 $sql1="select teamname,virtualpurchasepower,numberofplayers from leagueteamsdetails where leaguename='$leaguename' and virtualpurchasepower >25000 and ifnull(numberofplayers,0)<22 ";
 
 
 $sql2="SELECT leaguename, playername, currenthighestbid, ownerteam, bidsoldyn, inplaying11, ccaptainyn, pid from leagueauctionresults where leaguename='$leaguename' and ownerteam is null";
 
-$servername = "localhost:3306";
-$dbusername = "fanta_avad";
-$dbpassword = "FLeague@2018";
-$dbname="fantas10_avad";
 // Create connection
-$conn = mysqli_connect($servername, $dbusername, $dbpassword,$dbname);
+//$conn = mysqli_connect($servername, $dbusername, $dbpassword,$dbname);
 // Check connection
 if ($conn == false) {
 	echo "Sorry, site is temporarily experiencing database connectivity issues; should be sorted soon, please check again in some time";

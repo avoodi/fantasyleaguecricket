@@ -11,7 +11,10 @@ session_start();
 	$dbpassword = "FLeague@2018";
 	$dbname="fantas10_avad";
 	// Create connection
-	$conn = mysqli_connect($servername, $dbusername, $dbpassword,$dbname);
+	include "dbConnect.php";
+	global $conn;
+
+//	$conn = mysqli_connect($servername, $dbusername, $dbpassword,$dbname);
 	// Check connection
 	if ($conn == false) {
 		echo "Sorry, site is temporarily experiencing database connectivity issues; should be sorted soon, please check again in some time";
