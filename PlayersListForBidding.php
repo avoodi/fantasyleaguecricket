@@ -33,7 +33,7 @@ if ($conn == false) {
     //echo "prev owner is ".$prevowner;
     //this means this prog is called from addurbid php , so we need to insert into bidding details and update leagueteamdetails tablea
 
-    $sqlins="insert into BIDDINGDETAILS (playername,leaguename, biddingteam, reserveprice, BIDDINGAMOUNT, ROUNDNUMBER)  values ('$playername', '$leaguename', '$team',$reserveprice,$bid,1) ";
+    $sqlins="insert into biddingdetails (playername,leaguename, biddingteam, reserveprice, biddingamount ,roundnumber)  values ('$playername', '$leaguename', '$team',$reserveprice,$bid,1) ";
   //echo $sqlins . "</br>";
     if(! mysqli_query($conn,$sqlins) )
       {
@@ -208,7 +208,7 @@ if ($conn == false) {
   <?
 
   $i=1;
-  $sql="select x.playername,x.iplteam,x.speciality, x.reserveprice,ifnull(t.currenthighestbid,x.reserveprice)currenthighestbid, t.ownerteam from LEAGUEAUCTIONRESULTS T, PLAYERMST X where t.playername = x.playername and (ifnull(t.leaguename,'X')='$leaguename'  or t.leaguename is null)   ";
+  $sql="select x.playername,x.iplteam,x.speciality, x.reserveprice,ifnull(t.currenthighestbid,x.reserveprice)currenthighestbid, t.ownerteam from leagueauctionresults  t, playermst x where t.playername = x.playername and (ifnull(t.leaguename,'X')='$leaguename'  or t.leaguename is null)   ";
   //echo $sql . "<br/>";
   $result = mysqli_query($conn,$sql) ;
   while( $row = mysqli_fetch_array( $result ) )
