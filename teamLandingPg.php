@@ -7,11 +7,12 @@ global $conn;
 session_start();
 $owneremail=$_SESSION['username']; //on login page we have user name field which is actually email entered at registration time
 $leaguename=$_SESSION['leaguename'];
-$pass=$_SESSION['pass'];
+$pass=$_SESSION['pwd'];
 $teamname=$_SESSION['teamname'];
 $teamownername=$_SESSION['teamownername'];
 $iplday=$_SESSION['iplday'];
 
+echo $teamownername;
 
 //$servername = "localhost:3306";
 //$dbusername = "fanta_avad";

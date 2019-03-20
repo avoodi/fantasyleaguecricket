@@ -1,22 +1,25 @@
 #!/usr/bin/php
 <?
-echo $_POST['teamname']. " and " . $_POST['OwnerName'] . " and " . $_POST['OwnerEmail'] . " and " . $_POST['leaguename'];
+echo $_POST['teamname']. " and " . $_POST['OwnerName'] . " and " . $_POST['OwnerEmail'] . " and " . $_POST['leaguename']. " and pass is ". $_POST['Pass'];
 $teamname=$_POST['teamname'];
 $ownername=$_POST['OwnerName'];
 $owneremail=$_POST['OwnerEmail'];
 
+
+include "dbConnect.php";
+global $conn;
+
 //set session vars
 session_start();
 $_SESSION['username']=$ownername;
-$_SESSION['leaguename']=$leaguename;
+
 $_SESSION['$owneremail']=$owneremail;
 $_SESSION['pwd']=$_POST['Pass'];
 $_SESSION['teamname'] = $teamname;
 
-$password=$_SESSION['pwd'];
 
-	include "dbConnect.php";
-	global $conn;
+$password=$_POST['Pass'];
+
 
 // Create connection
 //$conn = mysqli_connect($servername, $dbusername, $dbpassword,$dbname);
@@ -28,8 +31,9 @@ $count=0;
 if (isset($_POST['selLeagueName']) )
 {
 	$leaguename = $_POST['selLeagueName'];
+	$_SESSION['leaguename']=$leaguename;
 	// if user selected existing league then stop him from creating team with same name
-	$sql="select count(*) from LEAGUETEAMSDETAILS where leaguename='$leaguename' and teamname='$teamname' ";
+	$sql="select count(*) from leagueteamsdetails where leaguename='$leaguename' and teamname='$teamname' ";
 	//	echo $sql;
 	$result = mysqli_query($conn,$sql) ;
 	while( $row = mysqli_fetch_array( $result ) )
@@ -44,6 +48,7 @@ if (isset($_POST['selLeagueName']) )
 }
 else {
 	$leaguename=$_POST['leaguename'];
+
  	$existingleague="no";
  	// check if user tried to enter league name that is already in db
 	$sql="select count(*) from league_mst where leaguename='$leaguename' ";
@@ -65,6 +70,10 @@ else {
 
 if ($existingleague=="no" && $count==0){
 // this means its a new league - and then we have to set it up by inserting into 3 tables
+// lets first set this user as leaguecreator
+$_SESSION['teamownername']=$ownername;
+$_SESSION['leaguename']=$leaguename;
+
 	$sql = "insert into league_mst (leaguename,leaguecreatorname) values ('$leaguename','$ownername')";
 //	$var=array($leaguename, $ownername);
 	//echo $sql ;
@@ -81,10 +90,12 @@ if ($existingleague=="no" && $count==0){
 				die('error sql2');
 			}
 
-// echo " now taking all players list and inserting into LEAGUEAUCTIONRESULTS for this league" ;
+ //echo " now taking all players list and inserting into LEAGUEAUCTIONRESULTS for this league" ;
 			$i=0;
 
-			$sql4="select PLAYERNAME,RESERVEPRICE,isnull(PID,0) from playermst";
+			$sql4="select PLAYERNAME,RESERVEPRICE,ifnull(PID,0) from playermst";
+
+//	echo $sql4;
 
 			$result = mysqli_query($conn,$sql4) ;
 			while( $row = mysqli_fetch_array( $result ) )
@@ -96,15 +107,16 @@ if ($existingleague=="no" && $count==0){
 				$i=$i+1;
 			}
 			mysqli_free_result($result);
+//echo "after creating playermst array  i is  " . $i;
 
-			for ($j=0; $j<$i; $j++) {
-				$sql5="insert into LEAGUEAUCTIONRESULTS (leaguename,playername,currenthighestbid,pid) values ('$leaguename','$pname[$j]',$rprice[$j],$pid[$j])";
-//echo $sql5 . " </br>";
+	for ($j=0; $j<$i; $j++) {
+				$sql5="insert into  leagueauctionresults  (leaguename,playername,currenthighestbid,pid) values ('$leaguename','$pname[$j]',$rprice[$j],$pid[$j]);";
+//		echo $sql5;
 				if(! mysqli_query($conn,$sql5) )
 				{
 					die('error sql5');
 				}
-				$sql5="";
+		$sql5="";
 			}
 
 	}
