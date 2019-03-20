@@ -29,7 +29,7 @@ $fivepoints=$_POST['fivewicketpoints'];
 $hatrikpoints=$_POST['hatrikpoints'];
 $biddingstatus=$_POST['D1'];
 
-$sql="update leaguerules set  maxteams=$maxteams ,maxtrades=$maxtrades,runpoints=$runpoints,catchpoints=$cpoints, wicketpoints=$wpoints, runoutpoints=$runoutpoints, maidenoverpoints=$mpoints, boundrypoints=$bpoints, sixpoints=$spoints, purchasepower=$ppower, biddingstatus='$biddingstatus', fivewicketinmatch=$fivepoints, hatrik=$hatrikpoints where leaguename='$leaguename'";
+$sql="update leaguerules set  maxteams=$maxteams ,maxtrades=$maxtrades,runpoints=$runpoints,catchpoints=$cpoints, wicketpoints=$wpoints, runoutpoints=$runoutpoints, maidenoverpoints=$mpoints, boundrypoints=$bpoints, sixerpoints=$spoints, purchasepower=$ppower, biddingstatus='$biddingstatus', fivewicketinmatch=$fivepoints, hatrik=$hatrikpoints where leaguename='$leaguename'";
 echo $sql;
 if(!mysqli_query($conn,$sql) )
   {
