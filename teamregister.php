@@ -5,13 +5,14 @@ $teamname=$_POST['teamname'];
 $ownername=$_POST['OwnerName'];
 $owneremail=$_POST['OwnerEmail'];
 
+
 include "dbConnect.php";
 global $conn;
 
 //set session vars
 session_start();
 $_SESSION['username']=$ownername;
-$_SESSION['leaguename']=$leaguename;
+
 $_SESSION['$owneremail']=$owneremail;
 $_SESSION['pwd']=$_POST['Pass'];
 $_SESSION['teamname'] = $teamname;
@@ -30,6 +31,7 @@ $count=0;
 if (isset($_POST['selLeagueName']) )
 {
 	$leaguename = $_POST['selLeagueName'];
+	$_SESSION['leaguename']=$leaguename;
 	// if user selected existing league then stop him from creating team with same name
 	$sql="select count(*) from leagueteamsdetails where leaguename='$leaguename' and teamname='$teamname' ";
 	//	echo $sql;
@@ -46,6 +48,7 @@ if (isset($_POST['selLeagueName']) )
 }
 else {
 	$leaguename=$_POST['leaguename'];
+
  	$existingleague="no";
  	// check if user tried to enter league name that is already in db
 	$sql="select count(*) from league_mst where leaguename='$leaguename' ";
@@ -69,6 +72,7 @@ if ($existingleague=="no" && $count==0){
 // this means its a new league - and then we have to set it up by inserting into 3 tables
 // lets first set this user as leaguecreator
 $_SESSION['teamownername']=$ownername;
+$_SESSION['leaguename']=$leaguename;
 
 	$sql = "insert into league_mst (leaguename,leaguecreatorname) values ('$leaguename','$ownername')";
 //	$var=array($leaguename, $ownername);
