@@ -2,7 +2,7 @@
 session_start();
 $owneremail=$_SESSION['username']; //on login page we have user name field which is actually email entered at registration time
 $leaguename=$_SESSION['leaguename'];
-$pass=$_SESSION['pass'];
+$pass=$_SESSION['pwd'];
 $teamname=$_SESSION['teamname'];
 $teamownername=$_SESSION['teamownername'];
 
@@ -34,7 +34,7 @@ while( $row = mysqli_fetch_array( $result ) )
 
 //}
 
-$sql="select MAXTEAMS,BIDSTARTDATE,BIDENDDATE,MAXTRADES,RUNPOINTS,CATCHPOINTS, WICKETPOINTS, RUNOUTPOINTS,MAIDENOVERPOINTS, BOUNDRYPOINTS,SIXERPOINTS,PURCHASEPOWER,BIDDINGSTATUS,FiveWicketInMatch,Hatrik from LeagueRules where leaguename='$leaguename'";
+$sql="select maxteams,bidstartdate,bidenddate, maxtrades , runpoints ,catchpoints ,wicketpoints,runoutpoints ,maidenoverpoints ,boundrypoints ,sixerpoints ,purchasepower  , biddingstatus  ,fivewicketinmatch,hatrik  from leaguerules where leaguename='$leaguename'";
 //echo "before " .$MAXTEAMS ;
 $result = mysqli_query($conn,$sql) ;
 while( $row = mysqli_fetch_array( $result ) )
