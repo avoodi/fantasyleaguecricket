@@ -39,21 +39,21 @@ $sql="select maxteams,bidstartdate,bidenddate, maxtrades , runpoints ,catchpoint
 $result = mysqli_query($conn,$sql) ;
 while( $row = mysqli_fetch_array( $result ) )
 {
-	$MAXTEAMS= $row['MAXTEAMS'];
-	$BIDSTARTDATE= $row['BIDSTARTDATE'];
-	$BIDENDDATE= $row['BIDENDDATE'];
-	$MAXTRADES= $row['MAXTRADES'];
-	$RUNPOINTS= $row['RUNPOINTS'];
-	$CATCHPOINTS= $row['CATCHPOINTS'];
-	$WICKETPOINTS= $row['WICKETPOINTS'];
-	$RUNOUTPOINTS= $row['RUNOUTPOINTS'];
-	$MAIDENOVERPOINTS= $row['MAIDENOVERPOINTS'];
-	$BOUNDRYPOINTS= $row['BOUNDRYPOINTS'];
-	$SIXERPOINTS= $row['SIXERPOINTS'];
-	$PURCHASEPOWER= $row['PURCHASEPOWER'];
-	$BIDDINGSTATUS =$row['BIDDINGSTATUS'];
-	$FiveWicketInMatch=$row['FiveWicketInMatch'];
-	$Hatrik=$row['Hatrik'];
+	$MAXTEAMS= $row['maxteams'];
+	$BIDSTARTDATE= $row['bidstartdate'];
+	$BIDENDDATE= $row['bidenddate'];
+	$MAXTRADES= $row['maxtrades'];
+	$RUNPOINTS= $row['runpoints'];
+	$CATCHPOINTS= $row['catchpoints'];
+	$WICKETPOINTS= $row['wicketpoints'];
+	$RUNOUTPOINTS= $row['runoutpoints'];
+	$MAIDENOVERPOINTS= $row['maidenoverpoints'];
+	$BOUNDRYPOINTS= $row['boundrypoints'];
+	$SIXERPOINTS= $row['sixerpoints'];
+	$PURCHASEPOWER= $row['purchasepower'];
+	$BIDDINGSTATUS =$row['biddingstatus'];
+	$FiveWicketInMatch=$row['fivewicketinmatch'];
+	$Hatrik=$row['hatrik'];
 }
 mysqli_free_result($result);
 
