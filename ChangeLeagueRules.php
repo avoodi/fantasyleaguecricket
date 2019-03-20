@@ -4,7 +4,7 @@
 session_start();
 $owneremail=$_SESSION['username']; //on login page we have user name field which is actually email entered at registration time
 $leaguename=$_SESSION['leaguename'];
-$pass=$_SESSION['pass'];
+$pass=$_SESSION['pwd'];
 $teamname=$_SESSION['teamname'];
 $teamownername=$_SESSION['teamownername'];
 
@@ -29,7 +29,7 @@ $fivepoints=$_POST['fivewicketpoints'];
 $hatrikpoints=$_POST['hatrikpoints'];
 $biddingstatus=$_POST['D1'];
 
-$sql="update leaguerules set  MAXTEAMS=$maxteams ,MAXTRADES=$maxtrades,RUNPOINTS=$runpoints,CATCHPOINTS=$cpoints, WICKETPOINTS=$wpoints, RUNOUTPOINTS=$runoutpoints,MAIDENOVERPOINTS=$mpoints, BOUNDRYPOINTS=$bpoints, SIXERPOINTS=$spoints,PURCHASEPOWER=$ppower,BIDDINGSTATUS='$biddingstatus', FiveWicketInMatch=$fivepoints,Hatrik=$hatrikpoints where leaguename='$leaguename'";
+$sql="update leaguerules set  maxteams=$maxteams ,maxtrades=$maxtrades,runpoints=$runpoints,catchpoints=$cpoints, wicketpoints=$wpoints, runoutpoints=$runoutpoints, maidenoverpoints=$mpoints, boundrypoints=$bpoints, sixpoints=$spoints, purchasepower=$ppower, biddingstatus='$biddingstatus', fivewicketinmatch=$fivepoints, hatrik=$hatrikpoints where leaguename='$leaguename'";
 echo $sql;
 if(!mysqli_query($conn,$sql) )
   {
