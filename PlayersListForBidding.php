@@ -87,7 +87,7 @@ if ($conn == false) {
     //          die('error sqlupdate2');
       //      }
 
-  $sql1="select ifnull(t.virtualpurchasepower,0), ifnull(t.currentbidamount,0) currentbidamount , t.numberofplayers from leagueteamsdetails T where t.teamname= '$team' and t.leaguename='$leaguename' ";
+  $sql1="select ifnull(t.virtualpurchasepower,0), ifnull(t.currentbidamount,0) currentbidamount , t.numberofplayers from leagueteamsdetails t where t.teamname= '$team' and t.leaguename='$leaguename' ";
   //echo $sql1 . "<br/>";
   $result = mysqli_query($conn,$sql1) ;
   while( $row = mysqli_fetch_array( $result ) )
