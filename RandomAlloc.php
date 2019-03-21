@@ -33,7 +33,7 @@ while( $row = mysqli_fetch_array( $result ) )
 	echo $myrandomtemp;
  if ( ! in_array($myrandomtemp, $myrandomarray) ){
      $myrandomarray[$availplayers]=$myrandomtemp;
- 	 $sql3="INSERT INTO LEAGUERANDOMALLOC (leaguename, playername, reserveprice, currenthighestbid, ownerteam, bidsoldyn, speciality, actualteam, randomnumber,pid)  VALUES('$leaguename', '$row[1]', 0, 0, '', '', '', '', $myrandomarray[$availplayers],$row[7]) ";
+ 	 $sql3="INSERT INTO leaguerandomalloc (leaguename, playername, reserveprice, currenthighestbid, ownerteam, bidsoldyn, speciality, actualteam, randomnumber,pid)  VALUES('$leaguename', '$row[1]', 0, 0, '', '', '', '', $myrandomarray[$availplayers],$row[7]) ";
 	 echo $sql3;
 	  if(! mysqli_query($conn,$sql3) )
     {

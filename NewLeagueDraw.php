@@ -22,12 +22,6 @@ session_start();
 		echo "Sorry, site is temporarily experiencing database connectivity issues; should be sorted soon, please check again in some time";
 	}
 
-if( $conn ) {
-     echo "Connection established.<br />";
-}else{
-     echo "Connection could not be established.<br />";
-     die( print_r( sqlsrv_errors(), true));
-}
 
 $sql    = "select teamname from leagueteamsdetails where leaguename = '$leaguename' order by teamname asc";
 $sql2    = "select teamname from leagueteamsdetails where leaguename = '$leaguename' order by teamname asc";
@@ -80,9 +74,9 @@ date_default_timezone_set('Asia/Kolkata');
 $today=date("z");
 
 //echo "helo today is " . $today ;
-$startofIPL = 96; // ipl started on 4th apr so 96th day of the year
+$startofIPL = 82; // ipl started on 23rd mar  so 82nd day of the year
 $startofOurLeague = ($today-$startofIPL)+1;
-$endofIPL =139; // the ipl league matches end on 20th may2018 which is 140th day
+$endofIPL =125; // the ipl league matches end on 5th may2018 which is 125th day
 $daysforOurLeague=$endofIPL-$today;
 //echo "and diff is ". $startofOurLeague . "and " . $daysforOurLeague ." </br>";
 

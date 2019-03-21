@@ -22,7 +22,7 @@ if ($conn == false) {
 }
 
 // following query needs playername
-$sql="select x.playername, x.reserveprice,ifnull(t.currenthighestbid,x.reserveprice)currenthighestbid, t.ownerteam from LEAGUEAUCTIONRESULTS T, PLAYERMST X where t.playername = x.playername and ifnull(t.leaguename,'X')='$leaguename' AND x.playername='$playername'";
+$sql="select x.playername, x.reserveprice,ifnull(t.currenthighestbid,x.reserveprice)currenthighestbid, t.ownerteam from leagueauctionresults t, playermst x where t.playername = x.playername and ifnull(t.leaguename,'X')='$leaguename' AND x.playername='$playername'";
 //echo $sql . "</br>";
 $result = mysqli_query($conn,$sql) ;
 while( $row = mysqli_fetch_array( $result ) )
