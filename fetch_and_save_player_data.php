@@ -13,6 +13,7 @@ function extract_and_save_players_data($conn, $teams, $matchid){
 		foreach($players as $player){
 			$pid=$player["pid"];
 			$name=$player["name"];
+      echo "pid is ".$pid. " name is ".$name ."</br>";
 			if(! record_exists("pid", $pid, $conn, "players")){
 				insert_new_player_record($conn, $pid, $name);
 			}

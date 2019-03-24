@@ -11,7 +11,7 @@ function extract_and_save_batting_data($conn, $batting_data, $man_of_the_match_i
 			$batting_balls_played=$score["B"];
 			$pid=$score["pid"];
 			$is_man_of_the_match = $man_of_the_match_id === $pid ? 1 : 0;
-			$query = "INSERT INTO PLAYER_BATTING_DATA(pid,runs_scored,fours_hit,sixes_hit,balls_played,matchid) values('$pid','$batting_runs_scored','$batting_fours_hit','$batting_sixes_hit','$batting_balls_played','$match_uniq_id');";
+			$query = "INSERT INTO player_batting_data(pid,runs_scored,fours_hit,sixes_hit,balls_played,matchid) values('$pid','$batting_runs_scored','$batting_fours_hit','$batting_sixes_hit','$batting_balls_played','$match_uniq_id');";
 			$stmt = execute_query($conn, $query);
 			insert_new_player_match_record($conn, $pid, $match_uniq_id, $is_man_of_the_match);
 		}
@@ -20,7 +20,7 @@ function extract_and_save_batting_data($conn, $batting_data, $man_of_the_match_i
 }
 
 function insert_new_player_match_record($conn, $pid, $match_uniq_id, $is_man_of_the_match){
-	$query = "INSERT INTO PLAYER_MATCHES(pid, matchid, mom) values('$pid','$match_uniq_id',$is_man_of_the_match);";
+	$query = "INSERT INTO player_matches(pid, matchid, mom) values('$pid','$match_uniq_id',$is_man_of_the_match);";
 	echo "<br>".$query."<br>";
 	if(! does_record_exists($pid, $match_uniq_id, $conn)){
 		$stmt = execute_query($conn, $query);
