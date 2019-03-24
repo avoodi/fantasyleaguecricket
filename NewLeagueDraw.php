@@ -10,7 +10,7 @@ session_start();
 	$team=$_SESSION['teamname'];
 	$teamowner = $_SESSION['username'];
 	$leaguename= $_SESSION['leaguename'];
-	echo "user name is ". $_SESSION['username'] . " and pass is " . $_SESSION['pwd']. " and team name is " . $_SESSION['teamname']."and league ". $_SESSION['leaguename'] ;
+	//echo "user name is ". $_SESSION['username'] . " and pass is " . $_SESSION['pwd']. " and team name is " . $_SESSION['teamname']."and league ". $_SESSION['leaguename'] ;
 
 	include "dbConnect.php";
 	global $conn;
@@ -26,8 +26,8 @@ session_start();
 $sql    = "select teamname from leagueteamsdetails where leaguename = '$leaguename' order by teamname asc";
 $sql2    = "select teamname from leagueteamsdetails where leaguename = '$leaguename' order by teamname asc";
 
-echo $sql ."</br> ";
-echo $sql2 ."</br> ";
+//echo $sql ."</br> ";
+//echo $sql2 ."</br> ";
 $i=0;
 
 $result = mysqli_query($conn,$sql) ;
@@ -71,7 +71,7 @@ $reverseCnt=$totalRows;
 
 //$ab=date_default_timezone_get();
 date_default_timezone_set('Asia/Kolkata');
-$today=date("z");
+$today=date("z"); //if we put draws before the tournament actual start date(testing) then we need to add that many days to this count
 
 //echo "helo today is " . $today ;
 $startofIPL = 82; // ipl started on 23rd mar  so 82nd day of the year
@@ -88,12 +88,12 @@ $ourmatchnum=1;
 for ($cnt=1; $cnt<=$daysforOurLeague ;$cnt++ ) {
   $reverseCnt=$totalRows;
   for ($cnt2=1 ; $cnt2<=$totalRows/2; $cnt2++) {
-         echo $arr1[$cnt2] ." vs " . $arr2[$reverseCnt] ." at " . $cnt ."</br>"  ;
+  //       echo $arr1[$cnt2] ." vs " . $arr2[$reverseCnt] ." at " . $cnt ."</br>"  ;
 				 /* very important ipmmatchnum needs to be set to the actual ipm match number when this
 				 prog is going to be executed for this league ; which means the start of the number could be diff for each league */
 				 $sql3= "insert into leaguedraw(leaguename, iplmatchnum, ourmatchnum, team1name, team2name)
 				 				values('$leaguename',$iplmatchnum, $ourmatchnum,'$arr1[$cnt2]', '$arr2[$reverseCnt]' )" ;
-					echo $sql3;
+		//			echo $sql3;
 					if(! mysqli_query($conn,$sql3) )
 						{
 							die('error sql3');
@@ -102,7 +102,7 @@ for ($cnt=1; $cnt<=$daysforOurLeague ;$cnt++ ) {
          $reverseCnt--;
 				 $ourmatchnum++;
   }
-  echo "\n";
+//  echo "\n";
 	/*reshuffle array1 */
   $tmp= $arr1[1];
   $tmp2= $arr2[1];
@@ -146,7 +146,7 @@ sqlsrv_close($conn);
 	</tr>
 </table>
 	 echo '<script type="text/javascript">
-	           window.location = "./teamLandingPg.php"
+          window.location = "./teamLandingPg.php"
 	      </script>';
 </body>
 </html>

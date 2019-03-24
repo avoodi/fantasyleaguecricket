@@ -1,13 +1,12 @@
 <!DOCTYPE html>
 <?
 //echo " in teamlogin page";
-$servername = "localhost:3306";
-$dbusername = "fanta_avad";
-$dbpassword = "FLeague@2018";
-$dbname="fantas10_avad";
+include "dbConnect.php";
+global $conn;
+
 
 // Create connection
-$conn = mysqli_connect($servername, $dbusername, $dbpassword,$dbname);
+//$conn = mysqli_connect($servername, $dbusername, $dbpassword,$dbname);
 
 // Check connection
 

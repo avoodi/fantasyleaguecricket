@@ -6,7 +6,8 @@ $leaguename=$_SESSION['leaguename'];
 $pass=$_SESSION['pass'];
 $teamname=$_SESSION['teamname'];
 $iplday=$_GET['mnum'];
-//echo "ipl day is ".$iplday;
+$ourmatchnum=$_GET['omn'];
+echo "ipl day is ".$iplday . "and our mt is ".$ourmatchnum ;
 include "dbConnect.php";
 global $conn;
 
@@ -136,6 +137,7 @@ mysqli_free_result($result);
       <td colspan="14" align="center">
 <input type="submit" align="center" name="btnSave" value="SubmitTeam" onClick="return callforsave(<? echo $i ;?>);">
 <input type ="hidden" name ="iplday" value="<? echo $iplday; ?>">
+<input type ="hidden" name ="ourmatchnum" value="<? echo $ourmatchnum; ?>">
 </td>
 </tr>
 </table>
@@ -151,6 +153,7 @@ var cnt =0;
 	{
  //return false;
     alert("Team Saved ");
+    alert("captain is "+ document.LAYOUTFORM.iscaptain.value);
 		if(iFlag ==1)
 		{
 			alert("Max. 11 Players has to be allowed for one Match");
