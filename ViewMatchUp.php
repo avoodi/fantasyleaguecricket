@@ -1,295 +1,237 @@
-<!--#include file="_includes/connection.asp" -->
-<%
-dim iflag 
-iflag = 0
-
-team1 = trim(request("t1"))
-team2 = trim(request("t2"))
-wcmatchnum=trim(request("t3"))
-
-leaguename = session("leaguename")
-teamowner = session("Userid")
-		
-set rsKeyRec = server.CreateObject("ADODB.RECORDSET")	
-ipasswd = request("pass")
-iuserid = request("username")
+<?
+session_start();
+	$username=$_SESSION['username'];
+	$teamname=$_SESSION['teamname'];
+	$teamowner = $_SESSION['username'];
+	$leaguename= $_SESSION['leaguename'];
+	$ourmatchnum=$_GET['t3'];
+	$team1=$_GET['t1'];
+	$team2=$_GET['t2'];
 
 
-szSql= "select pm.playername, nvl(pm.odibatavg,0) odibatavg, lar.ccaptainyn, pm.oditotalmatches, (pm.oditotalwickets/decode(pm.oditotalmatches,0,1,pm.oditotalmatches))odiwkts, (pm.oditotalcatches/decode(pm.oditotalmatches,0,1,pm.oditotalmatches)) odicatches,  (pm.oditotal4/decode(pm.oditotalmatches,0,1,pm.oditotalmatches)) odi4, (pm.oditotal6/decode(pm.oditotalmatches,0,1,pm.oditotalmatches)) odi6 ,  pm.oditotalmom, pm.iplteam, lar.inplaying11 from playermst pm, leagueauctionresults lar where lar.leaguename='"&leaguename&"' and nvl(lar.ownerteam,'') ='"&team1&"' and lar.playername=pm.playername "
-		
+	include "dbConnect.php";
+	global $conn;
 
-'response.End()
-set rsKeyRec2 = server.CreateObject("ADODB.RECORDSET")	
-szSql2= " select pm.playername, nvl(pm.odibatavg,0) odibatavg, lar.ccaptainyn, pm.oditotalmatches,  (pm.oditotalwickets/decode(pm.oditotalmatches,0,1,pm.oditotalmatches))odiwkts, (pm.oditotalcatches/decode(pm.oditotalmatches,0,1,pm.oditotalmatches)) odicatches,   (pm.oditotal4/decode(pm.oditotalmatches,0,1,pm.oditotalmatches)) odi4, (pm.oditotal6/decode(pm.oditotalmatches,0,1,pm.oditotalmatches)) odi6 ,   pm.oditotalmom, pm.iplteam, lar.inplaying11 from playermst pm, leagueauctionresults lar where lar.leaguename='"&leaguename&"' and nvl(lar.ownerteam,'') ='"&team2&"' and lar.playername=pm.playername "
+echo "our match num is : " . $ourmatchnum . "and team 1 : ". $team1 . "and team2 is : ".$team2;
 
+	if ($conn == false) {
+	  echo "Sorry, site is temporarily experiencing database connectivity issues; should be sorted soon, please check again in some time";
+	}
 
-set rsKeyRec3=server.CreateObject("ADODB.RECORDSET")
-szSql3="select team1, team2 from wcschedule w where w.matchnum="&wcmatchnum&" " 
-rsKeyRec3.Open szSql3, con
-wcTeam1=rsKeyRec3("team1")
-wcTeam2=rsKeyRec3("team2")
-rsKeyRec3.close
+	$playercount=0;
+	$playercount1=0;
+	$playercount2=0;
+	$sql = "select pid,playername,ownerteam,iscaptain  from selectedplayers where leaguename='$leaguename' and leaguematchnum=$ourmatchnum  " ;
+echo $sql . " </br>" ;
+	$result = mysqli_query($conn,$sql) ;
+	while( $row = mysqli_fetch_array( $result ) )
+	{
+		if($row[2] == $team1) {
+				$pid1[$playercount1]=$row[0];
+				$playername1[$playercount1]=$row[1];
+				$ownerteam1[$playercount1]=$row[2];
+				$iscaptain1[$playercount1]=$row[3];
+				$playercount1++;
+		}
+		if($row[2] == $team2) {
+				$pid2[$playercount2]=$row[0];
+				$playername2[$playercount2]=$row[1];
+				$ownerteam2[$playercount2]=$row[2];
+				$iscaptain2[$playercount2]=$row[3];
+				$playercount2++;
+		}
+		$playercount++;
+	}
+	mysqli_free_result($result);
+echo $playercount . "and ". $playercount1 . " and " . $playercount2;
+?>
 
-response.Write(szSelSql)
-
-set rsKeyRec4=server.CreateObject("ADODB.RECORDSET")
-szSql4="select l.leaguename, l.runpoints, l.catchpoints, l.wicketpoints, l.sixerpoints, l.boundrypoints  from leaguerules l where l.leaguename='"&leaguename&"' "
-rsKeyRec4.Open szSql4, con
-
-response.Write(szSelSql)
-
-runpoints=rsKeyRec4("runpoints")
-catchpoints=rsKeyRec4("catchpoints")
-wicketpoints=rsKeyRec4("wicketpoints")
-sixerpoints=rsKeyRec4("sixerpoints")
-boundrypoints=rsKeyRec4("boundrypoints")
-
-rsKeyRec4.close
-
-%>
-<link rel="stylesheet" type="text/css" href="dat.css"> 
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-<title>Team Player Details</title>
+	<link href="NewUI/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+	<link rel="stylesheet" type="text/css" href="NewUI/css/table-style.css" />
+	<link rel="stylesheet" type="text/css" href="NewUI/css/basictable.css" />
+	<link href="NewUI/css/component.css" rel="stylesheet" type="text/css" media="all" />
+	<link href="NewUI/css/style_grid.css" rel="stylesheet" type="text/css" media="all" />
+	<link href="NewUI/css/style.css" rel="stylesheet" type="text/css" media="all" />
+	<!-- font-awesome-icons -->
+	<link href="NewUI/css/font-awesome.css" rel="stylesheet">
+<title>Team Matchup</title>
 </head>
-<body style="margin:0px;" background="images/top_bg.gif">
+<body>
+    <!-- banner -->
+    <div class="wthree_agile_admin_info">
+        <div class="w3_agileits_top_nav">
+            <ul id="gn-menu" class="gn-menu-main">
 
-<style type="text/css">
-<!--
-.boldtable, .boldtable TD, .boldtable TR
-{
-font-family:Comic Sans MS, cursive;
-font-size:8pt;
-color:white;
-background-color:navy;
-}
--->
-</style>
-<table width="950" border="0" cellspacing="0" cellpadding="0" align="Center" bgcolor="#FFFFFF">
-	<tr>
-		<td style="background: url('images/TOPHEAD.gif') repeat-x;">	
-			<table width="98%" border="0" cellspacing="0" cellpadding="0" align="Center">				
-				<tr>
-					<td align="left" height="130"><marquee scrollamount="03"> 
-					<span style="font-size: 15pt;color:#FFFFFF">Welcome to the Indus Internal</span><b><font size="5" color="#FFFFFF"> Fantasy</font></b><span style="font-size: 15pt;color:#FFFFFF;"> 
-					Cricket league </span></marquee></td>
-				</tr>				
-			</table>
-		</td>
+                <!-- //nav_agile_w3l -->
+                <li class="second logo admin">
+                    <h1>
+                        <a href="teamLandingPg.php">
+                            <i class="fa fa-graduation-cap" aria-hidden="true"></i>Team </a>
+                    </h1>
+                </li>
+
+                <!-- <li class="second w3l_search admin_login">
+
+
+
+                </li> -->
+                <li class="second top_bell_nav">
+                        <ul class="top_dp_agile ">
+                            <li class="dropdown head-dpdn">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-home"></i></a>
+                            </li>
+                        </ul>
+                     </li>
+                <li class="second full-screen">
+
+                </li>
+
+            </ul>
+            <!-- //nav -->
+
+        </div>
+        <div class="clearfix"></div>
+
+
+        <!-- /inner_content-->
+        <div class="inner_content">
+            <!-- /inner_content_w3_agile_info-->
+            <div class="clearfix"></div>
+
+            <div class="buttons_w3ls_agile" style="margin-top:60px;">
+
+            </div>
+            <div class="inner_content_w3_agile_info two_in" style="margin-top: 0px;">
+                <!-- <h2 class="w3_inner_tittle">Team Home Page</h2> -->
+                <!-- tables -->
+                <div class="agile-tables">
+                    <div class="w3l-table-info agile_info_shadow">
+                        <h3 class="w3_inner_tittle two">This is how teams matchup for this match</h3>
+
+												<table id="table">
+														<thead>
+																<tr>
+		<!--<th align="center">Match#</th> -->
+		<div class="mark">
+		<th colspan="3" align="center"> Team 1 : <?echo $team1 ;?></th>
+		<th colspan="3" align="center"> Team 2 : <?echo $team2 ;?> </th>
+	</div>
 	</tr>
 	<tr>
-		<table width="950" align="center">
-			<tr>
-				<td width="40%" align="left"><a href="teambiddetails.asp"><b>Main Team Page</b></a></td>
-			</tr>
-		</table>
+		<th align="center"> Playername</th>
+		<th align="center">Captain(Y/N)</th>
+		<th align="center">Points</th>
+		<th align="center">Other Team Playername</th>
+		<th align="center">Other Team Captain(Y/N)</th>
+		<th align="center">Points</th>
 
 	</tr>
-    <tr>
-		<table border="0" cellpadding="0" class="text" cellspacing="0" width="80%" align="center" bordercolordark="#FFFFFF" bordercolorlight="#FFFFCC">
-			<tr>
-            	<td align="center" valign="top"><font size="+2" color="#FFFFFF" face="Comic Sans MS, cursive"> &quot;Head On&quot; match up Between team1 vs team2 </font>
-                </td>
-            </tr>
-		</table>
-	</tr>
-    <tr>
-    	<table width="600" border="1" align="center" class="boldtable">
-  			<tr>
-    			<td colspan="2"><font size="-1" color="#FFFFFF" face="Comic Sans MS, cursive">Following matchup is based on average performances in ODI's</font></td>
-    		</tr>
-  			<tr>
-    			<td align="center" >Team: <%=team1%> And <%=wcTeam1%></td>
-    			<td align="center" >Team: <%=team2%>And <%=wcTeam2%></td>
-  			</tr>
-  			<tr>
-    			<td>
-                	<table width="400" border="0">
-      					<tr bgcolor="#CCCC00">
-        					<th>Player</th>
-        					<th>Score</th>
-        					<th>Wickets</th>
-        					<th>4's</th>
-        					<th>6's</th>
-        					<th>Catches</th>
-        					
-        					<th>Points</th>
-        					<th>&nbsp;</th>
-        					<th>&nbsp;</th>
-      					</tr>
-                        
-						<%
-							rsKeyRec.Open szSql,con
-								I = 1
-								Points=0
-							Do while not rsKeyRec.eof
-							playersTeam=rsKeyRec("iplteam")
-							'response.write(trim(rsKeyRec("odibatavg")) * Trim(runpoints))
-							'response.end()
+</thead>
+ <!-- entire while loop to show all rows -->
+ <tbody>
 
-							if (wcTeam1=playersTeam or wcTeam2=playersTeam) and rsKeyRec("inplaying11")="Y" then
-								If rsKeyRec("ccaptainyn")="Y" then
-									Points = 2* (Trim(rsKeyRec("odibatavg")) * Trim(runpoints)) + (Trim(rsKeyRec("odiwkts")) * Trim(wicketpoints)) + (Trim(rsKeyRec("odi4")) * trim(boundrypoints))+ (Trim(rsKeyRec("odi6")) * trim(sixerpoints)) + (Trim(rsKeyRec("odicatches")) * trim(catchpoints))
-								else
-									Points = (trim(rsKeyRec("odibatavg")) * trim(runpoints)) + (trim(rsKeyRec("odiwkts")) * trim(wicketpoints)) + (trim(rsKeyRec("odi4")) * trim(boundrypoints))+ (trim(rsKeyRec("odi6")) * trim(sixerpoints)) + (trim(rsKeyRec("odicatches")) * trim(catchpoints))
-								end if
-								
-								TotalPoints=TotalPoints+Points
-								
-							end if
+	<?
+	for ($count=0; $count<$playercount ; $count++) {
+?>
+<tr>
+	<? if ($count<$playercount1) { ?>
+		<td class="text-center"><? echo $playername1[$count] ; ?></td>
 
+		<? if($iscaptain1[$count] =='Y') {?>
+			<td class="text-center">Yes</td>
+		<? } ;?>
+		<? if($iscaptain1[$count] =='N') {?>
+			<td class="text-center">-</td>
+		<? } ;?>
 
+		<td class="text-center">0</td>
+	<? }; ?>
+	<? if($count>=$playercount1) { ?>
+		<td class="text-center"> - </td>
+		<td class="test-center"> - </td>
+		<td class="text-center"> - </td>
+  <?	}; ?>
 
-if IsNumeric(rsKeyRec("odi4"))= False Then
-	rsodi4 = 0
-End If
-if IsNumeric(rsKeyRec("odi6"))= False Then
-	rsodi6 = 0
-End If
-if IsNumeric(rsKeyRec("odicatches"))= False Then
-	odicatches = 0
-End if
-if IsNumeric(rsKeyRec("odiwkts"))= False Then
-	odiwkts = 0
-End if
+	<? if($count<$playercount2) { ?>
+		<td class="text-center"><? echo $playername2[$count] ; ?></td>
 
-						%>
+		<? if ($iscaptain2[$count] =='Y') {?>
+			<td class="text-center">Yes</td>
+		<? } ;?>
+		<? if ($iscaptain2[$count] =='N') { ?>
+			<td class="text-center">-</td>
+		<? } ;?>
 
+		<td class="text-center">0</td>
+	<? }; ?>
+	<? if($count>=$playercount2) { ?>
+		<td class="text-center"> - </td>
+		<td class="test-center"> - </td>
+		<td class="text-center"> - </td>
+		<?	}; ?>
 
-      					<tr>
-        					<td><%=rsKeyRec("playername")%> <%if rsKeyRec("ccaptainyn")="Y" then%>***<%end if%></td>
-        					<td align="center"><%=Trim(rsKeyRec("odibatavg")) * trim(runpoints)%></td>
-        					<td align="center"><%=odiwkts * trim(wicketpoints)%></td>
-        					<td align="center"><%=rsodi4 * trim(boundrypoints) %></td>
-        					<td align="center"><%=rsodi6 * trim(sixerpoints)%></td>
-        					<td align="center"><%=odicatches * trim(catchpoints)%></td>                         
-        					<td align="center"><%=trim(Points)%></td>        					
-        					<td align="center">&nbsp;</td>
-        					<td align="center">&nbsp;</td>
-      					</tr>
-                        
-						<%
-							rsKeyRec.Movenext
-							I = I + 1
-							Points=0
-							Loop
-						%>
-      					<tr>
-        					<td>Total Points</td>
-        					<td>&nbsp;</td>
-        					<td>&nbsp;</td>
-        					<td>&nbsp;</td>
-        					<td>&nbsp;</td>
-        					<td>&nbsp;</td>
-        					<td>&nbsp;</td>
-        					<td>&nbsp;</td>
-        					<td>&nbsp;</td>
-        					<td><%=TotalPoints%></td>
-      					</tr>
-    				</table>
-                </td>
-    			<td>
-                	<table width="400" border="0">
-      					<tr>
-        					<th>Player</th>
-                            <th>Score</th>
-                            <th>Wickets</th>
-                            <th>4's</th>
-                            <th>6's</th>
-                            <th>Catches</th>
-                           
-                            <th>Point</th>
-                            <th>&nbsp;</th>
-                            <th>&nbsp;</th>
-                          </tr>
-                          
-                          <%
-							rsKeyRec2.Open szSql2,con
-								I = 1
-								Points=0
-								TotalPoints=0
-							Do while not rsKeyRec2.eof
-							playersTeam=rsKeyRec2("iplteam")
+	 </tr>
+<?
+	}	?>
 
-							if IsNumeric(rsKeyRec2("odi4"))= False Then
-								xrsodi4 = 0
-							End If
-							if IsNumeric(rsKeyRec2("odi6"))= False Then
-								xrsodi6 = 0
-							End If
-							if IsNumeric(rsKeyRec2("odicatches"))= False Then
-								xodicatches = 0
-							End if
-							if IsNumeric(rsKeyRec2("odiwkts"))= False Then
-								xodiwkts = 0
-							End if
-
-							if (wcTeam1 = playersTeam or wcTeam2 = playersTeam) and rsKeyRec2("inplaying11")="Y" then
-								If trim(rsKeyRec2("ccaptainyn")) <> "Y" then
-									Points = (trim(rsKeyRec2("odibatavg")) * trim(runpoints)) + (trim(rsKeyRec2("odiwkts")) * trim(wicketpoints)) + (trim(rsKeyRec2("odi4")) * trim(boundrypoints))+ (trim(rsKeyRec2("odi6")) * trim(sixerpoints)) + (trim(rsKeyRec2("odicatches")) * trim(catchpoints))									
-								else
-									Points = 2* (trim(rsKeyRec2("odibatavg")) * trim(runpoints)) + (trim(xodiwkts) * trim(wicketpoints)) + (trim(xrsodi4) * trim(boundrypoints))+ (trim(xrsodi6) * trim(sixerpoints)) + (trim(xodicatches) * trim(catchpoints))									
-								end if
-
-								TotalPoints=TotalPoints+Points
-							end If
-						
-				   %>
-                          <tr>
-                            <td><%=rsKeyRec2("playername")%> <%if rsKeyRec2("ccaptainyn")="Y" then%>***<%end if%></td>
-        					<td align="center"><%=trim(rsKeyRec2("odibatavg")) * trim(runpoints)%></td>
-        					<td align="center"><%=xodiwkts * trim(wicketpoints)%></td>
-        					<td align="center"><%=xrsodi4 * trim(boundrypoints) %></td>
-        					<td align="center"><%=xrsodi6 * trim(sixerpoints)%></td>
-        					<td align="center"><%=xodicatches * trim(catchpoints)%></td>                         
-        					<td align="center"><%=trim(Points)%></td>      					
-        					<td>&nbsp;</td>
-        					<td>&nbsp;</td>
-                          </tr>
-                          
-						  <%
-							rsKeyRec2.Movenext
-							I = I + 1
-							Points=0
-							Loop
-						  %>
-                          
-                          <tr>
-                            <td>Total Points</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td><%=TotalPoints%></td>
-                          </tr>
-    				</table>
-                 </td>
-  			</tr>
-		</table>
-		<table width="950" align="center" class="header2">			
-			<tr>
-				<td align="left" height="30">Please note: this page is WIP :) </td>
-			</tr>
-				<tr>
-					<td style="background: url('images/TOPHEAD.gif') repeat-x;">	
-						<table width="98%" border="0" cellspacing="0" cellpadding="0" align="Center">				
-							<tr>
-								<td align="left" height="30"></td>
-							</tr>				
-						</table>
-					</td>
-				</tr>
-				<tr><td align="Right" class="text">&copy 2011 All Rights Reserved.</td></tr>			
-			</table>	
-</tr>
+</tbody>
 </table>
+</div>
+</div>
+<!-- //tables -->
+</div>
+<!-- //inner_content_w3_agile_info-->
+</div>
 
+<div class="copyrights">
+		<p>© 2018 All Rights Reserved | contact avoodi@gmail.com for any queries
+		</p>
+</div>
+<!--copy rights end here-->
+<!-- js -->
+
+<script type="text/javascript" src="NewUI/js/jquery-2.1.4.min.js"></script>
+<script src="NewUI/js/modernizr.custom.js"></script>
+<script src="NewUI/js/classie.js"></script>
+<!-- tables -->
+
+<script type="text/javascript" src="NewUI/js/jquery.basictable.min.js"></script>
+<script type="text/javascript">
+		$(document).ready(function () {
+				$('#table').basictable();
+
+				$('#table-breakpoint').basictable({
+						breakpoint: 768
+				});
+
+				$('#table-swap-axis').basictable({
+						swapAxis: true
+				});
+
+				$('#table-force-off').basictable({
+						forceResponsive: false
+				});
+
+				$('#table-no-resize').basictable({
+						noResize: true
+				});
+
+				$('#table-two-axis').basictable();
+
+				$('#table-max-height').basictable({
+						tableWrapper: true
+				});
+		});
+</script>
+
+<!-- <script src="NewUI/js/jquery.nicescroll.js"></script>-->
+<script src="NewUI/js/scripts.js"></script>
+
+<script type="text/javascript" src="NewUI/js/bootstrap-3.1.1.min.js"></script>
 
 
 </body>
+
 </html>

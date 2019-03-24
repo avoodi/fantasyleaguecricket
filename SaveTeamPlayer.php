@@ -5,8 +5,10 @@ session_start();
 $leaguename=$_SESSION['leaguename'];
 $teamname=$_SESSION['teamname'];
 $iplday=$_POST[iplday];
+$ourmatchnum=$_POST[ourmatchnum];
 $selectedcount=0;
-//echo "ipl day is ".$iplday;
+echo "ipl day is ".$iplday . "and our mt is ".$ourmatchnum;
+//echo "You have selected :<b> ".$_POST['iscaptain']."</br>";
 //$selectedplayers=$_POST['chkSelGroup'];
 include "dbConnect.php";
 global $conn;
@@ -44,7 +46,7 @@ echo "You have selected :<b> ".$_POST['iscaptain']."</br>";
 $captainPID=$_POST['iscaptain'];
 }
 
-$sql="select count(*) from selectedplayers where leaguename='$leaguename' and ownerteam='$teamname' and iplday=$iplday" ;
+$sql="select count(*) from selectedplayers where leaguename='$leaguename' and ownerteam='$teamname' and leaguematchnum=$ourmatchnum" ;
 //echo $sql ."</br>";
 $result = mysqli_query($conn,$sql) ;
 while( $row = mysqli_fetch_array( $result ) )
@@ -56,7 +58,8 @@ mysqli_free_result($result);
 if($count >0 ) {
   // we will need to delete the existing rows
 //echo " in delete ";
-  $sqldel="delete from selectedplayers where leaguename='$leaguename' and ownerteam='$teamname' and iplday=$iplday" ;
+  $sqldel="delete from selectedplayers where leaguename='$leaguename' and ownerteam='$teamname' and leaguematchnum=$ourmatchnum" ;
+  //echo $sqldel ;
   if(! mysqli_query($conn,$sqldel) )
     {
       die('error sqldel');
@@ -69,10 +72,10 @@ if($selectedcount >0) {
   for ($i=0; $i<$selectedcount; $i++) {
   //    echo " in loop ".$pid[$i] . "and ".$captainPID."</br>";
       if($pid[$i]==$captainPID){
-        $sqlins="insert into selectedplayers (pid,playername,leaguename,ownerteam,iplday,leaguematchnum,iscaptain) values ($pid[$i],'','$leaguename','$teamname',$iplday,1,'Y')";
+        $sqlins="insert into selectedplayers (pid,playername,leaguename,ownerteam,iplday,leaguematchnum,iscaptain) values ($pid[$i],'$playername[$i]','$leaguename','$teamname',$iplday,$ourmatchnum,'Y')";
       }
       else {
-        $sqlins="insert into selectedplayers (pid,playername,leaguename,ownerteam,iplday,leaguematchnum,iscaptain) values ($pid[$i],'','$leaguename','$teamname',$iplday,1,'N')";
+        $sqlins="insert into selectedplayers (pid,playername,leaguename,ownerteam,iplday,leaguematchnum,iscaptain) values ($pid[$i],'$playername[$i]','$leaguename','$teamname',$iplday,$ourmatchnum,'N')";
       }
 //echo $sqlins."</br>";
     if(! mysqli_query($conn,$sqlins) )

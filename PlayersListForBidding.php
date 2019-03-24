@@ -285,7 +285,7 @@ if ($conn == false) {
             });
         </script>
 
-        <script src="NewUI/js/jquery.nicescroll.js"></script>
+<!--        <script src="NewUI/js/jquery.nicescroll.js"></script> -->
         <script src="NewUI/js/scripts.js"></script>
 
         <script type="text/javascript" src="NewUI/js/bootstrap-3.1.1.min.js"></script>

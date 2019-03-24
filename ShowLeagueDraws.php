@@ -142,12 +142,12 @@ session_start();
 	 <!--<td align="center"><? echo $iplmatchnum[$count] ;?></td> -->
 		<td class="text-center"><? echo $ourmatchnum[$count] ; ?></td>
 		<? if ($team1name[$count] == $teamname) { ?>
-		 <td class="text-center"> <a href="SelectYourTeam.php?mnum=<? echo $iplmatchnum[$count] ; ?>"><strong><? echo $team1name[$count]; ?></strong></a> </td>
+		 <td class="text-center"> <a href="SelectYourTeam.php?mnum=<? echo $iplmatchnum[$count] ; ?>&omn=<?echo $ourmatchnum[$count]; ?>"><strong><? echo $team1name[$count]; ?></strong></a> </td>
 		<td class="text-center"> <a href="ViewOtherTeam.php?nm=<? echo $team2name[$count] ?>&mnum=view"><? echo $team2name[$count] ;?></a> </td>
 	<? } ?>
 	<? if ($team2name[$count] == $teamname) { ?>
 		<td class="text-center"> <a href="ViewOtherTeam.php?nm=<? echo $team1name[$count] ?>&mnum=view"><? echo $team1name[$count] ;?></a> </td>
-	 <td class="text-center"> <a href="SelectYourTeam.php?mnum=<? echo $iplmatchnum[$count] ; ?>"><strong><? echo $team2name[$count]; ?></strong></a> </td>
+	 <td class="text-center"> <a href="SelectYourTeam.php?mnum=<? echo $iplmatchnum[$count] ; ?>&omn=<?echo $ourmatchnum[$count]; ?>"><strong><? echo $team2name[$count]; ?></strong></a> </td>
  <? } ?>
  <? if ( ($team2name[$count] !== $teamname) && ($team1name[$count] !== $teamname)) { ?>
 	 <td class="text-center"> <a href="ViewOtherTeam.php?nm=<? echo $team1name[$count] ?>&mnum=view"><? echo $team1name[$count] ;?></a> </td>
@@ -158,8 +158,8 @@ session_start();
 		<td class="text-center">&nbsp;<? echo $score[$count] ; ?></td>
 		<td class="text-center"><strong><? echo $whowon[$count] ; ?></strong></td>
 		<td class="text-center">
-	<!--a href="viewmatchup.php?t1=<? echo $team1name[$count] ?>&t2=<? echo $team2name[$count] ?>&t3=<<? echo $ourmatchnum[$count] ?>">
-			  <strong>ViewMatchup</strong></a-->
+	<a href="viewmatchup.php?t1=<? echo $team1name[$count] ?>&t2=<? echo $team2name[$count] ?>&t3=<? echo $ourmatchnum[$count] ?>">
+			  <strong>ViewMatchup</strong></a>
 				<!--<td align="center">&nbsp;<? echo $prediction[$count] ;?></td> -->
 				<td class="text-center"><?echo $iplmatchstr[$iplmatchnum[$count]] ;?></td>
 
@@ -218,7 +218,7 @@ session_start();
 		});
 </script>
 
-<script src="NewUI/js/jquery.nicescroll.js"></script>
+<!-- <script src="NewUI/js/jquery.nicescroll.js"></script>-->
 <script src="NewUI/js/scripts.js"></script>
 
 <script type="text/javascript" src="NewUI/js/bootstrap-3.1.1.min.js"></script>
