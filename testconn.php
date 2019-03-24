@@ -4,6 +4,7 @@
   </head>
   <body>
 <?php
+
 	function execute_query($conn, $query){
 		$result = mysqli_query($conn, $query);
 		if(!$result){
@@ -24,7 +25,7 @@
 	}
 
 	function record_exists($column, $value, $conn, $table_name){
-		$select_query = "select pid from $table_name where $column='$value';";
+		$select_query = "select pid from $table_name where $column=$value;";
 		$result = execute_query($conn, $select_query);
 		return result_has_rows($result);
 	}

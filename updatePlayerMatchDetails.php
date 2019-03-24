@@ -6,9 +6,9 @@
 
 <?php
 
-//require_once 'connect_db.php';
+require_once 'connect_db_forcricapi.php';
 //require_once 'testconn.php';
-require_once 'dbConnect.php';
+require_once 'testconn.php';
 require_once 'save_fielding_data.php';
 require_once 'save_bowling_data.php';
 require_once 'save_batting_data.php';
@@ -29,6 +29,7 @@ function run($match_uniq_id){
 	$man_of_the_match_id = $data["man-of-the-match"]["pid"];
 
 	$teams_and_players = $data["team"];
+  echo "decode done "."</br>";
 	extract_and_save_players_data($conn, $teams_and_players, $match_uniq_id);
 	echo "player records inserted.";
 	extract_and_save_fielding_data($conn, $fielding_data, $man_of_the_match_id, $match_uniq_id);
