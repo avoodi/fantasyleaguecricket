@@ -7,7 +7,7 @@ $pass=$_SESSION['pass'];
 $teamname=$_SESSION['teamname'];
 $iplday=$_GET['mnum'];
 $ourmatchnum=$_GET['omn'];
-echo "ipl day is ".$iplday . "and our mt is ".$ourmatchnum ;
+//echo "ipl day is ".$iplday . "and our mt is ".$ourmatchnum ;
 include "dbConnect.php";
 global $conn;
 

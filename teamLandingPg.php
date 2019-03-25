@@ -12,7 +12,7 @@ $teamname=$_SESSION['teamname'];
 $teamownername=$_SESSION['teamownername'];
 $iplday=$_SESSION['iplday'];
 
-echo $teamownername;
+//echo $teamownername;
 
 //$servername = "localhost:3306";
 //$dbusername = "fanta_avad";
@@ -26,8 +26,8 @@ if ($conn == false) {
 }
 // select from leaguedraw all matches only for this team
 $count=0;
-//$sql="select distinct(ld.ourmatchnum),ld.iplmatchnum,ld.team1name, ld.team2name, ip.matchstr ,ip.matchdate,  ifnull(ld.score,'-')score, ifnull(ld.whowon,'-') whowon from iplschedule ip , leaguedraw ld where ld.leaguename='$leaguename' and ( ld.team1name='$teamname' or ld.team2name='$teamname')and ld.iplmatchnum=ip.iplday ";
-$sql="select ld.ourmatchnum,ld.iplmatchnum,ld.team1name, ld.team2name, ifnull(ld.score,'-') score, ifnull(ld.whowon,'-') whowon,ld.actualiplmatch  from  leaguedraw ld where ld.leaguename='$leaguename' ";
+//$sql="select ld.ourmatchnum,ld.iplmatchnum,ld.team1name, ld.team2name, ifnull(ld.score,'-') score, ifnull(ld.whowon,'-') whowon,ld.actualiplmatch  from  leaguedraw ld where ld.leaguename='$leaguename' ";
+$sql="select distinct ld.ourmatchnum,ld.iplmatchnum,ld.team1name, ld.team2name, ifnull(ld.score,'-') score, ifnull(ld.whowon,'-') whowon, i.matchstr, i.matchdate  from  leaguedraw ld left join iplschedule i on (i.iplday=ld.iplmatchnum) where ld.leaguename='$leaguename'";
 //echo $sql ;
 $result = mysqli_query($conn,$sql) ;
 while( $row = mysqli_fetch_array( $result ) )
@@ -37,7 +37,7 @@ while( $row = mysqli_fetch_array( $result ) )
 	$team1name[$count]=$row[2];
 	$team2name[$count]=$row[3];
 	$iplmatchs[$count]=$row[6];
-//	$iplmatchdate[$count]=date_format($row[6],"yyyy-mm-dd");
+	$iplmatchdate[$count]=$row[7];
 	$score[$count]=$row[4];
 	$whowon[$count]=$row[5];
 	$count++;
@@ -82,7 +82,7 @@ while( $row = mysqli_fetch_array( $result ) )
 mysqli_free_result($result);
 
 $sqlupdt="update leagueteamsdetails set Currentbidamount=$totalbidamt , virtualpurchasepower=$teamvirpp, numberofplayers=$numberofplayers WHERE leaguename = '$leaguename' and teamname='$teamname' ";
-echo $sqlupdt;
+//echo $sqlupdt;
 	if(! mysqli_query($conn,$sqlupdt) )
 		{
 			die('error sqlupdate');
@@ -257,7 +257,7 @@ echo $sqlupdt;
 						<table id="table">
 							<thead>
 								<tr>
-									<th>Match#</th>
+									<th>MatchDate</th>
 									<th>Team1</th>
 									<th>Team2</th>
 									<th>Score</th>
@@ -272,14 +272,15 @@ echo $sqlupdt;
 						?>
 							<tbody>
 								<tr>
-										<td><? echo $ourmatchnum[$i] ; ?></td>
+										<!--<td><? echo $ourmatchnum[$i] ; ?></td> -->
+										<td><? echo $iplmatchdate[$i]; ?></td>
 										<? if ($team1name[$i] == $teamname) { ?>
-										<td> <a href="SelectYourTeam.php?mnum=<? echo $iplmatchnum[$i] ; ?>"><strong><? echo $team1name[$i]; ?></strong></a> </td>
+										<td> <a href="SelectYourTeam.php?mnum=<? echo $iplmatchnum[$i] ; ?>&omn=<?echo $ourmatchnum[$i]; ?>"><strong><? echo $team1name[$i]; ?></strong></a> </td>
 										<td> <a href="ViewOtherTeam.php?nm=<? echo $team2name[$i] ?>&mnum=view"><? echo $team2name[$i] ;?></a> </td>
 									<? } ?>
 									<? if ($team2name[$i] == $teamname) { ?>
 										<td> <a href="ViewOtherTeam.php?nm=<? echo $team1name[$i] ?>&mnum=view"><? echo $team1name[$i] ;?></a> </td>
-										<td> <a href="SelectYourTeam.php?mnum=<? echo $iplmatchnum[$i] ; ?>"><strong><? echo $team2name[$i]; ?></strong></a> </td>
+										<td> <a href="SelectYourTeam.php?mnum=<? echo $iplmatchnum[$i] ; ?>&omn=<?echo $ourmatchnum[$i]; ?>"><strong><? echo $team2name[$i]; ?></strong></a> </td>
 									<? } ?>
 										<td> <? echo $score[$i] ; ?> </td>
 										<td><strong> <? echo $whowon[$i] ; ?></strong></td>
@@ -288,60 +289,6 @@ echo $sqlupdt;
 							<? }
 								}	?>
 
-						<!--		<tr>
-										<td>7</td>
-										<td>2</td>
-										<td> <a href="#"><strong>av</strong></a> </td>
-										<td> <a href="#">ne</a> </td>
-										<td> 10 - 77 </td>
-										<td><strong> ne</strong></td>
-										<td >RCB-KXP</td>
-								</tr>
-								<tr>
-										<td>7</td>
-										<td>2</td>
-										<td> <a href="#"><strong>av</strong></a> </td>
-										<td> <a href="#">ne</a> </td>
-										<td> 10 - 77 </td>
-										<td><strong> ne</strong></td>
-										<td >RCB-KXP</td>
-								</tr>
-								<tr>
-										<td>7</td>
-										<td>2</td>
-										<td> <a href="#"><strong>av</strong></a> </td>
-										<td> <a href="#">ne</a> </td>
-										<td> 10 - 77 </td>
-										<td><strong> ne</strong></td>
-										<td >RCB-KXP</td>
-								</tr>
-								<tr>
-										<td>7</td>
-										<td>2</td>
-										<td> <a href="#"><strong>av</strong></a> </td>
-										<td> <a href="#">ne</a> </td>
-										<td> 10 - 77 </td>
-										<td><strong> ne</strong></td>
-										<td >RCB-KXP</td>
-								</tr><tr>
-										<td>7</td>
-										<td>2</td>
-										<td> <a href="#"><strong>av</strong></a> </td>
-										<td> <a href="#">ne</a> </td>
-										<td> 10 - 77 </td>
-										<td><strong> ne</strong></td>
-										<td >RCB-KXP</td>
-								</tr><tr>
-										<td>7</td>
-										<td>2</td>
-										<td> <a href="#"><strong>av</strong></a> </td>
-										<td> <a href="#">ne</a> </td>
-										<td> 10 - 77 </td>
-										<td><strong> ne</strong></td>
-										<td >RCB-KXP</td>
-								</tr>
-
--->
 							</tbody>
 						</table>
 					</div>

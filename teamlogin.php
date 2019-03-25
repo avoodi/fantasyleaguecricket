@@ -44,17 +44,21 @@ bordercolorlight="CCCCCC" class="pagenav">
     	<td align="center" colspan="2" valign="top" bgcolor="#CCCCCC"><strong>Register Teams</strong></td>
 	</tr>
 	<tr>
-    	<td align="right" width="28%">Team Name :</td>
-    	<td width="72%"><input type="text" name="teamname" value="" size="30"></td>
+    	<td align="right" >Team Name :</td>
+			<td ><input type="text" name="teamname" value="" size="30">
+			<font color="#000000" face="Verdana, Geneva, sans-serif" size="-2"> Some nice name for your team</td>
+
 	</tr>
 	<tr>
     	<td align="right">Owner Name :</td>
-    	<td><input type="text" name="OwnerName" value="" size="30"></td>
+    	<td><input type="text" name="OwnerName" value="" size="30">
+			<font color="#000000" face="Verdana, Geneva, sans-serif" size="-2"> Your name please</td>
+
 	</tr>
 	<tr>
     	<td align="right">Login id:</td>
     	<td><input type="text" name="OwnerEmail" value="" size="30">
-				<font color="#000000" face="Verdana, Geneva, sans-serif" size="-2"> could be email; To be used as LoginId</td>
+				<font color="#000000" face="Verdana, Geneva, sans-serif" size="-2">Could be email</td>
 	</tr>
 	<tr>
     	<td align="right">Password :</td>
