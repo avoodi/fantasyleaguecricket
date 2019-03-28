@@ -218,9 +218,11 @@ $sqlupdt="update leagueteamsdetails set Currentbidamount=$totalbidamt , virtualp
 					<button type="button" class="btn btn-xs btn-danger" onclick="call_leaguestanding()" >League Standing </button>
 					<? if ($isOwner=='Yes') { ?>
 						<? if ($drawdone =='N') {?>
-							<button type="button" class="btn btn-xs btn-info" onClick="Javascript:window.location.href = 'NewLeagueDraw.php';">Create League Schedule(draws) </button>
-							<button type="button" class="btn btn-xs btn-success" onClick="Javascript:window.location.href = 'RandomAlloc.php';">Auto Allocation</button>
+						<!--	<button type="button" class="btn btn-xs btn-info" onClick="Javascript:window.location.href = 'NewLeagueDraw.php';">Create League Schedule(draws) </button>
+						<button type="button" class="btn btn-xs btn-success" onClick="Javascript:window.location.href = 'RandomAlloc.php';">Auto Allocation</button> -->
 
+							<button type="button" class="btn btn-xs btn-info" onClick="confirmPutUpDraws()">Create League Schedule(draws)</button>
+						<button type="button" class="btn btn-xs btn-success" onClick="confirmRandomAlloc()">Auto Allocation</button>
 						<? } ?>
 					<? } ?>
 					<button type="button" class="btn btn-xs btn-info" onClick="Javascript:window.location.href = 'ShowLeagueDraws.php';">League Schedule(draws) </button>
@@ -239,9 +241,16 @@ $sqlupdt="update leagueteamsdetails set Currentbidamount=$totalbidamt , virtualp
 				<? if ($isOwner=='Yes') {?>
 <h3 class="w3_inner_tittle two">
 	<p> You are the league creator; you have powers :), and with power comes responsibility... </p>
-	<p> To get the league started quickly, invite few friends (any number >4 to 14 is good we say) </p>
-	<p> And go for bidding(switch it on in league rules page) or auto allocation(do not click on auto allocate button otherwise) of players. </p>
-	<p>And then put up league draws(do this only after teams are set with players either via bidding or auto allocate) </p>
+	<p> DO NOT click on buttons which say "AutoAllocation" or "Create League Schedule" as yet </p>
+	<p> To get the league started quickly follow below steps</p>
+	<p> 1.  invite few friends (any number >4 to 14 is good we say) </p>
+	<p> 2. after you have enough teams go to league rules page and change rules if required </p>
+	<p> 3. on league rules page , check what the 'Current Bidding Status' says </p>
+	<p> 4. if your league wants to go for bidding -the value should be 'started-in progress'</p>
+	<p> 5. fix some time window for bidding and communicate with other teams; and change the value to 'bidding over' whenever you want to close bidding </p>
+	<p> 6. if your league does not want to go for bidding then you can click on the 'Auto allocation' button  </p>
+	<p> 7. after bidding is over OR auto allocation is done, then put up league draws by clicking 'Create League Schedule' button </p>
+	<p> 8. thats it your league is all set now </p>
 	<p> pl email avoodi@gmail.com if you need any help </p>
 <? } ?>
 <? if ($isOwner=='No') {?>
@@ -379,6 +388,23 @@ function call_leaguestanding(){
    window.location.assign('LeaguePointsTable.php');//there are many ways to do this
 }
 </script>
+<script type="text/javascript">
+function confirmPutUpDraws() {
+    var ask = window.confirm("Are you sure your league has enough teams to put up league draws?");
+    if (ask) {
+        window.location.href = "NewLeagueDraw.php";
+    }
+}
+</script>
+<script type="text/javascript">
+function confirmRandomAlloc() {
+    var ask = window.confirm("Are you sure you want to Allocate players to all teams randomly?");
+    if (ask) {
+        window.location.href = "RandomAlloc.php";
+    }
+}
+</script>
+
 </body>
 
 </html>

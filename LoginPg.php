@@ -18,12 +18,12 @@
 							<!-- /login -->
 							<table width="98%" border="0" cellspacing="0" cellpadding="0" align="Center">
 								<tr>
-									<td align="center" height="50">
+									<td align="center">
 									<span style="font-size: 20pt;color:#CCCCCC">Welcome to the Fantasy League Cricket </span>
 										</td>
 								</tr>
 								<tr>
-									<td align="center" height="30">
+									<td align="center" >
 									<span style="font-size: 15pt;color:#CCCCCC">Create your own league, invite friends, play your own IPL  </span>
 										</td>
 								</tr>
@@ -46,13 +46,13 @@
 															</div>
 														</form>
 													</div>
-													<div class="login-social-grids">
+													<!-- <div class="login-social-grids">
 														<ul>
 															<li><a href="#"><i class="fa fa-facebook"></i></a></li>
 															<li><a href="#"><i class="fa fa-twitter"></i></a></li>
 															<li><a href="#"><i class="fa fa-rss"></i></a></li>
 														</ul>
-													</div>
+													</div> -->
 													<p><a href="teamlogin.php"> Don't have an account?</a></p>
 
 													 <h6><a href="teamlogin.php">Register</a><h6>
@@ -60,7 +60,7 @@
 										</div>
 										<table align="center" width=950>
 											<tr align="center">
-												<td><p>Enjoy IPL even more; Create a league of your own , play with your friends, family, office colleagues...
+												<td><p>Enjoy IPL even more; Create your own league , with your own rules, play with your friends, family, office colleagues...
 										<p></td>
 											</tr>
 											<tr align="center">
@@ -73,17 +73,17 @@
 												<td>* Friends/family/colleague join that league</td>
 											</tr>
 											<tr align="center">
-												<td>* League decide to for bidding process(optional, but lot of fun) to acquire players/form teams OR go for ‘random allocation’ of players
+												<td>* To acquire players, League decides to go for bidding process(optional, but lot of fun) OR system can help ‘random allocation’ of players to every team in your league
 										</td>
 											</tr>
 											<tr align="center">
-												<td>* The league creator puts up the draw(schedule of league matches) </td>
+												<td>* The league creator puts up the draw(schedule of league matches), all of this with just click of button </td>
 											</tr>
 											<tr align="center">
 												<td>* Teams select players, captain based on actual IPL match (based on league draw - can be done in one go for all future matches)</td>
 											</tr>
 											<tr align="center">
-												<td align="center">* Every team has one-one match with some other league everyday, earns points based on how players performed in actual ill match
+												<td align="center">* Every team has one-one match with some other league everyday, earns points based on how players performed in actual IPL match
 											</td>
 											</tr>
 											<tr align="center">
@@ -91,9 +91,14 @@
 											</td>
 											</tr>
 											<tr align="center">
-												<td>* Buy, sell players if required
+												<td>* Buy, sell players if required - Try it its lot of fun
 											</td>
 											</tr >
+											<tr align="center">
+												<td>* Check this <a href="https://youtu.be/FfUGnFRNtR0" target="_blank">video</a> to know more or read this<a href="https://medium.com/@avoodi/owning-an-ipl-team-virtually-9b239801e9bb" target="_blank"> blog </a> to know more
+											</td>
+											</tr >
+
 
 										</table>
 

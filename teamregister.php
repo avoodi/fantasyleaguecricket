@@ -1,6 +1,6 @@
 #!/usr/bin/php
 <?
-echo $_POST['teamname']. " and " . $_POST['OwnerName'] . " and " . $_POST['OwnerEmail'] . " and " . $_POST['leaguename']. " and pass is ". $_POST['Pass'];
+//echo $_POST['teamname']. " and " . $_POST['OwnerName'] . " and " . $_POST['OwnerEmail'] . " and " . $_POST['leaguename']. " and pass is ". $_POST['Pass'];
 $teamname=$_POST['teamname'];
 $ownername=$_POST['OwnerName'];
 $owneremail=$_POST['OwnerEmail'];
