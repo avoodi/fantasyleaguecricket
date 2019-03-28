@@ -12,7 +12,7 @@ $teamname=$_SESSION['teamname'];
 $teamownername=$_SESSION['teamownername'];
 $iplday=$_SESSION['iplday'];
 
-echo $teamownername;
+//echo $teamownername;
 
 //$servername = "localhost:3306";
 //$dbusername = "fanta_avad";
@@ -26,8 +26,8 @@ if ($conn == false) {
 }
 // select from leaguedraw all matches only for this team
 $count=0;
-//$sql="select distinct(ld.ourmatchnum),ld.iplmatchnum,ld.team1name, ld.team2name, ip.matchstr ,ip.matchdate,  ifnull(ld.score,'-')score, ifnull(ld.whowon,'-') whowon from iplschedule ip , leaguedraw ld where ld.leaguename='$leaguename' and ( ld.team1name='$teamname' or ld.team2name='$teamname')and ld.iplmatchnum=ip.iplday ";
-$sql="select ld.ourmatchnum,ld.iplmatchnum,ld.team1name, ld.team2name, ifnull(ld.score,'-') score, ifnull(ld.whowon,'-') whowon,ld.actualiplmatch  from  leaguedraw ld where ld.leaguename='$leaguename' ";
+//$sql="select ld.ourmatchnum,ld.iplmatchnum,ld.team1name, ld.team2name, ifnull(ld.score,'-') score, ifnull(ld.whowon,'-') whowon,ld.actualiplmatch  from  leaguedraw ld where ld.leaguename='$leaguename' ";
+$sql="select distinct ld.ourmatchnum,ld.iplmatchnum,ld.team1name, ld.team2name, ifnull(ld.score,'-') score, ifnull(ld.whowon,'-') whowon, i.matchstr, i.matchdate  from  leaguedraw ld left join iplschedule i on (i.iplday=ld.iplmatchnum) where ld.leaguename='$leaguename'";
 //echo $sql ;
 $result = mysqli_query($conn,$sql) ;
 while( $row = mysqli_fetch_array( $result ) )
@@ -37,7 +37,7 @@ while( $row = mysqli_fetch_array( $result ) )
 	$team1name[$count]=$row[2];
 	$team2name[$count]=$row[3];
 	$iplmatchs[$count]=$row[6];
-//	$iplmatchdate[$count]=date_format($row[6],"yyyy-mm-dd");
+	$iplmatchdate[$count]=$row[7];
 	$score[$count]=$row[4];
 	$whowon[$count]=$row[5];
 	$count++;
@@ -82,7 +82,7 @@ while( $row = mysqli_fetch_array( $result ) )
 mysqli_free_result($result);
 
 $sqlupdt="update leagueteamsdetails set Currentbidamount=$totalbidamt , virtualpurchasepower=$teamvirpp, numberofplayers=$numberofplayers WHERE leaguename = '$leaguename' and teamname='$teamname' ";
-echo $sqlupdt;
+//echo $sqlupdt;
 	if(! mysqli_query($conn,$sqlupdt) )
 		{
 			die('error sqlupdate');
@@ -218,9 +218,11 @@ echo $sqlupdt;
 					<button type="button" class="btn btn-xs btn-danger" onclick="call_leaguestanding()" >League Standing </button>
 					<? if ($isOwner=='Yes') { ?>
 						<? if ($drawdone =='N') {?>
-							<button type="button" class="btn btn-xs btn-info" onClick="Javascript:window.location.href = 'NewLeagueDraw.php';">Create League Schedule(draws) </button>
-							<button type="button" class="btn btn-xs btn-success" onClick="Javascript:window.location.href = 'RandomAlloc.php';">Auto Allocation</button>
+						<!--	<button type="button" class="btn btn-xs btn-info" onClick="Javascript:window.location.href = 'NewLeagueDraw.php';">Create League Schedule(draws) </button>
+						<button type="button" class="btn btn-xs btn-success" onClick="Javascript:window.location.href = 'RandomAlloc.php';">Auto Allocation</button> -->
 
+							<button type="button" class="btn btn-xs btn-info" onClick="confirmPutUpDraws()">Create League Schedule(draws)</button>
+						<button type="button" class="btn btn-xs btn-success" onClick="confirmRandomAlloc()">Auto Allocation</button>
 						<? } ?>
 					<? } ?>
 					<button type="button" class="btn btn-xs btn-info" onClick="Javascript:window.location.href = 'ShowLeagueDraws.php';">League Schedule(draws) </button>
@@ -239,9 +241,16 @@ echo $sqlupdt;
 				<? if ($isOwner=='Yes') {?>
 <h3 class="w3_inner_tittle two">
 	<p> You are the league creator; you have powers :), and with power comes responsibility... </p>
-	<p> To get the league started quickly, invite few friends (any number >4 to 14 is good we say) </p>
-	<p> And go for bidding(switch it on in league rules page) or auto allocation(do not click on auto allocate button otherwise) of players. </p>
-	<p>And then put up league draws(do this only after teams are set with players either via bidding or auto allocate) </p>
+	<p> DO NOT click on buttons which say "AutoAllocation" or "Create League Schedule" as yet </p>
+	<p> To get the league started quickly follow below steps</p>
+	<p> 1.  invite few friends (any number >4 to 14 is good we say) </p>
+	<p> 2. after you have enough teams go to league rules page and change rules if required </p>
+	<p> 3. on league rules page , check what the 'Current Bidding Status' says </p>
+	<p> 4. if your league wants to go for bidding -the value should be 'started-in progress'</p>
+	<p> 5. fix some time window for bidding and communicate with other teams; and change the value to 'bidding over' whenever you want to close bidding </p>
+	<p> 6. if your league does not want to go for bidding then you can click on the 'Auto allocation' button  </p>
+	<p> 7. after bidding is over OR auto allocation is done, then put up league draws by clicking 'Create League Schedule' button </p>
+	<p> 8. thats it your league is all set now </p>
 	<p> pl email avoodi@gmail.com if you need any help </p>
 <? } ?>
 <? if ($isOwner=='No') {?>
@@ -257,7 +266,7 @@ echo $sqlupdt;
 						<table id="table">
 							<thead>
 								<tr>
-									<th>Match#</th>
+									<th>MatchDate</th>
 									<th>Team1</th>
 									<th>Team2</th>
 									<th>Score</th>
@@ -272,14 +281,15 @@ echo $sqlupdt;
 						?>
 							<tbody>
 								<tr>
-										<td><? echo $ourmatchnum[$i] ; ?></td>
+										<!--<td><? echo $ourmatchnum[$i] ; ?></td> -->
+										<td><? echo $iplmatchdate[$i]; ?></td>
 										<? if ($team1name[$i] == $teamname) { ?>
-										<td> <a href="SelectYourTeam.php?mnum=<? echo $iplmatchnum[$i] ; ?>"><strong><? echo $team1name[$i]; ?></strong></a> </td>
+										<td> <a href="SelectYourTeam.php?mnum=<? echo $iplmatchnum[$i] ; ?>&omn=<?echo $ourmatchnum[$i]; ?>"><strong><? echo $team1name[$i]; ?></strong></a> </td>
 										<td> <a href="ViewOtherTeam.php?nm=<? echo $team2name[$i] ?>&mnum=view"><? echo $team2name[$i] ;?></a> </td>
 									<? } ?>
 									<? if ($team2name[$i] == $teamname) { ?>
 										<td> <a href="ViewOtherTeam.php?nm=<? echo $team1name[$i] ?>&mnum=view"><? echo $team1name[$i] ;?></a> </td>
-										<td> <a href="SelectYourTeam.php?mnum=<? echo $iplmatchnum[$i] ; ?>"><strong><? echo $team2name[$i]; ?></strong></a> </td>
+										<td> <a href="SelectYourTeam.php?mnum=<? echo $iplmatchnum[$i] ; ?>&omn=<?echo $ourmatchnum[$i]; ?>"><strong><? echo $team2name[$i]; ?></strong></a> </td>
 									<? } ?>
 										<td> <? echo $score[$i] ; ?> </td>
 										<td><strong> <? echo $whowon[$i] ; ?></strong></td>
@@ -288,60 +298,6 @@ echo $sqlupdt;
 							<? }
 								}	?>
 
-						<!--		<tr>
-										<td>7</td>
-										<td>2</td>
-										<td> <a href="#"><strong>av</strong></a> </td>
-										<td> <a href="#">ne</a> </td>
-										<td> 10 - 77 </td>
-										<td><strong> ne</strong></td>
-										<td >RCB-KXP</td>
-								</tr>
-								<tr>
-										<td>7</td>
-										<td>2</td>
-										<td> <a href="#"><strong>av</strong></a> </td>
-										<td> <a href="#">ne</a> </td>
-										<td> 10 - 77 </td>
-										<td><strong> ne</strong></td>
-										<td >RCB-KXP</td>
-								</tr>
-								<tr>
-										<td>7</td>
-										<td>2</td>
-										<td> <a href="#"><strong>av</strong></a> </td>
-										<td> <a href="#">ne</a> </td>
-										<td> 10 - 77 </td>
-										<td><strong> ne</strong></td>
-										<td >RCB-KXP</td>
-								</tr>
-								<tr>
-										<td>7</td>
-										<td>2</td>
-										<td> <a href="#"><strong>av</strong></a> </td>
-										<td> <a href="#">ne</a> </td>
-										<td> 10 - 77 </td>
-										<td><strong> ne</strong></td>
-										<td >RCB-KXP</td>
-								</tr><tr>
-										<td>7</td>
-										<td>2</td>
-										<td> <a href="#"><strong>av</strong></a> </td>
-										<td> <a href="#">ne</a> </td>
-										<td> 10 - 77 </td>
-										<td><strong> ne</strong></td>
-										<td >RCB-KXP</td>
-								</tr><tr>
-										<td>7</td>
-										<td>2</td>
-										<td> <a href="#"><strong>av</strong></a> </td>
-										<td> <a href="#">ne</a> </td>
-										<td> 10 - 77 </td>
-										<td><strong> ne</strong></td>
-										<td >RCB-KXP</td>
-								</tr>
-
--->
 							</tbody>
 						</table>
 					</div>
@@ -432,6 +388,23 @@ function call_leaguestanding(){
    window.location.assign('LeaguePointsTable.php');//there are many ways to do this
 }
 </script>
+<script type="text/javascript">
+function confirmPutUpDraws() {
+    var ask = window.confirm("Are you sure your league has enough teams to put up league draws?");
+    if (ask) {
+        window.location.href = "NewLeagueDraw.php";
+    }
+}
+</script>
+<script type="text/javascript">
+function confirmRandomAlloc() {
+    var ask = window.confirm("Are you sure you want to Allocate players to all teams randomly?");
+    if (ask) {
+        window.location.href = "RandomAlloc.php";
+    }
+}
+</script>
+
 </body>
 
 </html>

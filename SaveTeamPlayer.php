@@ -7,7 +7,7 @@ $teamname=$_SESSION['teamname'];
 $iplday=$_POST[iplday];
 $ourmatchnum=$_POST[ourmatchnum];
 $selectedcount=0;
-echo "ipl day is ".$iplday . "and our mt is ".$ourmatchnum;
+//echo "ipl day is ".$iplday . "and our mt is ".$ourmatchnum;
 //echo "You have selected :<b> ".$_POST['iscaptain']."</br>";
 //$selectedplayers=$_POST['chkSelGroup'];
 include "dbConnect.php";
@@ -42,7 +42,7 @@ if(!empty($_POST)) {
 //echo $selectedplayers;
 if(isset($_POST['iscaptain']))
 {
-echo "You have selected :<b> ".$_POST['iscaptain']."</br>";
+//echo "You have selected :<b> ".$_POST['iscaptain']."</br>";
 $captainPID=$_POST['iscaptain'];
 }
 

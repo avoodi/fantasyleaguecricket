@@ -18,7 +18,7 @@ session_start();
 	}
 
 	$i=0;
-	$sql = "select *  from leaguedraw where leaguename='$leaguename'  " ;
+	$sql = "select *  from leaguedraw ld  where leaguename='$leaguename'" ;
 //echo $sql . " </br>" ;
 	$result = mysqli_query($conn,$sql) ;
 	while( $row = mysqli_fetch_array( $result ) )
@@ -39,11 +39,12 @@ session_start();
 	mysqli_free_result($result);
 	$leaguedrawrows=$i;
 	$i=0;
-	$sql="select iplday, matchstr from iplschedule where iplday>=$iplmatchnum[0]";
+	$sql="select iplday, matchstr, matchdate from iplschedule where iplday>=$iplmatchnum[0]";
 	$result = mysqli_query($conn,$sql) ;
 	while( $row = mysqli_fetch_array( $result ) )
 	{
 		$iplmatchstr[$row[0]]=$row[1];
+		$iplmatchdate[$row[0]]=$row[2];
 		$i++;
 	}
 	mysqli_free_result($result);
@@ -118,7 +119,7 @@ session_start();
 														<thead>
 																<tr>
 		<!--<th align="center">Match#</th> -->
-		<th align="center">OurLeagueMatch#</th>
+		<th align="center">MatchDate#</th>
 		<th align="center">Team1</th>
 		<th align="center">Team2</th>
 		<!--<th align="center">Date</th> -->
@@ -140,7 +141,7 @@ session_start();
 <tbody>
 <tr>
 	 <!--<td align="center"><? echo $iplmatchnum[$count] ;?></td> -->
-		<td class="text-center"><? echo $ourmatchnum[$count] ; ?></td>
+		<td class="text-center"><? echo $iplmatchdate[$iplmatchnum[$count]] ; ?></td>
 		<? if ($team1name[$count] == $teamname) { ?>
 		 <td class="text-center"> <a href="SelectYourTeam.php?mnum=<? echo $iplmatchnum[$count] ; ?>&omn=<?echo $ourmatchnum[$count]; ?>"><strong><? echo $team1name[$count]; ?></strong></a> </td>
 		<td class="text-center"> <a href="ViewOtherTeam.php?nm=<? echo $team2name[$count] ?>&mnum=view"><? echo $team2name[$count] ;?></a> </td>

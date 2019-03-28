@@ -12,7 +12,7 @@ session_start();
 	include "dbConnect.php";
 	global $conn;
 
-echo "our match num is : " . $ourmatchnum . "and team 1 : ". $team1 . "and team2 is : ".$team2;
+//echo "our match num is : " . $ourmatchnum . "and team 1 : ". $team1 . "and team2 is : ".$team2;
 
 	if ($conn == false) {
 	  echo "Sorry, site is temporarily experiencing database connectivity issues; should be sorted soon, please check again in some time";
@@ -21,8 +21,8 @@ echo "our match num is : " . $ourmatchnum . "and team 1 : ". $team1 . "and team2
 	$playercount=0;
 	$playercount1=0;
 	$playercount2=0;
-	$sql = "select pid,playername,ownerteam,iscaptain  from selectedplayers where leaguename='$leaguename' and leaguematchnum=$ourmatchnum  " ;
-echo $sql . " </br>" ;
+	$sql = "select s.pid,s.playername,s.ownerteam,s.iscaptain ,p.points,s.iplday  from selectedplayers s left join playersmatchdetails p  on(s.playername=p.playername and s.leaguename=p.leaguename) where s.leaguename='$leaguename' and s.leaguematchnum=$ourmatchnum "	 ;
+//echo $sql . " </br>" ;
 	$result = mysqli_query($conn,$sql) ;
 	while( $row = mysqli_fetch_array( $result ) )
 	{
@@ -31,6 +31,7 @@ echo $sql . " </br>" ;
 				$playername1[$playercount1]=$row[1];
 				$ownerteam1[$playercount1]=$row[2];
 				$iscaptain1[$playercount1]=$row[3];
+				$points1[$playercount1]=$row[4];
 				$playercount1++;
 		}
 		if($row[2] == $team2) {
@@ -38,12 +39,27 @@ echo $sql . " </br>" ;
 				$playername2[$playercount2]=$row[1];
 				$ownerteam2[$playercount2]=$row[2];
 				$iscaptain2[$playercount2]=$row[3];
+				$points2[$playercount2]=$row[4];
 				$playercount2++;
 		}
+		$iplmatchnum=$row[5]; // yes its not supposed to be an array, asits alwys going to be one value for this query
 		$playercount++;
 	}
 	mysqli_free_result($result);
-echo $playercount . "and ". $playercount1 . " and " . $playercount2;
+//echo $playercount . "and ". $playercount1 . " and " . $playercount2;
+
+// get the match string - to be used just for display
+$sql="select distinct matchstr , matchdate from iplschedule where iplday=$iplmatchnum";
+//echo $sql . "</br>" ;
+$result = mysqli_query($conn,$sql) ;
+while( $row = mysqli_fetch_array( $result ) )
+{
+  $todayIPLmatch=$row[0];
+	$matchdate=$row[1];
+  //echo " in here " .$todayIPLmatch;
+}
+mysqli_free_result($result);
+
 ?>
 
 <html>
@@ -109,7 +125,7 @@ echo $playercount . "and ". $playercount1 . " and " . $playercount2;
                 <div class="agile-tables">
                     <div class="w3l-table-info agile_info_shadow">
                         <h3 class="w3_inner_tittle two">This is how teams matchup for this match</h3>
-
+        								<h4 class="w3_inner_tittle two"><?echo $todayIPLmatch ; ?> on <? echo $matchdate ; ?></h3>
 												<table id="table">
 														<thead>
 																<tr>
@@ -120,11 +136,11 @@ echo $playercount . "and ". $playercount1 . " and " . $playercount2;
 	</div>
 	</tr>
 	<tr>
-		<th align="center"> Playername</th>
+		<th align="center">Playername</th>
 		<th align="center">Captain(Y/N)</th>
 		<th align="center">Points</th>
-		<th align="center">Other Team Playername</th>
-		<th align="center">Other Team Captain(Y/N)</th>
+		<th align="center">Playername</th>
+		<th align="center">Captain(Y/N)</th>
 		<th align="center">Points</th>
 
 	</tr>
@@ -146,7 +162,7 @@ echo $playercount . "and ". $playercount1 . " and " . $playercount2;
 			<td class="text-center">-</td>
 		<? } ;?>
 
-		<td class="text-center">0</td>
+		<td class="text-center"><? echo $points1[$count]; ?></td>
 	<? }; ?>
 	<? if($count>=$playercount1) { ?>
 		<td class="text-center"> - </td>
@@ -164,7 +180,7 @@ echo $playercount . "and ". $playercount1 . " and " . $playercount2;
 			<td class="text-center">-</td>
 		<? } ;?>
 
-		<td class="text-center">0</td>
+		<td class="text-center"><? echo $points2[$count]; ?></td>
 	<? }; ?>
 	<? if($count>=$playercount2) { ?>
 		<td class="text-center"> - </td>

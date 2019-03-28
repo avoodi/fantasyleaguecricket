@@ -74,7 +74,7 @@ date_default_timezone_set('Asia/Kolkata');
 $today=date("z"); //if we put draws before the tournament actual start date(testing) then we need to add that many days to this count
 
 //echo "helo today is " . $today ;
-$startofIPL = 82; // ipl started on 23rd mar  so 82nd day of the year
+$startofIPL = 81; // ipl started on 23rd mar  so 82nd day of the year
 $startofOurLeague = ($today-$startofIPL)+1;
 $endofIPL =125; // the ipl league matches end on 5th may2018 which is 125th day
 $daysforOurLeague=$endofIPL-$today;

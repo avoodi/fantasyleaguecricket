@@ -30,8 +30,8 @@ if ($conn == false) {
 }
 
 //change below when we have 2 matches scores
-//$sql="select pid,matchid,playername,ifnull(runs_scored,0),ifnull(balls_played,0),ifnull(fours_hit,0),ifnull(sixes_hit,0),ifnull(catches_taken,0),ifnull(runouts,0),ifnull(wickets_taken,0),ifnull(overs_bowled,0),ifnull(maiden_overs,0),ifnull(runs_given,0),ifnull(mom,0) from player_details_per_match where matchid=$matchid" ;
-$sql="select pid,matchid,playername,ifnull(runs_scored,0),ifnull(balls_played,0),ifnull(fours_hit,0),ifnull(sixes_hit,0),ifnull(catches_taken,0),ifnull(runouts,0),ifnull(wickets_taken,0),ifnull(overs_bowled,0),ifnull(maiden_overs,0),ifnull(runs_given,0),ifnull(mom,0) from player_details_per_match where matchid in (1136578,1136579)" ;
+//$sql="select pid,matchid,playername,ifnull(runs_scored,0),ifnull(balls_played,0),ifnull(fours_hit,0),ifnull(sixes_hit,0),ifnull(catches_taken,0),ifnull(runouts,0),ifnull(wickets_taken,0),ifnull(overs_bowled,0),ifnull(maiden_overs,0),ifnull(runs_given,0),ifnull(mom,0) from player_details_per_match where matchid=$matchid and pid>0"  ;
+$sql="select pid,matchid,playername,ifnull(runs_scored,0),ifnull(balls_played,0),ifnull(fours_hit,0),ifnull(sixes_hit,0),ifnull(catches_taken,0),ifnull(runouts,0),ifnull(wickets_taken,0),ifnull(overs_bowled,0),ifnull(maiden_overs,0),ifnull(runs_given,0),ifnull(mom,0) from player_details_per_match where matchid in (1175357,1175358) and pid>0" ;
 
 echo $sql;
 $i=0;
@@ -68,7 +68,7 @@ for ($i=0 ; $i<$countofplayerstoday; $i++){
 $sqlupdt="update playermst SET  score=score+$raw_runsscored[$i], numberof4=numberof4+$raw_fours[$i], numberof6=$raw_sixes[$i], numberofcatches=numberofcatches+$raw_catches[$i], numberofrunouts=numberofrunouts+$raw_runout[$i], manofthematch=manofthematch+$raw_mom[$i], wickets=wickets+$raw_wicketstaken[$i], overs=overs+$raw_overs[$i],
  runsconsided=runsconsided+$raw_runsgiven[$i], ballsfaced=ballsfaced+$raw_ballsplayed[$i],maidenover=maidenover+$raw_maiden[$i] where pid=$raw_pid[$i]";
 echo $sqlupdt."</br>";
- if(! mysqli_query($conn,$sqlupdt) )
+if(! mysqli_query($conn,$sqlupdt) )
    {
      die('error sqlupdate');
    }
@@ -94,7 +94,7 @@ echo " all team names and ourmatch number collected ". $teamsinleague ."</br>";
 // now lets do (c)
 $playercount=0;
 //$sql2="select playername, ownerteam, ccaptainyn,pid from leagueauctionresults where leaguename='$leaguename'  and inplaying11='Y' ";
-$sql2="select pid, playername, ownerteam, iscaptain from selectedplayers where leaguename='$leaguename' and iplday=$iplday";
+$sql2="select pid, playername, ownerteam, iscaptain, leaguematchnum from selectedplayers where leaguename='$leaguename' and iplday=$iplday";
 $result = mysqli_query($conn,$sql2) ;
 while( $row = mysqli_fetch_array( $result ) )
 {
@@ -102,6 +102,7 @@ while( $row = mysqli_fetch_array( $result ) )
   $ownerteam[$playercount]=$row[2];
   $ccaptainyn[$playercount]=$row[3];
   $Sel_pid[$playercount]=$row[0];
+  $leaguematchnum[$playercount]=$row[4];
   $playercount++;
 }
 mysqli_free_result($result);
@@ -164,7 +165,7 @@ if ($key !== false){
   }
     // now insert into playersmatchdetails table
     $sqlins = "insert into playersmatchdetails (leaguename, ownerteamname, playername, iplmatchnum, ourmatchnum, runs, wickets, catches, runoutstumpout, hit4, hit6, overs, runsconsided, inplaying11, mom, howout, points, ballsfaced, maidenovers,iscaptainyn) Values ";
-    $sqlins = $sqlins. "('$leaguename','$ownerteam[$i]','$playername[$i]',$iplday,0,$raw_runsscored[$key],$raw_wicketstaken[$key],$raw_catches[$key],$raw_runout[$key],$raw_fours[$key],$raw_sixes[$key],$raw_overs[$key],$raw_runsgiven[$key],'Y','$raw_mom[$key]','',$totalpoints,$raw_ballsplayed[$key], $raw_maiden[$key],'$ccaptainyn[$key]' ) ";
+    $sqlins = $sqlins. "('$leaguename','$ownerteam[$i]','$playername[$i]',$iplday,$leaguematchnum[$i],$raw_runsscored[$key],$raw_wicketstaken[$key],$raw_catches[$key],$raw_runout[$key],$raw_fours[$key],$raw_sixes[$key],$raw_overs[$key],$raw_runsgiven[$key],'Y','$raw_mom[$key]','',$totalpoints,$raw_ballsplayed[$key], $raw_maiden[$key],'$ccaptainyn[$key]' ) ";
 
     echo $sqlins."</br>";
 

@@ -14,4 +14,4 @@ if (!$conn) {
     die("Sorry, site is temporarily experiencing database connectivity issues; should be sorted soon, please check again in some time
 : " . mysqli_connect_error());
 }
-echo "Connected successfully"; ?>
+//echo "Connected successfully"; ?>
