@@ -9,7 +9,7 @@ $uname=$_SESSION['uname'];
 $pwd=$_SESSION['pwd'];
 $groupname=$_SESSION['groupname'];
 $grouppwd=$_SESSION['grouppwd'];
-
+//echo $uname, $groupname;
 	// Check connection
 	if ($conn == false) {
 		echo "Sorry, site is temporarily experiencing database connectivity issues; should be sorted soon, please check again in some time";
@@ -27,7 +27,7 @@ while( $row = mysqli_fetch_array( $result ) )
 }
 mysqli_free_result($result);
 $teamsinleague=$i;
-
+//echo $teamsinleague;
 $i=0;
 $sql= "select ad.username,ad.iplday,ad.groupname,ad.result, am.answer as realanswer,
  (select question from DQMaster dqm where dqm.qid=ad.qid and dqm.groupname='$groupname') as question,
@@ -134,7 +134,8 @@ for ($i=0;$i<$teamsinleague ; $i++) {
 			 $avgPts=0;
 		 }
 		  ?>
-    <td class="text-center"><? echo round($avgPts,1); ?> </td></tr>
+    <td class="text-center"><? echo round($avgPts,1) ; ?> </td>
+	</tr>
 
 <?
 }
@@ -153,12 +154,12 @@ for ($i=0;$i<$teamsinleague ; $i++) {
 </tr>
 </tread>
 <?
-for ($i=0;$i<$questionCompare ; $i++) {
+for ($i=$questionCompare-1;$i>0 ; $i--) {
 ?>
 <tbody>
 
 <tr >
-	<? if $iplmatch[$i] != $iplmatch[$i]
+
 <td class="text-center"><? echo $iplmatch[$i];?> </td>
 <td class="text-center"><? echo $question[$i];?> </td>
 <td class="text-center"><? echo $youranswer[$i];?> </td>
