@@ -8,7 +8,7 @@ echo "in here" .$leaguename ;
 include "dbConnect.php";
 global $conn;
 
-$sql1="select teamname,virtualpurchasepower,numberofplayers from leagueteamsdetails where leaguename='$leaguename' and virtualpurchasepower >25000 and ifnull(numberofplayers,0)<22 ";
+$sql1="select teamname,virtualpurchasepower,numberofplayers,currentbidamount from leagueteamsdetails where leaguename='$leaguename' and virtualpurchasepower >25000 and ifnull(numberofplayers,0)<22 ";
 
 
 $sql2="SELECT leaguename, playername, currenthighestbid, ownerteam, bidsoldyn, inplaying11, ccaptainyn, pid from leagueauctionresults where leaguename='$leaguename' and ownerteam is null";
@@ -58,6 +58,7 @@ while( $row = mysqli_fetch_array( $result ) )
   $teamsarray[$teamcount]=$row[0];
   $teamvirpp[$teamcount]=$row[1];
   $teamnumberofplayer[$teamcount]=$row[2];
+	$teamcurrbidamt[$teamcount]=$row[3];
   $teamcount++;
 }
 mysqli_free_result($result);
@@ -84,7 +85,7 @@ echo "tems are ".$teamcount;
   }
 	**/
 	$maxPlayerInTeam=22;
-	$playerCount=0;
+	$playerCount=$teamnumberofplayer[$i];
 	while ($playerCount < $maxPlayerInTeam)  {
 	$random_key=array_rand($randompidarray,1);
 		$random_pid=$randompidarray[$random_key];
@@ -96,24 +97,29 @@ echo "available ply ".$availplayers ."<br>";
 			echo "first if playercount" . $playerCount ;
 			if(($teamvirpp[$i]+$randomplaycost[$findindex]) >25000 && $teamnumberofplayer[$i]<$maxPlayerInTeam) {
 				$sqlupdt = "update leagueauctionresults set ownerteam='$teamsarray[$i]' ,bidsoldyn='Y' where leaguename='$leaguename' and pid=$randompidarray[$findindex] ";
-
+echo $sqlupdt. "</br>";
 				if(! mysqli_query($conn,$sqlupdt) ) {
 					die('problem: random alloc 2');
 				}
 				$teamvirpp[$i] = $teamvirpp[$i] - $randomplaycost[$findindex];
+				$teamcurrbidamt[$i]=$teamcurrbidamt[$i]+$randomplaycost[$findindex];
 				$teamnumberofplayer[$i] = $teamnumberofplayer[$i]+1;
 				$randomplayergone[$findindex]='Y';
 //echo "breaking now <br>";
 				$sqlupdt="";
 				$playerCount++;
+				$availplayers--;
 			//	break 1;
+			}
+			else {
+					echo "  team ".$teamsarray[$i] ." has total amt " .$teamvirpp[$i]+$randomplaycost[$findindex] . " and total players " .$teamnumberofplayer[$i] ."</br>";
 			}
 		}
 	}
 }
 
   //one team is over now update leagueteamdetails and move on to next team1
-    $sqlupdt2="update leagueteamsdetails set numberofplayers=$teamnumberofplayer[$i] , virtualpurchasepower=$teamvirpp[$i] where leaguename='$leaguename' and teamname='$teamsarray[$i]'";
+    $sqlupdt2="update leagueteamsdetails set numberofplayers=$teamnumberofplayer[$i] , virtualpurchasepower=$teamvirpp[$i], currentbidamount=$teamcurrbidamt[$i] where leaguename='$leaguename' and teamname='$teamsarray[$i]'";
     if(! mysqli_query($conn,$sqlupdt2) )
       {
         die('error sqlupdate2');
