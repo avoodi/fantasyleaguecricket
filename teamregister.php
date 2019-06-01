@@ -93,7 +93,8 @@ $_SESSION['leaguename']=$leaguename;
  //echo " now taking all players list and inserting into LEAGUEAUCTIONRESULTS for this league" ;
 			$i=0;
 
-			$sql4="select PLAYERNAME,RESERVEPRICE,ifnull(PID,0) from playermst";
+			$sql4="select PLAYERNAME,RESERVEPRICE,ifnull(PID,0) from playermst where iplteam in('Afganistan','australia','Bangladesh',
+'England','India','NewZeland','Pakistan','SouthAfrica','SriLanka','WestIndies')";
 
 //	echo $sql4;
 
