@@ -95,9 +95,7 @@ $_SESSION['leaguename']=$leaguename;
 
 			$sql4="select PLAYERNAME,RESERVEPRICE,ifnull(PID,0) from playermst where iplteam in('Afganistan','australia','Bangladesh',
 'England','India','NewZeland','Pakistan','SouthAfrica','SriLanka','WestIndies')";
-
 //	echo $sql4;
-
 			$result = mysqli_query($conn,$sql4) ;
 			while( $row = mysqli_fetch_array( $result ) )
 			{
