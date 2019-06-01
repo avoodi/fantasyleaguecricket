@@ -31,7 +31,7 @@ $teamsinleague=$i;
 $i=0;
 $sql= "select ad.username,ad.iplday,ad.groupname,ad.result, am.answer as realanswer,
  (select question from DQMaster dqm where dqm.qid=ad.qid and dqm.groupname='$groupname') as question,
-(select matchstr from iplschedule i where ad.iplday=i.iplday) as IPLMatch
+(select distinct matchstr from iplschedule i where ad.iplday=i.iplday) as IPLMatch
 from DQanswersdetails ad, DQanswerMaster am
 where ad.qid=am.qid and ad.iplday=am.iplday and ad.groupname='$groupname' and username='$uname'";
 $result = mysqli_query($conn,$sql) ;

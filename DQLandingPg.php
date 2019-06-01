@@ -285,7 +285,7 @@ mysqli_free_result($result);
 									<td> <input type="hidden" name ="question[]" value="<?echo $question[$i];?>"> </td>
 								</tr>
 							<? } ?>
-							<? if ($matches >2) {  ?>
+							<? if ($matches >=2) {  ?>
 							 	<tr>
 									<td align="CENTER" bgcolor="ff22hh" colspan="3">Second Match (ignore if there is only 1 match today)</td>
 								</tr>

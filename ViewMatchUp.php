@@ -21,7 +21,7 @@ session_start();
 	$playercount=0;
 	$playercount1=0;
 	$playercount2=0;
-	$sql = "select s.pid,s.playername,s.ownerteam,s.iscaptain ,p.points,s.iplday  from selectedplayers s left join playersmatchdetails p  on(s.playername=p.playername and s.leaguename=p.leaguename) where s.leaguename='$leaguename' and s.leaguematchnum=$ourmatchnum "	 ;
+	$sql = "select s.pid,s.playername,s.ownerteam,s.iscaptain ,p.points,s.iplday  from selectedplayers s left join playersmatchdetails p  on(s.playername=p.playername and s.leaguename=p.leaguename and s.leaguematchnum=p.ourmatchnum) where s.leaguename='$leaguename' and s.leaguematchnum=$ourmatchnum  "	 ;
 //echo $sql . " </br>" ;
 	$result = mysqli_query($conn,$sql) ;
 	while( $row = mysqli_fetch_array( $result ) )
