@@ -2,9 +2,9 @@
 function connect_db(){
 
 	$servername = "103.21.58.5";
-	$username = "fantay5h_avad";
-	$password = "FLeague@2019";
-	$dbname="fantay5h_avad";
+	$username = "fanta_avad";
+	$password = "FCLipl@2020";
+	$dbname="fantalht_5h";
 
 	// Create connection
 	$conn = mysqli_connect($servername, $username, $password, $dbname);
