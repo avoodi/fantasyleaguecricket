@@ -24,12 +24,12 @@ global $conn;
 //echo $username . " " .$pwd . " " .$leaguename. "</br>";
 /* need ot add code for checking / validing pwd here  */
 
-
+/*
 $servername = "103.21.58.5";
 $dbusername = "fantay5h_avad";
 $dbpassword = "FLeague@2019";
 $dbname="fantay5h_avad";
-
+*/
 // Create connection
 //$conn = mysqli_connect($servername, $dbusername, $dbpassword,$dbname);
 
