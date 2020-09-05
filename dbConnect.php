@@ -2,6 +2,7 @@
 // Connects to my Database
 //mysql_connect("your.hostaddress.com", "username", "password") or die(mysql_error());
 // Connects to my Database
+
 $servername = "119.18.54.125";
 $username = "fantaycc_avad";
 $password = "FCLipl@2020";
