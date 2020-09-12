@@ -197,13 +197,14 @@ mysqli_free_result($result);
         <H4 align="center" style="margin-bottom:10px; color:green">Bidding is currently in progress; You wont be able to purchase players from here as yet</H4>
   <? } ;?>
 
-  <? if ( $numofTrades >=20 ) {?>
-     <h4 align ="center" style="margin-bottom:10px; color:red"> SORRY, you have already done enough(20) trades/purchases ; hence you will not be able to purchase any more players </h4>
-  <?} ?>
-  <? if ($numofTrades <20) {?>
-      <h4 align ="center" style="margin-bottom:10px; color:green"> You have done <? echo $numofTrades; ?> trades/purchase so far; so you sure can do one more </h4>
-  <?} ?>
-
+  <? if ($biddingstatus == "Closed") { ?>
+      <? if ( $numofTrades >=20 ) {?>
+          <h4 align ="center" style="margin-bottom:10px; color:red"> SORRY, you have already done enough(20) trades/purchases ; hence you will not be able to purchase any more players </h4>
+      <?} ?>
+      <? if ($numofTrades <20) {?>
+          <h4 align ="center" style="margin-bottom:10px; color:green"> You have done <? echo $numofTrades; ?> trades/purchase so far; so you sure can do one more </h4>
+      <?} ?>
+  <? } ?>
   <div class="clearfix"></div>
       <div class="rows">
           <div class="">

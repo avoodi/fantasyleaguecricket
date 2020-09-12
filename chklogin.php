@@ -21,7 +21,7 @@ global $conn;
     $pwd=$_SESSION['pwd'];
     $leaguename=$_SESSION['leaguename'];
     $isPresent=0;
-//echo $username . " " .$pwd . " " .$leaguename. "</br>";
+echo $username . " " .$pwd . " " .$leaguename. "</br>";
 /* need ot add code for checking / validing pwd here  */
 
 /*
