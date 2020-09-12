@@ -1,11 +1,10 @@
 <?php
 function connect_db(){
 
-	$servername = "103.21.58.5";
-	$username = "fanta_avad";
+	$servername = "119.18.54.125";
+	$username = "fantaycc_avad";
 	$password = "FCLipl@2020";
-	$dbname="fantalht_5h";
-
+	$dbname="fantaycc_2805";
 	// Create connection
 	$conn = mysqli_connect($servername, $username, $password, $dbname);
 	// Check connection
