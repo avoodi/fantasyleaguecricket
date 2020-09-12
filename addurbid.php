@@ -63,6 +63,14 @@ mysqli_free_result($result);
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <title>Submit Bid</title>
+<link href="NewUI/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+<link rel="stylesheet" type="text/css" href="NewUI/css/table-style.css" />
+<link rel="stylesheet" type="text/css" href="NewUI/css/basictable.css" />
+<link href="NewUI/css/component.css" rel="stylesheet" type="text/css" media="all" />
+<link href="NewUI/css/style_grid.css" rel="stylesheet" type="text/css" media="all" />
+<link href="NewUI/css/style.css" rel="stylesheet" type="text/css" media="all" />
+<!-- font-awesome-icons -->
+<link href="NewUI/css/font-awesome.css" rel="stylesheet">
 </head>
 <body>
 <br/><br/><br/><br/>
@@ -86,7 +94,7 @@ mysqli_free_result($result);
 		</TR>
 		<TR>
 			<TD align="right"><b>Your Bid :</b></TD>
-			<TD><input type="text" name="urBId" value=""></TD>
+			<TD><input type="text" name="urBId" value="">should be atleast >500 than current bid</TD>
 		</TR>
 		<TR>
 			<td colspan="2" align="center" bgcolor="#FFFFCC"> <input type="submit" name="add" value="Add"  >
@@ -96,6 +104,8 @@ mysqli_free_result($result);
 		<td><input type="hidden" name='currentbidtotal' value="<? echo $currentbidamount ; ?>" > </td>
 		<td><input type="hidden" name='numberofplayers' value="<? echo $numberofplayers ; ?>" > </td> </tr>
 	</table>
+  <button type="button" class="btn btn-xs btn-success " onClick="Javascript:window.location.href = 'PlayersListForBidding.php';" >Bidding</button>
+
 	<input type="hidden" name="nm" value="<? echo $playername ;?>">
 	<input type="hidden" name="act" value="add">
 	<input type="hidden" name="reserveprice" value="<? echo $reserveprice ;?>">

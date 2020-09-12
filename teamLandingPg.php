@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <?
-
+session_start();
 include "dbConnect.php";
 global $conn;
 
-session_start();
+
 $owneremail=$_SESSION['username']; //on login page we have user name field which is actually email entered at registration time
 $leaguename=$_SESSION['leaguename'];
 $pass=$_SESSION['pwd'];
@@ -12,7 +12,7 @@ $teamname=$_SESSION['teamname'];
 $teamownername=$_SESSION['teamownername'];
 $iplday=$_SESSION['iplday'];
 
-//echo $teamownername;
+//echo "leaguename is ". $leaguename " and owner name is " . $teamownername;
 
 //$servername = "localhost:3306";
 //$dbusername = "fanta_avad";
@@ -99,7 +99,6 @@ $sqlupdt="update leagueteamsdetails set Currentbidamount=$totalbidamt , virtualp
 //mysqli_free_result($result);
 
 ?>
-
 <html>
 
 <head>
