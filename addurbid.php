@@ -76,7 +76,12 @@ mysqli_free_result($result);
 <br/><br/><br/><br/>
 
 <form name="frmadd" action="PlayersListForBidding.php" method="post" onSubmit="return valid();">
-	<table border="1" cellpadding="2" class="text" cellspacing="2" width="60%" align="center" bordercolordark="#FFFFFF" bordercolorlight="#CCCCCC">
+  <div class="agile-tables">
+    <div class="w3l-table-info agile_info_shadow">
+      <h3 class="w3_inner_tittle two">
+
+  <table id="table " >
+    <!--border="1" cellpadding="2" class="text" cellspacing="2" width="60%" align="center" bordercolordark="#FFFFFF" bordercolorlight="#CCCCCC"> -->
 		<TR>
 			<td colspan="2" align="center" bgcolor="#FFFFCC" ><h3>Add Your Bid</h3></td>
 		</TR>
@@ -104,6 +109,8 @@ mysqli_free_result($result);
 		<td><input type="hidden" name='currentbidtotal' value="<? echo $currentbidamount ; ?>" > </td>
 		<td><input type="hidden" name='numberofplayers' value="<? echo $numberofplayers ; ?>" > </td> </tr>
 	</table>
+</div>
+</div>
   <button type="button" class="btn btn-xs btn-success " onClick="Javascript:window.location.href = 'PlayersListForBidding.php';" >Bidding</button>
 
 	<input type="hidden" name="nm" value="<? echo $playername ;?>">
