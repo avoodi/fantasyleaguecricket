@@ -111,7 +111,7 @@ mysqli_free_result($result);
 	</table>
 </div>
 </div>
-  <button type="button" class="btn btn-xs btn-success " onClick="Javascript:window.location.href = 'PlayersListForBidding.php';" >Bidding</button>
+  <button type="button" class="btn btn-xs btn-success " onClick="Javascript:window.location.href = 'PlayersListForBidding.php';" >Get back to Bidding List </button>
 
 	<input type="hidden" name="nm" value="<? echo $playername ;?>">
 	<input type="hidden" name="act" value="add">
