@@ -191,10 +191,11 @@ mysqli_free_result($result);
       <h5 align="center" style="margin-bottom:10px; color:red"> Maximum 20 purchases are allowed throughout the time period of the league </h5>
   <? } ;?>
   <?	if ($biddingstatus=="Yet To Start") { ?>
-      <H4 align ="center" style="margin-bottom:10px; color:red"> Bidding for your league is not activated yet.. pl contact league Creator.. This page can be used only after bidding is complete </h4>
+      <H4 align ="center" style="margin-bottom:10px; color:red">
+        This page shows list of players left after bidding / random allocation is over; pl contact league Creator to change the bidding status </h4>
   <? } ;?>
   <? if ($biddingstatus=="Started-InProgress") { ?>
-        <H4 align="center" style="margin-bottom:10px; color:green">Bidding is currently in progress; You wont be able to purchase players from here as yet</H4>
+        <H4 align="center" style="margin-bottom:10px; color:green">Bidding is currently in progress, so please get your faviorate players from there; This page will show list of players still available after bidding is over/league has started.</H4>
   <? } ;?>
 
   <? if ($biddingstatus == "Closed") { ?>
