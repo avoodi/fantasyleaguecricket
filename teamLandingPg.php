@@ -255,8 +255,8 @@ $sqlupdt="update leagueteamsdetails set Currentbidamount=$totalbidamt , virtualp
 <? if ($isOwner=='No') {?>
 	<? if ($drawdone =='N') {?>
 			<h3 class="w3_inner_tittle two">
-			<p> Looks like your league has not started playing matches yet! </p>
-			<p> Is the bidding, player allocation over? Talk to the league creator ; and should you need any help/have questions , do write to avoodi@gmail.com </p>
+			<p> Match schedule for your team will appear below, after your league has enough teams and league creator has clicked on 'create draws' ! </p>
+			<p> May be your league is still bidding for players ? Talk to the league creator ; and should you need any help/have questions , do write to avoodi@gmail.com </p>
 		<? } ?>
 <? } ?>
 				<div class="agile-tables">
