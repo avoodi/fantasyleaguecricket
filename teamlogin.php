@@ -20,140 +20,135 @@ while( $row = mysqli_fetch_array( $result ) )
 <html>
 
 <head>
-<title>Register Teams</title>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+	<title>Register Teams</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <link href="assets/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <style>
+          .form-register {
+            width: 100%;
+            max-width: 60%;
+            padding: 10px 20px 40px 20px;
+            margin:8% auto ;
+            border-radius: 15px;
+        }
+        .steps{
+            margin: 5% 10% auto;
+            padding: 2%;
+            width: 80%;
+        }
+        .steps-font li{
+            font-size:16px;
+        }
+    </style>
 </head>
 
-<body leftmargin="0" topmargin="0" onLoad="foc();" >
+<body onLoad="foc();" >
+    <div class="row m-0">
+    <div class="col-12 col-lg-6 col-xl-6">
+            <div class="row m-0">
+                <div class="row m-0 text-center">
+                    <h1 class="mt-5 text-danger w-100"> 
+                        <small> Welcome to</small> <br> 
+                        <strong><em>Fantasy League Cricket </em></strong>
+                    </h1>
+                    <p class="w-100"><strong class="text-success">Create your own league, invite friends, play your own IPL</strong></p>
+                    <p class="m-0">
+                        <strong class="text-secondary">
+                            <em> Enjoy IPL even more; Create your own league , 
+                                with your own rules, play with your friends, family, office colleagues...
+                            </em>
+                        </strong>
+                    </p>
+                </div>
+                <div class="flex steps rounded bg-primary">
+                    <h5 class="text-white"> <strong> <u> Every new team needs to register - </u></strong> </h5>
+                    <ul class="steps-font text-white">
+                        <li>Join the league that is created by a person known to you:) if you join a league 'uninvited', the league creator can kick you out .. </li>
+                        <li>if you are creating a new league just enter all the details , give your league a name and then pass on that league name to your friends/family/colleagues who you want to be part of your league</li>
+                        <li>Login id : can be anything that you will use to login next time, giving email is better as important information about league can be communicated, we assure you of 0 spam emails</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-lg-6 col-xl-6">
+            <Form name="frmreg" class="form-register bg-primary" method="post" action="teamregister.php">
+                <h1 class="h3 mb-3 font-weight-normal text-center text-white">
+                    <strong class="text-uppercase">Register</strong>
+                </h1>
+                <input type="text" name="teamname" class="form-control mt-2" placeholder="Team name" value="" size="30">
+                <input type="text" name="OwnerName" class="form-control mt-2" placeholder="Owner name" value="" size="30">
+                <input type="text" name="OwnerEmail" class="form-control mt-2" placeholder="Email" value="" size="30">
+                <input type="Password" name="Pass" class="form-control mt-2" placeholder="Password" value="" size="30" maxlength="8">
+                <hr class="border border-white">
 
-<table width="950" border="0" cellspacing="0" cellpadding="0" align="Center" bgcolor="#FFFFFF">
-	<tr>
-		<td >
-			<table width="98%" border="0" cellspacing="0" cellpadding="0" align="Center">
-				<tr>
-					<td align="left" height="130"></td>
-				</tr>
-			</table>
-		</td>
-	</tr>
-	<tr>
-<table width="50%" border="0" cellpadding="2" cellspacing="1" align="center" bordercolordark="#FFFFFF"
-bordercolorlight="CCCCCC" class="pagenav">
-	<Form name="frmreg" method="post" action="teamregister.php">
-	<tr>
-    	<td align="center" colspan="2" valign="top" bgcolor="#CCCCCC"><strong>Register Teams</strong></td>
-	</tr>
-	<tr>
-    	<td align="right" >Team Name :</td>
-			<td ><input type="text" name="teamname" value="" size="30">
-			<font color="#000000" face="Verdana, Geneva, sans-serif" size="-2"> Some nice name for your team</td>
-
-	</tr>
-	<tr>
-    	<td align="right">Owner Name :</td>
-    	<td><input type="text" name="OwnerName" value="" size="30">
-			<font color="#000000" face="Verdana, Geneva, sans-serif" size="-2"> Your name please</td>
-
-	</tr>
-	<tr>
-    	<td align="right">Login id:</td>
-    	<td><input type="text" name="OwnerEmail" value="" size="30">
-				<font color="#000000" face="Verdana, Geneva, sans-serif" size="-2">Could be email</td>
-	</tr>
-	<tr>
-    	<td align="right">Password :</td>
-    	<td><input type="Password" name="Pass" value="" size="30" maxlength="8">
-    	<font color="#000000" face="Verdana, Geneva, sans-serif" size="-2"> max 8 chars</font>
-        </td>
-	</tr>
-
-	<tr>
-    	<td align="right" colspan="2">
-    	<table width="100%" bgcolor="#99CC66" border="1" cellpadding="2" cellspacing="1"
-				align="center" bordercolordark="#FFFFFF" bordercolorlight="CCCCCC" class="pagenav">
-			<tr>
-			<td colspan="2" width="50%"> Want to join existing league?</td>
-			<td colspan="2" width="50%"> Want to create a new league ? </td>
-			</tr>
-			<tr>
-			<td> <input type="radio" name="ExistingLeague" onClick="EnableDisControl(this);" ></td>
-			<td><!--<%If LFlag="True" Then%><font color="#FF0000"><b>*</b></font><%End if%>-->
-				<select name="selLeagueName">
-				<option>--Select League--</option>
-				<?
-				foreach($arr1 as $lname) {
-				?>
-				<option value="<?= $lname ?>"><?= $lname ?></option>
-				<?
-				}
-				?>
-				</select>
-			</td>
-			<td> LeagueName </td>
-			 <td> <input type="text" name="leaguename" value="" size="30" onClick="DisSel(this);"></td>
-			</tr>
-		</table></td>
-	</tr>
-
-	<tr>
-    	<td align="center" colspan="2" valign="top" bgcolor="#CCCCCC"><input type="button" value="Cancel"
-				name="Cancel" onClick="Refreshpage();"> <input type="submit" value="Submit" name="submit">
-
-    	</td>
-	</tr>
-	</Form>
-</table>
-</tr>
-</table>
-<div align="center">
-<table width=950>
-	<tr align="center">
-		<td><p>Every new team needs to register ..
-<p></td>
-	</tr>
-	<tr align="center">
-		<td>* Join the league that is created by a person known to you:) if you join a league 'uninvited', the league creator can kick you out .. </td>
-	</tr >
-	<tr align="center">
-		<td>* if you are creating a new league just enter all the details , give your league a name and then pass on that league name to your friends/family/colleagues who you want to be part of your league</td>
-	</tr>
-	<tr align="center">
-		<td>* Login id : can be anything that you will use to login next time, giving email is better as important information about league can be communicated, we assure you of 0 spam emails</td>
-	</tr>
-
-</table>
-</div>
-
+                <div class="form-group">
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="existingLeague" name="existingLeagueCheck" onClick="EnableDisControl(this);" >
+                        <label class="form-check-label text-white" for="existingLeague">
+                            Want to create a new league ?
+                        </label>
+                    </div>
+                    <input type="text" name="leaguename" class="form-control mt-2" placeholder="League name" maxlength="30" value="" size="30">
+                </div>
+                
+                <label for="" class="w-100 text-white">Want to join existing league?</label>
+                <select class="form-control custom-select" name="selLeagueName">
+                    <option>Select league</option>
+                    <?
+                    foreach($arr1 as $lname) {
+                    ?>
+                    <option value="<?= $lname ?>"><?= $lname ?></option>
+                    <?
+                    }
+                    ?>
+                </select>
+                <div class="row text-center mt-3">
+                    <div class="col-6 col-lg-6 col-xl-6 ">
+                        <input type="button" value="Cancel" class="btn btn-danger w-100" name="Cancel" onClick="Refreshpage();"> 
+                    </div>
+                    <div class="col-6 col-lg-6 col-xl-6 ">
+                        <input type="submit" value="Submit" class="btn btn-success w-100" name="submit">    
+                    </div>
+                    
+                    
+                </div>
+            </Form>
+        </div>
+       
+    </div>
 </body>
 </html>
 <script language="JavaScript" type="text/JavaScript">
-<!--
-function EnableDisControl(theField)
-{
-  if(theField.name == "ExistingLeague")
-  {
-  	if(theField.checked == true)
-  	{
+	function EnableDisControl(theField)
+	{
+		if(theField.checked == true)
+		{
+				document.frmreg.selLeagueName.disabled = true;
+				document.frmreg.leaguename.disabled = false;
+		}
+        if(theField.checked == false){
             document.frmreg.selLeagueName.disabled = false;
-  	 		document.frmreg.leaguename.disabled = true;
+            document.frmreg.leaguename.disabled = true;
+        }
+	}
 
-     }
-  }
+    function foc() {
+        document.frmreg.existingLeagueCheck.checked =true;
+        document.frmreg.selLeagueName.disabled = true;
+    }
 
-}
+	function DisSel(theField)
+	{
 
-function DisSel(theField)
-{
-
-  if(theField.name == "leaguename")
-  {
-  		document.frmreg.selLeagueName.disabled = true;
-  	 	document.frmreg.ExistingLeague.disabled = true;
-  }
-}
-function Refreshpage()
-{
-	location.href="teamlogin.php";
-}
-//-->
+	if(theField.name == "leaguename")
+	{
+			document.frmreg.selLeagueName.disabled = true;
+			document.frmreg.ExistingLeague.disabled = true;
+	}
+	}
+	function Refreshpage()
+	{
+		location.href="teamlogin.php";
+	}
 </script>
