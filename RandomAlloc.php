@@ -8,11 +8,15 @@ echo "in here" .$leaguename ;
 include "dbConnect.php";
 global $conn;
 
+$myfile = fopen("RandomAllocoutput.txt", "a") or die("Unable to open file!");
+
 $sql1="select teamname,virtualpurchasepower,numberofplayers,currentbidamount from leagueteamsdetails where leaguename='$leaguename' and virtualpurchasepower >25000 and ifnull(numberofplayers,0)<22 ";
 
-
 $sql2="SELECT leaguename, playername, currenthighestbid, ownerteam, bidsoldyn, inplaying11, ccaptainyn, pid from leagueauctionresults where leaguename='$leaguename' and ownerteam is null";
-echo $sql2;
+fwrite($myfile, $sql2);
+
+////echo $sql2;
+
 // Create connection
 //$conn = mysqli_connect($servername, $dbusername, $dbpassword,$dbname);
 // Check connection
@@ -23,7 +27,7 @@ if ($conn == false) {
 $availplayers=0;
 $result = mysqli_query($conn,$sql2) ;
 $myrandomarray=[];
-echo "in here" ;
+//echo "in here" ;
 
 while( $row = mysqli_fetch_array( $result ) )
 {
@@ -51,7 +55,10 @@ while( $row = mysqli_fetch_array( $result ) )
 mysqli_free_result($result);
 
 $teamcount=0;
-echo "</br> </br> sql1 is ". $sql1 ."</br>";
+////echo "</br> </br> sql1 is ". $sql1 ."</br>";
+fwrite($myfile, "sql1 is ");
+fwrite($myfile, $sql1 );
+
 $result = mysqli_query($conn,$sql1) ;
 while( $row = mysqli_fetch_array( $result ) )
 {
@@ -63,7 +70,9 @@ while( $row = mysqli_fetch_array( $result ) )
 }
 mysqli_free_result($result);
 
-echo "tems are ".$teamcount;
+////echo "tems are ".$teamcount;
+fwrite($myfile, "teams are");
+fwrite($myfile, $teamcount);
 
  for ($i=0; $i<$teamcount; $i++) {
 /**  for ($j=0; $j<$availplayers ; $j++) {
@@ -90,14 +99,21 @@ echo "tems are ".$teamcount;
 	$random_key=array_rand($randompidarray,1);
 		$random_pid=$randompidarray[$random_key];
 	//	echo "random pid : ". $random_pid;
-echo "available ply ".$availplayers ."<br>";
+////echo "available ply ".$availplayers ."<br>";
+fwrite($myfile,"available ply");
+fwrite($myfile,$availplayers);
 	 for ($findindex=0; $findindex<$availplayers; $findindex++) {
 //    echo "find index " . $findindex ."<br>";
 		if($randompidarray[$findindex]==$random_pid && $randomplayergone[$findindex]=='N') {
-			echo "first if playercount" . $playerCount ;
+	////		echo "first if playercount" . $playerCount ;
+fwrite($myfile,"first if playercount");
+fwrite($myfile,$playerCount);
+
 			if(($teamvirpp[$i]+$randomplaycost[$findindex]) >25000 && $teamnumberofplayer[$i]<$maxPlayerInTeam) {
 				$sqlupdt = "update leagueauctionresults set ownerteam='$teamsarray[$i]' ,bidsoldyn='Y' where leaguename='$leaguename' and pid=$randompidarray[$findindex] ";
-echo $sqlupdt. "</br>";
+////echo $sqlupdt. "</br>";
+fwrite($myfile, $sqlupdt);
+
 				if(! mysqli_query($conn,$sqlupdt) ) {
 					die('problem: random alloc 2');
 				}
@@ -112,7 +128,9 @@ echo $sqlupdt. "</br>";
 			//	break 1;
 			}
 			else {
-					echo "  team ".$teamsarray[$i] ." has total amt " .$teamvirpp[$i]+$randomplaycost[$findindex] . " and total players " .$teamnumberofplayer[$i] ."</br>";
+					////echo "  team ".$teamsarray[$i] ." has total amt " .$teamvirpp[$i]+$randomplaycost[$findindex] . " and total players " .$teamnumberofplayer[$i] ."</br>";
+					$msgStr= "  team ".$teamsarray[$i] ." has total amt " .$teamvirpp[$i]+$randomplaycost[$findindex] . " and total players " .$teamnumberofplayer[$i] ;
+					fwrite($myfile, $msgStr);
 			}
 		}
 	}
@@ -124,7 +142,9 @@ echo $sqlupdt. "</br>";
       {
         die('error sqlupdate2');
       		}
-    echo "leagueteamsdetails updt ".$sqlupdt2 . "</br>";
+    ////echo "leagueteamsdetails updt ".$sqlupdt2 . "</br>";
+		$msgStr="leagueteamsdetails updt ".$sqlupdt2 ;
+		fwrite($myfile,$msgStr);
   }
 
   $sqlupdt3="update leaguerules set biddingstatus='Closed' where leaguename='$leaguename'";
@@ -132,5 +152,8 @@ echo $sqlupdt. "</br>";
     {
       die('error sqlupdate3');
     }
-
+fclose($myfile);
+echo '<script type="text/javascript">
+					 window.location = "./teamLandingPg.php"
+			</script>';
 ?>

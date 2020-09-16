@@ -55,7 +55,7 @@ while( $row = mysqli_fetch_array( $result ) )
 if ($isPresent ==1) {
   date_default_timezone_set('Asia/Kolkata');
   $today=date("z");
-  $startofIPL = 96; // ipl started on 4th apr so 96th day of the year
+  $startofIPL = 263; // ipl started on 4th apr so 96th day of the year
   $iplday = ($today-$startofIPL)+1;
   $_SESSION['iplday']=$iplday;
 

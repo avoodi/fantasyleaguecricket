@@ -29,7 +29,7 @@ mysqli_free_result($result);
 
 date_default_timezone_set('Asia/Kolkata');
 $today=date("z"); //if we put draws before the tournament actual start date(testing) then we need to add that many days to this count
-$startofIPL = 81; // ipl started on 23rd mar  so 82nd day of the year
+$startofIPL = 263; // ipl started on 23rd mar  so 82nd day of the year
 $iplday = ($today-$startofIPL)+1;
 $currentHr=date('H');
 //echo $iplday;
