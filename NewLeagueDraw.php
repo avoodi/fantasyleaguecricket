@@ -1,8 +1,3 @@
-<html>
-<head>
-
-	</head>
-<body leftmargin="0" topmargin="0">
 <?
 
 session_start();
@@ -131,7 +126,10 @@ $sqlupdt="UPDATE league_mst SET drawdone= 'Y' WHERE leaguename = '$leaguename'  
 sqlsrv_close($conn);
 
 ?>
-
+<html>
+<head>
+</head>
+<body leftmargin="0" topmargin="0">
 	<table width="950" border="0" cellspacing="0" cellpadding="0" align="Center" bgcolor="#FFFFFF">
 	<tr>
 		<td >
