@@ -122,7 +122,7 @@ $sqlupdt="update leagueteamsdetails set Currentbidamount=$totalbidamt , virtualp
 		}
 //above 3 sql stmts will make sure data is correct about money and count of players
 
-$sql1="select ifnull(t.virtualpurchasepower,0), ifnull(t.currentbidamount,0) currentbidamount , t.numberofplayers from leagueteamsdetails T where t.teamname= '$team' and t.leaguename='$leaguename' ";
+$sql1="select ifnull(t.virtualpurchasepower,0), ifnull(t.currentbidamount,0) currentbidamount , t.numberofplayers from leagueteamsdetails t where t.teamname= '$team' and t.leaguename='$leaguename' ";
 //echo $sql1 . "<br/>";
 $result = mysqli_query($conn,$sql1) ;
 while( $row = mysqli_fetch_array( $result ) )
@@ -251,7 +251,7 @@ mysqli_free_result($result);
 <?
 
 $i=1;
-$sql="select x.playername,x.iplteam,x.speciality, x.reserveprice,ifnull(t.currenthighestbid,x.reserveprice)currenthighestbid, t.ownerteam from LEAGUEAUCTIONRESULTS T, PLAYERMST X where t.playername = x.playername and (ifnull(t.leaguename,'X')='$leaguename'  or t.leaguename is null)  and ifnull(t.bidsoldyn,'N')='N' ";
+$sql="select x.playername,x.iplteam,x.speciality, x.reserveprice,ifnull(t.currenthighestbid,x.reserveprice)currenthighestbid, t.ownerteam from leagueauctionresults t, playermst x where t.playername = x.playername and (ifnull(t.leaguename,'X')='$leaguename'  or t.leaguename is null)  and ifnull(t.bidsoldyn,'N')='N' ";
 //echo $sql . "<br/>";
 $result = mysqli_query($conn,$sql) ;
 while( $row = mysqli_fetch_array( $result ) )
