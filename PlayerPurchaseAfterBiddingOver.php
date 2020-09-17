@@ -45,7 +45,7 @@ if(isset($_POST['nm'])) {
   //echo "prev owner is ".$prevowner;
   //this means this prog is called from addurbid php , so we need to insert into bidding details and update leagueteamdetails tablea
 
-  $sqlins="insert into BIDDINGDETAILS (playername,leaguename, biddingteam, reserveprice, BIDDINGAMOUNT, ROUNDNUMBER)  values ('$playername', '$leaguename', '$team',$reserveprice,$bid,1) ";
+  $sqlins="insert into biddingdetails (playername,leaguename, biddingteam, reserveprice, biddingamount, roundnumber)  values ('$playername', '$leaguename', '$team',$reserveprice,$bid,1) ";
 //echo $sqlins . "</br>";
   if(! mysqli_query($conn,$sqlins) )
     {
@@ -203,9 +203,10 @@ mysqli_free_result($result);
           <h4 align ="center" style="margin-bottom:10px; color:red"> SORRY, you have already done enough(20) trades/purchases ; hence you will not be able to purchase any more players </h4>
       <?} ?>
       <? if ($numofTrades <20) {?>
-          <h4 align ="center" style="margin-bottom:10px; color:green"> You have done <? echo $numofTrades; ?> trades/purchase so far; so you sure can do one more </h4>
+          <h4 align ="center" style="margin-bottom:10px; color:green"> You have done <? echo $numofTrades; ?> trades/purchase so far; so you sure can do one more if you have enough money and < 22 players :) </h4>
       <?} ?>
   <? } ?>
+
   <div class="clearfix"></div>
       <div class="rows">
           <div class="">
