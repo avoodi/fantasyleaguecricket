@@ -9,7 +9,7 @@ if ($conn == false) {
 	echo "Sorry, site is temporarily experiencing database connectivity issues; should be sorted soon, please check again in some time";
 }
 
-$sql="select leaguename from league_mst";
+$sql="select leaguename from league_mst  where biddingstatus ='NotApplicable'";
 
 $result = mysqli_query($conn,$sql) ;
 while( $row = mysqli_fetch_array( $result ) )
