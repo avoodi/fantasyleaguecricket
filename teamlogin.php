@@ -7,7 +7,7 @@ if ($conn == false) {
 	echo "Sorry, site is temporarily experiencing database connectivity issues; should be sorted soon, please check again in some time";
 }
 
-$sql="select leaguename from league_mst";
+$sql="select leaguename from league_mst where teamsinleague in null";
 
 $result = mysqli_query($conn,$sql) ;
 while( $row = mysqli_fetch_array( $result ) )
@@ -23,7 +23,7 @@ while( $row = mysqli_fetch_array( $result ) )
 	<title>Register Teams</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
     <link href="assets/dist/css/bootstrap.min.css" rel="stylesheet">
-    
+
     <style>
           .form-register {
             width: 100%;
@@ -48,14 +48,14 @@ while( $row = mysqli_fetch_array( $result ) )
     <div class="col-12 col-lg-6 col-xl-6">
             <div class="row m-0">
                 <div class="row m-0 text-center">
-                    <h1 class="mt-5 text-danger w-100"> 
-                        <small> Welcome to</small> <br> 
+                    <h1 class="mt-5 text-danger w-100">
+                        <small> Welcome to</small> <br>
                         <strong><em>Fantasy League Cricket </em></strong>
                     </h1>
                     <p class="w-100"><strong class="text-success">Create your own league, invite friends, play your own IPL</strong></p>
                     <p class="m-0">
                         <strong class="text-secondary">
-                            <em> Enjoy IPL even more; Create your own league , 
+                            <em> Enjoy IPL even more; Create your own league ,
                                 with your own rules, play with your friends, family, office colleagues...
                             </em>
                         </strong>
@@ -91,7 +91,7 @@ while( $row = mysqli_fetch_array( $result ) )
                     </div>
                     <input type="text" name="leaguename" class="form-control mt-2" placeholder="League name" maxlength="30" value="" size="30">
                 </div>
-                
+
                 <label for="" class="w-100 text-white">Want to join existing league?</label>
                 <select class="form-control custom-select" name="selLeagueName">
                     <option>Select league</option>
@@ -105,17 +105,17 @@ while( $row = mysqli_fetch_array( $result ) )
                 </select>
                 <div class="row text-center mt-3">
                     <div class="col-6 col-lg-6 col-xl-6 ">
-                        <input type="button" value="Cancel" class="btn btn-danger w-100" name="Cancel" onClick="Refreshpage();"> 
+                        <input type="button" value="Cancel" class="btn btn-danger w-100" name="Cancel" onClick="Refreshpage();">
                     </div>
                     <div class="col-6 col-lg-6 col-xl-6 ">
-                        <input type="submit" value="Submit" class="btn btn-success w-100" name="submit">    
+                        <input type="submit" value="Submit" class="btn btn-success w-100" name="submit">
                     </div>
-                    
-                    
+
+
                 </div>
             </Form>
         </div>
-       
+
     </div>
 </body>
 </html>
@@ -127,10 +127,11 @@ while( $row = mysqli_fetch_array( $result ) )
 				document.frmreg.selLeagueName.disabled = true;
 				document.frmreg.leaguename.disabled = false;
 		}
-        if(theField.checked == false){
-            document.frmreg.selLeagueName.disabled = false;
-            document.frmreg.leaguename.disabled = true;
-        }
+    if(theField.checked == false)
+		{
+        document.frmreg.selLeagueName.disabled = false;
+        document.frmreg.leaguename.disabled = true;
+    }
 	}
 
     function foc() {
