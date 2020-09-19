@@ -123,7 +123,7 @@ $_SESSION['leaguename']=$leaguename;
 
 	}
 
-if ($count ==0 && leaguename != 'Select league') {
+if ($count ==0 && $leaguename != 'Select league') {
 // need to insert team details to leagueteamdetails
 	$sql3= "insert into leagueteamsdetails (teamname, leaguename, teamownername, teamowneremail,team_password, purchasepower, numberofplayers, totalteamscore, matcheswon, matcheslost, matchesdrawn, averagescore, currentbidamount, virtualpurchasepower, points, averagestrikerate) values('$teamname','$leaguename','$ownername','$owneremail','$password',15000000,0,0,0,0,0,0,0,15000000,0,0)";
 //echo $sql3 ."\n";
