@@ -66,7 +66,7 @@ if ($existinggroup=="no" && $count==0){
 // lets first set this user as leaguecreator
 $_SESSION['groupname']=$groupname;
 $_SESSION['grouppwd']=$grouppwd;
-	$sql = "insert into league_mst (leaguename,leaguecreatorname) values ('$groupname','$uname')";
+	$sql = "insert into league_mst (leaguename,leaguecreatorname, biddingstatus) values ('$groupname','$uname','NotApplicable')";
 //	$var=array($leaguename, $ownername);
 	//echo $sql ;
 	if(! mysqli_query($conn,$sql) )
