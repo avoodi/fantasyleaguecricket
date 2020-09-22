@@ -7,7 +7,7 @@
 	$teamownername=$_SESSION['teamownername'];
 
 	// this is called only after varifying that the user is league creator
-	//echo "ownername is ".$teamownername;
+	echo "ownername is ".$teamownername;
 	include "dbConnect.php";
 	global $conn;
 	// Create connection

@@ -262,6 +262,7 @@ mysqli_free_result($result);
 -->
 		<form name='getanswers' method = 'POST' action = 'DQSaveAnswers.php/' onsubmit="valid()">
 						<h3 class="w3_inner_tittle two">Here are todays questions</h3>
+						<h5 class="w3_inner_tittle three">i.e enter short form of team name, and copy paste playername from list below</h5>
 						<table id="table">
 							<thead>
 								<tr>

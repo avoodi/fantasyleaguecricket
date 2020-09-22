@@ -12,7 +12,7 @@ $teamname=$_SESSION['teamname'];
 $teamownername=$_SESSION['teamownername'];
 $iplday=$_SESSION['iplday'];
 
-//echo "leaguename is ". $leaguename " and owner name is " . $teamownername;
+//echo "leaguename is ". $leaguename . " and owner name is " . $teamownername . 'is correct';
 
 //$servername = "localhost:3306";
 //$dbusername = "fanta_avad";
@@ -47,14 +47,15 @@ mysqli_free_result($result);
 
 $isOwner='No';
 $sql="select leaguecreatorname,drawdone from league_mst where leaguename='$leaguename'";
+//echo $sql;
 $result = mysqli_query($conn,$sql) ;
 while( $row = mysqli_fetch_array( $result ) )
 {
 	$Owner=$row[0];
+//	echo "here owner is " . $Owner ."is it right?";
 	$drawdone=$row[1];
 }
-//echo "league is " .$leaguename. " and teamowner is ". $isOwner;
-
+//echo "session owner is ". $teamownername . "and comparing it ".$Owner ;
 if ($Owner == $teamownername)
 {
 	$isOwner='Yes';

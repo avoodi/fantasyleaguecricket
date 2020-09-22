@@ -6,6 +6,8 @@ $matchesRaw = file_get_contents($matches_url);
 $matchesJson = json_decode($matchesRaw, true);
 $matches=$matchesJson["matches"];
 
+echo " before calling yeterday function" ;
+
 function yesterdays_ttwenty_matches($match){
 	$yesterdays_date=date('Y-m-d',strtotime("-1 days"));
     $actual_date=date('Y-m-d', strtotime($match["date"]));

@@ -43,10 +43,10 @@ if (isset($_POST['selLeagueName']) )
 	if ($count>0) {
 		echo '<script type="text/javascript">alert("sorry teamname already exists in same league!"); window.location = "./teamlogin.php" </script>';
 	}
-	if ($leaguename='Select league')
-	{
-		echo '<script type="text/javascript">alert("Please select correct league name from the dropdown!"); window.location = "./teamlogin.php" </script>';
-	}
+	//if ($leaguename='Select league')
+	//{
+	//	echo '<script type="text/javascript">alert("Please select correct league name from the dropdown!"); window.location = "./teamlogin.php" </script>';
+//	}
 }
 else {
 	$leaguename=$_POST['leaguename'];
