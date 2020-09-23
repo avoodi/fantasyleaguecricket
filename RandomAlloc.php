@@ -14,6 +14,7 @@ $sql1="select teamname,virtualpurchasepower,numberofplayers,currentbidamount fro
 
 $sql2="SELECT leaguename, playername, currenthighestbid, ownerteam, bidsoldyn, inplaying11, ccaptainyn, pid from leagueauctionresults where leaguename='$leaguename' and ownerteam is null";
 fwrite($myfile, $sql2);
+fwrite($myfile,"\n");
 
 ////echo $sql2;
 
@@ -58,6 +59,7 @@ $teamcount=0;
 ////echo "</br> </br> sql1 is ". $sql1 ."</br>";
 fwrite($myfile, "sql1 is ");
 fwrite($myfile, $sql1 );
+fwrite($myfile,"\n");
 
 $result = mysqli_query($conn,$sql1) ;
 while( $row = mysqli_fetch_array( $result ) )
@@ -73,6 +75,7 @@ mysqli_free_result($result);
 ////echo "tems are ".$teamcount;
 fwrite($myfile, "teams are");
 fwrite($myfile, $teamcount);
+fwrite($myfile,"\n");
 
  for ($i=0; $i<$teamcount; $i++) {
 /**  for ($j=0; $j<$availplayers ; $j++) {
@@ -102,17 +105,20 @@ fwrite($myfile, $teamcount);
 ////echo "available ply ".$availplayers ."<br>";
 fwrite($myfile,"available ply");
 fwrite($myfile,$availplayers);
+fwrite($myfile,"\n");
 	 for ($findindex=0; $findindex<$availplayers; $findindex++) {
 //    echo "find index " . $findindex ."<br>";
 		if($randompidarray[$findindex]==$random_pid && $randomplayergone[$findindex]=='N') {
 	////		echo "first if playercount" . $playerCount ;
 fwrite($myfile,"first if playercount");
 fwrite($myfile,$playerCount);
+fwrite($myfile,"\n");
 
 			if(($teamvirpp[$i]+$randomplaycost[$findindex]) >25000 && $teamnumberofplayer[$i]<$maxPlayerInTeam) {
 				$sqlupdt = "update leagueauctionresults set ownerteam='$teamsarray[$i]' ,bidsoldyn='Y' where leaguename='$leaguename' and pid=$randompidarray[$findindex] ";
 ////echo $sqlupdt. "</br>";
 fwrite($myfile, $sqlupdt);
+fwrite($myfile,"\n");
 
 				if(! mysqli_query($conn,$sqlupdt) ) {
 					die('problem: random alloc 2');
@@ -131,6 +137,7 @@ fwrite($myfile, $sqlupdt);
 					////echo "  team ".$teamsarray[$i] ." has total amt " .$teamvirpp[$i]+$randomplaycost[$findindex] . " and total players " .$teamnumberofplayer[$i] ."</br>";
 					$msgStr= "  team ".$teamsarray[$i] ." has total amt " .$teamvirpp[$i]+$randomplaycost[$findindex] . " and total players " .$teamnumberofplayer[$i] ;
 					fwrite($myfile, $msgStr);
+					fwrite($myfile,"\n");
 			}
 		}
 	}
@@ -145,6 +152,7 @@ fwrite($myfile, $sqlupdt);
     ////echo "leagueteamsdetails updt ".$sqlupdt2 . "</br>";
 		$msgStr="leagueteamsdetails updt ".$sqlupdt2 ;
 		fwrite($myfile,$msgStr);
+		fwrite($myfile,"\n");
   }
 
   $sqlupdt3="update leaguerules set biddingstatus='Closed' where leaguename='$leaguename'";

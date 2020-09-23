@@ -1,0 +1,39 @@
+
+=================================================
+**steps to insert a missing player or new player **
+
+insert into playermst (`playername`,`speciality`,`reserveprice`,`score`,`numberof4`,`numberof6`,`numberof1`,
+`numberof2`,`numberof3`,`numberofcatches`,`numberofrunouts`,`outcatch`,`outbowled`,`outrunout`,`outlbw`,
+`outstumped`,`outothers`,`manofthematch`,`wickets`,`overs`,`runsconsided`,`ballsfaced`,`points`,`iplteam`,
+`maidenover`,`oditotalmatches`,`oditotalruns`,`oditotalwickets`,`oditotalcatches`,`oditotal4`,`oditotal6`,
+`oditotalmom`,`wctotalmatches`,`wctotalruns`,`wctotalwickets`,`odibatavg`,`PID`)
+VALUES
+('Kuldeep Yadav','Bowler',500000,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,559235);
+
+update playermst set iplteam='KKR' where pid=559235
+
+insert into leagueauctionresults (leaguename,playername,currenthighestbid,ownerteam,bidsoldyn,inplaying11,ccaptainyn,pid) values
+('VVS','Kuldeep Yadav',500000,null,null,null,null,559235)
+do this above insert for all leagues !!
+
+=========================================================
+
+updating the reservprice incase we need to reset some league or some players within the league
+
+update leagueauctionresults set  where leaguename='PMOLeague' and ownerteam in ('MM221080','MO221080')
+pdate leagueauctionresults inner join playermst p
+on p.pid=leagueauctionresults.pid
+set leagueauctionresults.currenthighestbid=p.reserveprice where
+leagueauctionresults.leaguename='PMOLeague' and leagueauctionresults.ownerteam in ('MM221080','MO221080')
+
+====================================================
+reset teams bidding situation to start from scratch
+
+update leagueauctionresults set bidsoldyn=null , ownerteam=null where leaguename='VVS';
+
+update leagueteamsdetails set numberofplayers=0, currentbidamount=0, virtualpurchasepower=15000000;
+
+delete from biddingdetails where leaguename='VVS';
+
+==========================================================

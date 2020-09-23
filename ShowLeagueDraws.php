@@ -159,7 +159,7 @@ session_start();
 		<td class="text-center">&nbsp;<? echo $score[$count] ; ?></td>
 		<td class="text-center"><strong><? echo $whowon[$count] ; ?></strong></td>
 		<td class="text-center">
-	<a href="viewmatchup.php?t1=<? echo $team1name[$count] ?>&t2=<? echo $team2name[$count] ?>&t3=<? echo $ourmatchnum[$count] ?>">
+	<a href="ViewMatchUp.php?t1=<? echo $team1name[$count] ?>&t2=<? echo $team2name[$count] ?>&t3=<? echo $ourmatchnum[$count] ?>">
 			  <strong>ViewMatchup</strong></a>
 				<!--<td align="center">&nbsp;<? echo $prediction[$count] ;?></td> -->
 				<td class="text-center"><?echo $iplmatchstr[$iplmatchnum[$count]] ;?></td>
