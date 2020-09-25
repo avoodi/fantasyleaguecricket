@@ -16,6 +16,7 @@ $iplday=$_POST['iplday']; // this should be supplied to this program
 $matchid=$_POST['matchid'];
 $isrunearlier=$_POST['firstrun'];
 
+
 echo $leaguename . " ". $iplday ." " . $matchid;
 // lets read from the rawscoreupdate
 
@@ -53,6 +54,7 @@ $raw_overs[$i]=$row[10];
 $raw_maiden[$i]=$row[11];
 $raw_runsgiven[$i]=$row[12];
 $raw_mom[$i]=$row[13];
+//echo "current player " . $i . " name " . $raw_playername[$i] . " and " . $raw_pid[$i] . " and mom " . $raw_mom[$i] ."</br>";
 $i++;
 }
 
@@ -62,16 +64,13 @@ mysqli_free_result($result);
 echo "Raw data collected for ". $countofplayerstoday ." and is run earlier ". $isrunearlier . "</br>";
 //lets first add to playermst only if its first time (dont need to update playermst for each league)
 
-if ($isrunearlier=='Y'){
+if ($isrunearlier=='Y'){ // this actually is checking if its first time run !
 for ($i=0 ; $i<$countofplayerstoday; $i++){
 
 $sqlupdt="update playermst SET  score=score+$raw_runsscored[$i], numberof4=numberof4+$raw_fours[$i], numberof6=$raw_sixes[$i], numberofcatches=numberofcatches+$raw_catches[$i], numberofrunouts=numberofrunouts+$raw_runout[$i], manofthematch=manofthematch+$raw_mom[$i], wickets=wickets+$raw_wicketstaken[$i], overs=overs+$raw_overs[$i],
  runsconsided=runsconsided+$raw_runsgiven[$i], ballsfaced=ballsfaced+$raw_ballsplayed[$i],maidenover=maidenover+$raw_maiden[$i] where pid=$raw_pid[$i]";
 echo $sqlupdt."</br>";
-if(! mysqli_query($conn,$sqlupdt) )
-   {
-     die('error sqlupdate');
-   }
+if(! mysqli_query($conn,$sqlupdt) ) { die('error sqlupdate'); }
 
 }
 echo "updated playermst </br>";
@@ -103,6 +102,7 @@ while( $row = mysqli_fetch_array( $result ) )
   $ccaptainyn[$playercount]=$row[3];
   $Sel_pid[$playercount]=$row[0];
   $leaguematchnum[$playercount]=$row[4];
+//  echo " sel pname count is ".$playercount . "name " . $playername[$playercount] . " and " . $Sel_pid[$playercount] . " ownerteam ". $ownerteam[$playercount].  " and cap? ". $ccaptainyn[$playercount] . " </br> ";
   $playercount++;
 }
 mysqli_free_result($result);
@@ -141,7 +141,7 @@ $boundrypoints=0;
 $sixerpoints=0;
 $mompoints=0;
 
-//echo $Sel_pid[$i]. " vs ". print_r($raw_pid) ;
+//echo $Sel_pid[$i]. " vs ". print_r($raw_pid) . "and current key" . $key ." </br>";
 $key=array_search($Sel_pid[$i],$raw_pid);
 if ($key !== false){
   //means player was in playing 11, so count the points based on league rules and insert into playersmatchdetails
@@ -152,32 +152,32 @@ if ($key !== false){
   $maidenoverpoints=$raw_maiden[$key] * $LR_maidenoverpoint;
   $boundrypoints=$raw_fours[$key] * $LR_boundrypoints;
   $sixerpoints=$raw_sixes[$key] * $LR_sixerpoints;
+
+//  echo " player in mainloop pid ".$Sel_pid[$i] . " and runpts = ". $runpoints . "and key is " . $key . " </br>";
+//  echo " raw mom ". $raw_mom[$key] . " </br>";
   if($raw_mom[$key]=='Y'){
     //please CHECK WHAT VALUE FOR MOM IS GETTING FROM JSON TO RAW TABLE
     $mompoints=$LR_mompoints;
+    echo " mom player is " . $raw_mom[$key] . " </br>";
   }
 
-  if($ccaptainyn[$key]=='Y'){
+  if($ccaptainyn[$i]=='Y'){
     $totalpoints= ($runpoints + $catchpoints + $wicketpoints + $runoutpoints + $maidenoverpoints + $boundrypoints + $sixerpoints + $mompoints)*2;
+    echo "total points in Y =". $totalpoints ." \n";
   }
   else {
     $totalpoints= $runpoints + $catchpoints + $wicketpoints + $runoutpoints + $maidenoverpoints + $boundrypoints + $sixerpoints + $mompoints ;
-  }
+    }
     // now insert into playersmatchdetails table
     $sqlins = "insert into playersmatchdetails (leaguename, ownerteamname, playername, iplmatchnum, ourmatchnum, runs, wickets, catches, runoutstumpout, hit4, hit6, overs, runsconsided, inplaying11, mom, howout, points, ballsfaced, maidenovers,iscaptainyn) Values ";
-    $sqlins = $sqlins. "('$leaguename','$ownerteam[$i]','$playername[$i]',$iplday,$leaguematchnum[$i],$raw_runsscored[$key],$raw_wicketstaken[$key],$raw_catches[$key],$raw_runout[$key],$raw_fours[$key],$raw_sixes[$key],$raw_overs[$key],$raw_runsgiven[$key],'Y','$raw_mom[$key]','',$totalpoints,$raw_ballsplayed[$key], $raw_maiden[$key],'$ccaptainyn[$key]' ) ";
-
+    $sqlins = $sqlins. "('$leaguename','$ownerteam[$i]','$playername[$i]',$iplday,$leaguematchnum[$i],$raw_runsscored[$key],$raw_wicketstaken[$key],$raw_catches[$key],$raw_runout[$key],$raw_fours[$key],$raw_sixes[$key],$raw_overs[$key],$raw_runsgiven[$key],'Y','$raw_mom[$key]','',$totalpoints,$raw_ballsplayed[$key], $raw_maiden[$key],'$ccaptainyn[$i]' ) ";
     echo $sqlins."</br>";
 
-    if(! mysqli_query($conn,$sqlins) )
-      {
-        die('error sqlins');
-      }
+    if(! mysqli_query($conn,$sqlins) ) { die('error sqlins');   }
 }
-else {
-  // the player in playing11 was not playing that day
-  echo "do nothing ";
-}
+else {  // the player in playing11 was not playing that day
+  echo "do nothing for pid " .$Sel_pid[$i]. "</br>" ;
+  }
 }
 
 echo " for each player points calculated and inserted into playersmatchdetails </br>";
