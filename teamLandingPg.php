@@ -349,7 +349,7 @@
 				?>
 
 						<blockquote class="blockquote text-left border border-dangers rounded p-1">
-							<p class="mb-0 text-muted" style="font-size: 0.8rem;"><?echo $post[$i] ;?> Lorem ipsum, dolor sit amet consectetur adipisicing elit. Unde esse voluptate iste debitis dicta excepturi cumque, molestiae distinctio dolorem exercitationem voluptatibus voluptatem, aperiam sequi veniam similique accusamus rerum mollitia eum. </p>
+							<p class="mb-0 text-muted" style="font-size: 0.8rem;"><?echo $post[$i] ;?>  </p>
 							<footer class="blockquote-footer text-right"><cite class="text-danger" style="font-size: 1.2rem;"><? echo $teamname[$i] ; echo "::"?> Team Pune</cite></footer>
 						</blockquote>
 						<hr class="m-0">
