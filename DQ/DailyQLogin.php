@@ -3,11 +3,11 @@
 <head>
 <title>Sign In</title>
 <!-- //custom-theme -->
-<link href="NewUI/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
-<link href="NewUI/css/component.css" rel="stylesheet" type="text/css" media="all" />
-<link href="NewUI/css/style_grid.css" rel="stylesheet" type="text/css" media="all" />
-<link href="NewUI/css/style.css" rel="stylesheet" type="text/css" media="all" />
-<link href="NewUI/css/font-awesome.css" rel="stylesheet">
+<link href="../NewUI/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+<link href="../NewUI/css/component.css" rel="stylesheet" type="text/css" media="all" />
+<link href="../NewUI/css/style_grid.css" rel="stylesheet" type="text/css" media="all" />
+<link href="../NewUI/css/style.css" rel="stylesheet" type="text/css" media="all" />
+<link href="../NewUI/css/font-awesome.css" rel="stylesheet">
 </head>
 <body>
 						<div class="pages_agile_info_w3l">

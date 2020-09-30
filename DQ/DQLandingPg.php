@@ -141,14 +141,14 @@ mysqli_free_result($result);
 	<title>Index page</title>
 	<!-- custom-theme -->
 
-	<link href="NewUI/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
-	<link rel="stylesheet" type="text/css" href="NewUI/css/table-style.css" />
-	<link rel="stylesheet" type="text/css" href="NewUI/css/basictable.css" />
-	<link href="NewUI/css/component.css" rel="stylesheet" type="text/css" media="all" />
-	<link href="NewUI/css/style_grid.css" rel="stylesheet" type="text/css" media="all" />
-	<link href="NewUI/css/style.css" rel="stylesheet" type="text/css" media="all" />
+	<link href="../NewUI/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+	<link rel="stylesheet" type="text/css" href="../NewUI/css/table-style.css" />
+	<link rel="stylesheet" type="text/css" href="../NewUI/css/basictable.css" />
+	<link href="../NewUI/css/component.css" rel="stylesheet" type="text/css" media="all" />
+	<link href="../NewUI/css/style_grid.css" rel="stylesheet" type="text/css" media="all" />
+	<link href="../NewUI/css/style.css" rel="stylesheet" type="text/css" media="all" />
 	<!-- font-awesome-icons -->
-	<link href="NewUI/css/font-awesome.css" rel="stylesheet">
+	<link href="../NewUI/css/font-awesome.css" rel="stylesheet">
 	<!-- //font-awesome-icons -->
 </head>
 
@@ -348,12 +348,12 @@ mysqli_free_result($result);
 <!--copy rights end here-->
 		<!-- js -->
 
-		<script type="text/javascript" src="NewUI/js/jquery-2.1.4.min.js"></script>
-		<script src="NewUI/js/modernizr.custom.js"></script>
-		<script src="NewUI/js/classie.js"></script>
+		<script type="text/javascript" src="../NewUI/js/jquery-2.1.4.min.js"></script>
+		<script src="../NewUI/js/modernizr.custom.js"></script>
+		<script src="../NewUI/js/classie.js"></script>
 		<!-- tables -->
 
-		<script type="text/javascript" src="NewUI/js/jquery.basictable.min.js"></script>
+		<script type="text/javascript" src="../NewUI/js/jquery.basictable.min.js"></script>
 		<script type="text/javascript">
 			$(document).ready(function () {
 				$('#table').basictable();
@@ -382,10 +382,10 @@ mysqli_free_result($result);
 			});
 		</script>
 
-		<script src="NewUI/js/jquery.nicescroll.js"></script>
-		<script src="NewUI/js/scripts.js"></script>
+		<script src="../NewUI/js/jquery.nicescroll.js"></script>
+		<script src="../NewUI/js/scripts.js"></script>
 
-		<script type="text/javascript" src="NewUI/js/bootstrap-3.1.1.min.js"></script>
+		<script type="text/javascript" src="../NewUI/js/bootstrap-3.1.1.min.js"></script>
 
 
 </body>

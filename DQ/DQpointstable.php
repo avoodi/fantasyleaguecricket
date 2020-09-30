@@ -16,7 +16,7 @@ $grouppwd=$_SESSION['grouppwd'];
 	}
 
 $i=0;
-$sql= "select  username,  sum(score) points,count(*) count  from DQanswersdetails where groupname='$groupname' and score is not null group by username ";
+$sql= "select  username,  sum(score) points,count(*) count , sum(score)/count(*) as avgcount  from DQanswersdetails where groupname='$groupname' and score is not null group by username order by avgcount desc";
 $result = mysqli_query($conn,$sql) ;
 while( $row = mysqli_fetch_array( $result ) )
 {
@@ -47,14 +47,14 @@ $questionCompare=$i;
 ?>
 <html>
 <head>
-	<link href="NewUI/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
-	<link rel="stylesheet" type="text/css" href="NewUI/css/table-style.css" />
-	<link rel="stylesheet" type="text/css" href="NewUI/css/basictable.css" />
-	<link href="NewUI/css/component.css" rel="stylesheet" type="text/css" media="all" />
-	<link href="NewUI/css/style_grid.css" rel="stylesheet" type="text/css" media="all" />
-	<link href="NewUI/css/style.css" rel="stylesheet" type="text/css" media="all" />
+	<link href="../NewUI/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+	<link rel="stylesheet" type="text/css" href="../NewUI/css/table-style.css" />
+	<link rel="stylesheet" type="text/css" href="../NewUI/css/basictable.css" />
+	<link href="../NewUI/css/component.css" rel="stylesheet" type="text/css" media="all" />
+	<link href="../NewUI/css/style_grid.css" rel="stylesheet" type="text/css" media="all" />
+	<link href="../NewUI/css/style.css" rel="stylesheet" type="text/css" media="all" />
 	<!-- font-awesome-icons -->
-	<link href="NewUI/css/font-awesome.css" rel="stylesheet">
+	<link href="../NewUI/css/font-awesome.css" rel="stylesheet">
 
 	<!--SCRIPT LANGUAGE="JAVASCRIPT" SRC="images/sorttable.js"></SCRIPT -->
 	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
@@ -185,12 +185,12 @@ for ($i=$questionCompare-1;$i>0 ; $i--) {
 <!--copy rights end here-->
 <!-- js -->
 
-<script type="text/javascript" src="NewUI/js/jquery-2.1.4.min.js"></script>
-<script src="NewUI/js/modernizr.custom.js"></script>
-<script src="NewUI/js/classie.js"></script>
+<script type="text/javascript" src="../NewUI/js/jquery-2.1.4.min.js"></script>
+<script src="../NewUI/js/modernizr.custom.js"></script>
+<script src="../NewUI/js/classie.js"></script>
 <!-- tables -->
 
-<script type="text/javascript" src="NewUI/js/jquery.basictable.min.js"></script>
+<script type="text/javascript" src="../NewUI/js/jquery.basictable.min.js"></script>
 <script type="text/javascript">
 		$(document).ready(function () {
 				$('#table').basictable();
@@ -220,9 +220,9 @@ for ($i=$questionCompare-1;$i>0 ; $i--) {
 </script>
 
 <!-- <script src="NewUI/js/jquery.nicescroll.js"></script>-->
-<script src="NewUI/js/scripts.js"></script>
+<script src="../NewUI/js/scripts.js"></script>
 
-<script type="text/javascript" src="NewUI/js/bootstrap-3.1.1.min.js"></script>
+<script type="text/javascript" src="../NewUI/js/bootstrap-3.1.1.min.js"></script>
 
 
 

@@ -23,12 +23,12 @@ while( $row = mysqli_fetch_array( $result ) )
 <head>
 <title>signup</title>
 <!-- custom-theme -->
-<link href="NewUI/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
-<link href="NewUI/css/component.css" rel="stylesheet" type="text/css" media="all" />
-<link href="NewUI/css/style_grid.css" rel="stylesheet" type="text/css" media="all" />
-<link href="NewUI/css/style.css" rel="stylesheet" type="text/css" media="all" />
+<link href="../NewUI/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+<link href="../NewUI/css/component.css" rel="stylesheet" type="text/css" media="all" />
+<link href="../NewUI/css/style_grid.css" rel="stylesheet" type="text/css" media="all" />
+<link href="../NewUI/css/style.css" rel="stylesheet" type="text/css" media="all" />
 <!-- font-awesome-icons -->
-<link href="NewUI/css/font-awesome.css" rel="stylesheet">
+<link href="../NewUI/css/font-awesome.css" rel="stylesheet">
 <!-- //font-awesome-icons -->
 </head>
 <body>
@@ -98,16 +98,16 @@ while( $row = mysqli_fetch_array( $result ) )
 
 
 <!-- js -->
-          <script type="text/javascript" src="NewUI/js/jquery-2.1.4.min.js"></script>
-		  <script src="NewUI/js/modernizr.custom.js"></script>
-		   <script src="NewUI/js/classie.js"></script>
+          <script type="text/javascript" src="../NewUI/js/jquery-2.1.4.min.js"></script>
+		  <script src="../NewUI/js/modernizr.custom.js"></script>
+		   <script src="../NewUI/js/classie.js"></script>
 <!-- //js -->
 
 
-<script src="NewUI/js/jquery.nicescroll.js"></script>
-<script src="NewUI/js/scripts.js"></script>
+<script src="../NewUI/js/jquery.nicescroll.js"></script>
+<script src="../NewUI/js/scripts.js"></script>
 
-<script type="text/javascript" src="NewUI/js/bootstrap-3.1.1.min.js"></script>
+<script type="text/javascript" src="../NewUI/js/bootstrap-3.1.1.min.js"></script>
 
 <script language="JavaScript" type="text/JavaScript">
 <!--
