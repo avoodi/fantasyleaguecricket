@@ -106,107 +106,53 @@
 	<link rel="icon" href="assets/dist/img/favicon.ico" type="image/ico" sizes="16x16">
 	<link href="assets/dist/css/bootstrap.min.css" rel="stylesheet">
 	<link href="assets/dist/css/style.css" rel="stylesheet">
-	<style>
-		body {
-			padding-top: 56px;
-		}
-		.list {
-			/* color: #dc3545!important; */
-			font-size: 13px;
-		}
-	</style>
+	<link href="assets/dist/css/colors.css" rel="stylesheet">
 </head>
 
 <body class="bg-fantasy">
 	<!-- Navigation -->
-	<nav class="navbar fixed-top navbar-expand-lg bg-white">
-		<div class="container">
-			<a class="navbar-brand text-danger" href="#"> <strong> <em> Fantasy League Cricket </em></strong></a>
-			<button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon text-danger"> Menu </span>
-			</button>
-			<div class="collapse navbar-collapse" id="navbarResponsive">
-				<ul class="navbar-nav ml-auto">
-					<li class="nav-item">
-						<a class="nav-link text-danger" href="PlayersListForBidding.php">Bidding</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link text-danger" href="ViewYourTeam.php">Your Team</a>
-					</li>
-					<li class="nav-item dropdown">
-						<a class="nav-link dropdown-toggle text-danger" href="#" id="navbarDropdownLeague" data-toggle="dropdown"
-							aria-haspopup="true" aria-expanded="false">
-							League
-						</a>
-						<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownLeague">
-							<? if ($isOwner=='No') {?>
-								<a class="dropdown-item text-danger" href="LeagueRulesView.php">League Rules</a>
-							<? } ?>
-
-							<? if ($isOwner=='Yes') { ?>
-								<a class="dropdown-item text-danger" href="LeagueRules.php">League Rules</a>
-							<? } ?>
-							<a class="dropdown-item text-danger" href="#" onclick="call_leaguestanding()">League Standing </a>
-							<a class="dropdown-item text-danger" href="ShowLeagueDraws.php">League Schedule(draws)</a>
-						</div>
-					</li>
-
-
-					<li class="nav-item dropdown">
-						<a class="nav-link dropdown-toggle text-danger" href="#" id="navbarDropdownPlayer" data-toggle="dropdown"
-							aria-haspopup="true" aria-expanded="false">
-							Players
-						</a>
-						<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownPlayer">
-							<a class="dropdown-item text-danger" href="PlayerPurchaseAfterBiddingOver.php">Player Purchase</a>
-							<a class="dropdown-item text-danger" href="Sellplayer.php">Player Sell</a>
-							<a class="dropdown-item text-danger" href="viewallplayersperf.php">All Players performance</a>
-						</div>
-					</li>
-				</ul>
-			</div>
-		</div>
-	</nav>
+	<?php include 'navbar.php';?>
+	
 
 	<!-- Page Content -->
 	<div class="container bg-white p-3 pt-1 ">
 		<!-- <h1 class="my-4">Teams</h1> -->
-
+		
 		<!-- Section -->
 		<div class="row ">
-			<div class="col-lg-3 mb-4">
+			<div class="col-lg-3 col-3 mb-4">
 				<div class="card h-100 bg-danger">
-					<h6 class="card-header text-white">Team</h6>
+					<h6 class="card-header text-white display">Team</h6>
 					<div class="card-footer text-right">
 					<span class="badge bg-white">
 						<? echo $teamname; ?></span>
 					</div>
 				</div>
 			</div>
-			<div class="col-lg-3 mb-4">
+			<div class="col-lg-3 col-3 mb-4">
 				<div class="card h-100 bg-warning">
-					<h6 class="card-header text-white">League</h6>
+					<h6 class="card-header text-white display">League</h6>
 					<div class="card-footer text-right">
 					<span class="badge bg-white">
 						<? echo $leaguename; ?></span>
 					</div>
 				</div>
 			</div>
-			<div class="col-lg-3 mb-4">
+			<div class="col-lg-3 col-3 mb-4">
 				<div class="card h-100 bg-primary">
-					<h6 class="card-header text-white">Amount You have </h6>
+					<h6 class="card-header text-white display">Amount</h6>
 					<div class="card-footer text-right">
 						<span class="badge bg-white">
 						<?echo $teamvirpp; ?></span>
 					</div>
 				</div>
 			</div>
-			<div class="col-lg-3 mb-4">
+			<div class="col-lg-3 col-3 mb-4">
 				<div class="card h-100 bg-success">
-					<h6 class="card-header text-white">Players you have </h6>
+					<h6 class="card-header text-white display">Players</h6>
 					<div class="card-footer text-right">
 					<span class="badge bg-white">
-						<?echo $numberofplayers; ?></span>
+						<?echo $teamvirpp; ?></span>
 					</div>
 				</div>
 			</div>
@@ -217,7 +163,7 @@
 		<div class="row">
 			<div class="col-lg-8">
 				<!-- <h6 class="text-danger"><u> Responsibility</u></h6> -->
-
+				
 				<? if ($isOwner=='Yes') {?>
 					<div class="blockquote border border-dangers rounded p-2">
 						<p class="m-0 text-danger"> <small>To get the league started quickly follow below steps -</small></p>
@@ -233,7 +179,7 @@
 						</ul>
 					</div>
 				<? } ?>
-
+				
 			</div>
 			<div class="col-lg-4">
 				<div class="row mb-1">
@@ -246,7 +192,7 @@
 							<? } ?>
 						<? } ?>
 					</div>
-				</div>
+				</div>	
 				<div class="row p-3">
 					<? if ($isOwner=='No') {?>
 						<? if ($drawdone =='N') {?>
@@ -256,13 +202,13 @@
 					<? } ?>
 				</div>
 
-
+				
 
 			</div>
 		</div>
 		<!-- /.row -->
 
-
+	
 		<hr>
 		<!-- Section -->
 		<div class="row p-3 mb-2">
@@ -291,25 +237,25 @@
 							<? echo $iplmatchdate[$i]; ?>
 						</td>
 						<? if ($team1name[$i] == $teamname) { ?>
-							<td>
+							<td> 
 								<a href="SelectYourTeam.php?mnum=<? echo $iplmatchnum[$i] ; ?>&omn=<?echo $ourmatchnum[$i]; ?>">
 									<strong><? echo $team1name[$i]; ?></strong>
-								</a>
+								</a> 
 							</td>
-							<td>
+							<td> 
 								<a href="ViewOtherTeam.php?nm=<? echo $team2name[$i] ?>&mnum=view">
 									<? echo $team2name[$i] ;?>
-								</a>
+								</a> 
 							</td>
 						<? } ?>
 						<? if ($team2name[$i] == $teamname) { ?>
-							<td>
+							<td> 
 								<a href="ViewOtherTeam.php?nm=<? echo $team1name[$i] ?>&mnum=view">
-									<? echo $team1name[$i] ;?></a>
+									<? echo $team1name[$i] ;?></a> 
 							</td>
-							<td>
+							<td> 
 								<a href="SelectYourTeam.php?mnum=<? echo $iplmatchnum[$i] ; ?>&omn=<?echo $ourmatchnum[$i]; ?>"><strong>
-										<? echo $team2name[$i]; ?></strong></a>
+										<? echo $team2name[$i]; ?></strong></a> 
 							</td>
 						<? } ?>
 						<td>
@@ -349,13 +295,13 @@
 				?>
 
 						<blockquote class="blockquote text-left border border-dangers rounded p-1">
-							<p class="mb-0 text-muted" style="font-size: 0.8rem;"><?echo $post[$i] ;?>  </p>
+							<p class="mb-0 text-muted" style="font-size: 0.8rem;"><?echo $post[$i] ;?> Lorem ipsum, dolor sit amet consectetur adipisicing elit. Unde esse voluptate iste debitis dicta excepturi cumque, molestiae distinctio dolorem exercitationem voluptatibus voluptatem, aperiam sequi veniam similique accusamus rerum mollitia eum. </p>
 							<footer class="blockquote-footer text-right"><cite class="text-danger" style="font-size: 1.2rem;"><? echo $teamname[$i] ; echo "::"?> Team Pune</cite></footer>
 						</blockquote>
 						<hr class="m-0">
-				<?
+				<? 
 						$i++;
-					}
+					} 
 				?>
 			</div>
 		</div>
@@ -363,12 +309,7 @@
 	<!-- /.container -->
 
 	<!-- Footer -->
-	<footer class="p-2 bg-white fixed-bottom">
-		<div class="container">
-			<p class="m-0 text-center text-danger"> <small> © 2018 All Rights Reserved | mail us : <a href="mailto:avoodi@gmail.com" class="text-success">avoodi@gmail.com</a> for any queries.</small></p>
-		</div>
-		<!-- /.container -->
-	</footer>
+	<?php include 'footer.php';?>
 
 	<!-- Bootstrap core JavaScript -->
 	<script src="assets/dist/js/jquery/jquery.min.js"></script>

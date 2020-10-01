@@ -1,3 +1,11 @@
+body {
+    padding-top: 56px;
+}
+
+.list {
+    /* color: #dc3545!important; */
+    font-size: 13px;
+}
 .bg-fantasy{
     background-color: #ccc!important;
 }
