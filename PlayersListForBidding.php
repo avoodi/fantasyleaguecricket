@@ -210,10 +210,8 @@
 							<td>
 								<? echo $row[4] ?>
 							</td>
-							<td><input type="text" value="<? echo $row[4]; ?>" class="form-control form-control-sm" name="currbid" size="15" readonly="true"></td>
-							<td>
-								<? echo $row[5] ?>
-							</td>
+							<td><input type="text" value="<? echo $row[5]; ?>" class="form-control form-control-sm" name="currbid" size="15" readonly="true"></td>
+							
 							<? if ($biddingstatus == "Started-InProgress" ) { ?>
 							<td><a href="addurbid.php?nm=<? echo $row[0] ?>" onClick="return valid();">Your bid</a> </td>
 							<? } ?>
