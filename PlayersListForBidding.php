@@ -120,11 +120,12 @@
 		<div class="row text-center m-0">
 			<? if ($biddingstatus =="Closed") {?>
 			<div class="alert alert-danger text-danger w-100" role="alert">
-				Bidding IS OVER For This League , Pl check your players page.
+				Bidding IS OVER For This League , Pl check your players page (or playerpurchase page).
 			</div>
-			<div class="alert alert-warning text-danger w-100" role="alert">
+<!--			<div class="alert alert-warning text-danger w-100" role="alert">
 				Below list shows players which are not owned by any team in your league So they are available for 'individual purchase' OR can be 'auto allocated'(for this you need to talk to your leagues creator)...
 			</div>
+-->      
 			<? } ;?>
 
 			<? if ($biddingstatus=="Yet To Start") { ?>
