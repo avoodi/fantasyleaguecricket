@@ -125,7 +125,7 @@
 <!--			<div class="alert alert-warning text-danger w-100" role="alert">
 				Below list shows players which are not owned by any team in your league So they are available for 'individual purchase' OR can be 'auto allocated'(for this you need to talk to your leagues creator)...
 			</div>
--->      
+-->
 			<? } ;?>
 
 			<? if ($biddingstatus=="Yet To Start") { ?>
@@ -176,7 +176,7 @@
 						<tr>
 							<th>Sr.No</th>
 							<th>Player Name</th>
-							<th>Speciality</th>
+							<!--th>Speciality</th-->
 							<th>IPL Team</th>
 							<th>Reserve Price</th>
 							<th>Current highest Bid</th>
@@ -205,10 +205,10 @@
 								<? echo $row[1] ?>
 							</td>
 							<td>
-								<? echo $row[2] ?>
+								<? echo $row[3] ?>
 							</td>
 							<td>
-								<? echo $row[3] ?>
+								<? echo $row[4] ?>
 							</td>
 							<td><input type="text" value="<? echo $row[4]; ?>" class="form-control form-control-sm" name="currbid" size="15" readonly="true"></td>
 							<td>
