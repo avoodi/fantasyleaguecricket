@@ -112,12 +112,12 @@
 <body class="bg-fantasy">
 	<!-- Navigation -->
 	<?php include 'navbar.php';?>
-	
+
 
 	<!-- Page Content -->
 	<div class="container bg-white p-3 pt-1 ">
 		<!-- <h1 class="my-4">Teams</h1> -->
-		
+
 		<!-- Section -->
 		<div class="row ">
 			<div class="col-lg-3 col-3 mb-4">
@@ -152,7 +152,7 @@
 					<h6 class="card-header text-white display">Players</h6>
 					<div class="card-footer text-right">
 					<span class="badge bg-white">
-						<?echo $teamvirpp; ?></span>
+						<?echo $numberofplayers; ?></span>
 					</div>
 				</div>
 			</div>
@@ -163,7 +163,7 @@
 		<div class="row">
 			<div class="col-lg-8">
 				<!-- <h6 class="text-danger"><u> Responsibility</u></h6> -->
-				
+
 				<? if ($isOwner=='Yes') {?>
 					<div class="blockquote border border-dangers rounded p-2">
 						<p class="m-0 text-danger"> <small>To get the league started quickly follow below steps -</small></p>
@@ -179,7 +179,7 @@
 						</ul>
 					</div>
 				<? } ?>
-				
+
 			</div>
 			<div class="col-lg-4">
 				<div class="row mb-1">
@@ -192,7 +192,7 @@
 							<? } ?>
 						<? } ?>
 					</div>
-				</div>	
+				</div>
 				<div class="row p-3">
 					<? if ($isOwner=='No') {?>
 						<? if ($drawdone =='N') {?>
@@ -202,13 +202,13 @@
 					<? } ?>
 				</div>
 
-				
+
 
 			</div>
 		</div>
 		<!-- /.row -->
 
-	
+
 		<hr>
 		<!-- Section -->
 		<div class="row p-3 mb-2">
@@ -237,25 +237,25 @@
 							<? echo $iplmatchdate[$i]; ?>
 						</td>
 						<? if ($team1name[$i] == $teamname) { ?>
-							<td> 
+							<td>
 								<a href="SelectYourTeam.php?mnum=<? echo $iplmatchnum[$i] ; ?>&omn=<?echo $ourmatchnum[$i]; ?>">
 									<strong><? echo $team1name[$i]; ?></strong>
-								</a> 
+								</a>
 							</td>
-							<td> 
+							<td>
 								<a href="ViewOtherTeam.php?nm=<? echo $team2name[$i] ?>&mnum=view">
 									<? echo $team2name[$i] ;?>
-								</a> 
+								</a>
 							</td>
 						<? } ?>
 						<? if ($team2name[$i] == $teamname) { ?>
-							<td> 
+							<td>
 								<a href="ViewOtherTeam.php?nm=<? echo $team1name[$i] ?>&mnum=view">
-									<? echo $team1name[$i] ;?></a> 
+									<? echo $team1name[$i] ;?></a>
 							</td>
-							<td> 
+							<td>
 								<a href="SelectYourTeam.php?mnum=<? echo $iplmatchnum[$i] ; ?>&omn=<?echo $ourmatchnum[$i]; ?>"><strong>
-										<? echo $team2name[$i]; ?></strong></a> 
+										<? echo $team2name[$i]; ?></strong></a>
 							</td>
 						<? } ?>
 						<td>
@@ -299,9 +299,9 @@
 							<footer class="blockquote-footer text-right"><cite class="text-danger" style="font-size: 1.2rem;"><? echo $teamname[$i] ; echo "::"?> Team Pune</cite></footer>
 						</blockquote>
 						<hr class="m-0">
-				<? 
+				<?
 						$i++;
-					} 
+					}
 				?>
 			</div>
 		</div>
