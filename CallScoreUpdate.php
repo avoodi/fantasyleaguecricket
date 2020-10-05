@@ -5,6 +5,7 @@
 <head>
 </head>
 <body>
+  <h4> Did we have 2 matches yesterday ? if yes, pl check if scoreupdate script has been updated</h4>
 <table align="center"  width=80%>
   <Form name="frmreg" method="post" action="scoreupdate.php">
     <tr>
