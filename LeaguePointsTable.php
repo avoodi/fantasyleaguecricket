@@ -17,7 +17,11 @@ session_start();
 	}
 
 $i=0;
-$sql="select teamname, teamownername,ifnull(numberofplayers,0),ifnull(totalteamscore,0),ifnull(matcheswon,0), matcheslost,matchesdrawn, points  from leagueteamsdetails where leaguename='$leaguename'";
+//$sql="select teamname, teamownername,ifnull(numberofplayers,0),ifnull(totalteamscore,0),ifnull(matcheswon,0), matcheslost,matchesdrawn, points  from leagueteamsdetails where leaguename='$leaguename'";
+
+$sql="select teamname, teamownername,ifnull(numberofplayers,0),ifnull(totalteamscore,0),ifnull(matcheswon,0),
+matcheslost,matchesdrawn, points, ifnull(totalteamscore,0)/(ifnull(matcheswon,0)+matcheslost+matchesdrawn) as avgscore  from leagueteamsdetails where leaguename='$leaguename' order by points desc, avgscore desc";
+
 $result = mysqli_query($conn,$sql) ;
 while( $row = mysqli_fetch_array( $result ) )
 {
@@ -29,6 +33,7 @@ while( $row = mysqli_fetch_array( $result ) )
   $matcheslost[$i]=$row[5];
   $matchesdrawn[$i]=$row[6];
   $points[$i]=$row[7];
+	$avgscore[$i]=$row[8];
   $i++;
 }
 mysqli_free_result($result);
@@ -112,6 +117,7 @@ $teamsinleague=$i;
   <th align="center"># of Wins</th>
   <th align="center"># of Losses </th>
   <th align="center"># of draw </th>
+	<th align="center">Average score</th>
 </tr>
 </tread>
 <?
@@ -126,6 +132,7 @@ for ($i=0;$i<$teamsinleague ; $i++) {
     <td class="text-center"><? echo $matcheswon[$i];?> </td>
     <td class="text-center"><? echo $matcheslost[$i];?> </td>
     <td class="text-center"><? echo $matchesdrawn[$i];?> </td>
+		<td class="text-center"><? echo $avgscore[$i]; ?> </td>
   </tr>
 <?
 }
