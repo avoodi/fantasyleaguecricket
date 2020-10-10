@@ -17,7 +17,6 @@ global $conn;
 if ($conn == false) {
   echo "Sorry, site is temporarily experiencing database connectivity issues; should be sorted soon, please check again in some time";
 }
-
 $playercount=0;
 $sql="select pid, playername from leagueauctionresults where leaguename='$leaguename' and ownerteam='$teamname' ";
 //echo $sql . "</br>";
@@ -135,7 +134,7 @@ mysqli_free_result($result);
 <? } ?>
 <tr bgcolor="#CCCCCC" >
       <td colspan="14" align="center">
-<input type="submit" align="center" name="btnSave" value="SubmitTeam" onClick="return callforsave(<? echo $i ;?>);">
+<input type="submit" align="center" name="btnSave" value="SubmitTeam" onClick="return callforsave(<? echo $i ;?>);">  <!--DONE for preventing edits during match time-->
 <input type ="hidden" name ="iplday" value="<? echo $iplday; ?>">
 <input type ="hidden" name ="ourmatchnum" value="<? echo $ourmatchnum; ?>">
 </td>
@@ -152,14 +151,26 @@ var cnt =0;
 	function callforsave(selcount)
 	{
  //return false;
-    alert("Team Saved ");
+
     alert("captain is "+ document.LAYOUTFORM.iscaptain.value);
+    // the next few lines (if condition) is same as the count function , but that function gets called only when user checks and unchecks the selected players
+    // it does not get called in cases where on first load the page has >11 players selected... hence we need the below lines here separately
+    var selPlayersCnt=document.querySelectorAll('input[type="checkbox"]:checked').length;
+    alert("you have selected "+ selPlayersCnt);
+    if(selPlayersCnt>11){
+      iFlag = 1;
+  //  return false;
+    }
+    else{
+      iFlag = 0;
+    }
+
 		if(iFlag ==1)
 		{
-			alert("Max. 11 Players has to be allowed for one Match");
+			alert("Max. 11 Players has to be allowed for one Match, team not saved");
 			return false;
 		}
-
+    alert("Team Saved ");
 		document.LAYOUTFORM.specialaction.value="save";
 		document.LAYOUTFORM.method = "POST";
 		document.LAYOUTFORM.action = "SaveTeamPlayer.php";
@@ -175,8 +186,17 @@ var cnt =0;
 	function count(str)
 	{
 	  var iSel = <? echo $i-1 ; ?>;
-
-
+//alert("count is "+cnt);
+var selPlayersCnt=document.querySelectorAll('input[type="checkbox"]:checked').length;
+alert("you have selected "+ selPlayersCnt);
+if(selPlayersCnt>11){
+  iFlag = 1;
+return false;
+}
+else{
+  iFlag = 0;
+}
+/**
 	   if(iSel ==0)
 		{
 		 cnt =0;
@@ -187,20 +207,22 @@ var cnt =0;
 		 ichkFlag = 1;
 		 }
 
-	   if(str.checked == true)
+	   if(str.checked == true) {
 		   cnt ++;
-	   else
+     }
+	   else {
 		  cnt--;
+    }
+
 		if(cnt > 11)
 		 {
-		// alert("Max. 11 Players has to be allowed for one Match");
-		 iFlag = 1;
+			 iFlag = 1;
 		 return false;
 		 }
 		else
 		{
 		iFlag =0;
 		}
-
+**/
 	}
 </script>
