@@ -22,7 +22,6 @@ foreach($yesterdays_matches as $match){
  	echo "Running script for matchid ".$matchid."<br>";
  	run($matchid);
  	echo "script completed for ".$matchid."<br>";
-
 }
 **/
 // This is to be changed everyday till we pass it as param
