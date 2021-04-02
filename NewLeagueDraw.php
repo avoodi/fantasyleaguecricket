@@ -78,7 +78,7 @@ $daysforOurLeague=$endofIPL-$today;
 //$days=14;
 $iplmatchnum=$startofOurLeague;
 $ourmatchnum=1;
-//echo "tota rows " . $totalRows . "revers is " . $reverseCnt ." </br>";
+echo "tota rows " . $totalRows . "revers is " . $reverseCnt ." </br>";
 
 for ($cnt=1; $cnt<=$daysforOurLeague ;$cnt++ ) {
   $reverseCnt=$totalRows;
@@ -88,29 +88,35 @@ for ($cnt=1; $cnt<=$daysforOurLeague ;$cnt++ ) {
 				 prog is going to be executed for this league ; which means the start of the number could be diff for each league */
 				 $sql3= "insert into leaguedraw(leaguename, iplmatchnum, ourmatchnum, team1name, team2name)
 				 				values('$leaguename',$iplmatchnum, $ourmatchnum,'$arr1[$cnt2]', '$arr2[$reverseCnt]' )" ;
-		//			echo $sql3;
-					if(! mysqli_query($conn,$sql3) )
+					echo $sql3 ."</br>";
+	/*			if(! mysqli_query($conn,$sql3) )
 						{
 							die('error sql3');
 						}
+	*/
 //					$result = mysqli_query($conn,$sql3) ;
          $reverseCnt--;
 				 $ourmatchnum++;
   }
-//  echo "\n";
+
 	/*reshuffle array1 */
   $tmp= $arr1[1];
   $tmp2= $arr2[1];
+	echo "before reshuffle ". $tmp ." and ". $tmp2 . "</br>";
   for ($reshuffle=1; $reshuffle<=$totalRows ; $reshuffle++){
     $arr1[$reshuffle] = $arr1[$reshuffle+1];
     $arr2[$reshuffle] = $arr2[$reshuffle+1];
+		echo $arr1[$reshuffle] ." and ".$arr2[$reshuffle] ." </br>";
   }
   $arr1[$totalRows] =$tmp;
   $arr2[$totalRows] =$tmp2;
+	echo "after reshuffle ". $arr1[$totalRows]. " and ". $arr2[$totalRows]."</br>";
 
+echo "at the end of loop " . $reverseCnt. " and total rows is ". $totalRows. "for ipl match num " . $iplmatchnum . "our mt ". $ourmatchnum . "</br>";
 	$iplmatchnum++; //important
 }
 
+/*
 $sqlupdt="UPDATE leaguerules SET biddingstatus= 'Closed' WHERE leaguename = '$leaguename'  ";
 if(! mysqli_query($conn,$sqlupdt) )
 	{
@@ -122,7 +128,7 @@ $sqlupdt="UPDATE league_mst SET drawdone= 'Y' WHERE leaguename = '$leaguename'  
 		{
 			die('error sqlupdate');
 		}
-
+*/
 sqlsrv_close($conn);
 
 ?>
