@@ -5,7 +5,7 @@ global $conn;
 
 date_default_timezone_set('Asia/Kolkata');
 $today=date("z"); //if we put draws before the tournament actual start date(testing) then we need to add that many days to this count
-$startofIPL = 262; // ipl started on 23rd mar  so 263rd day of the year ; sep 19th 2020
+$startofIPL = 98; // ipl started on 23rd mar  so 263rd day of the year ; sep 19th 2020
 $iplday = ($today-$startofIPL)+1;
 
 $groupCount=0;
