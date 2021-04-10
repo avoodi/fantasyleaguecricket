@@ -5,3 +5,8 @@ deployment:
     - /bin/cp -R assets $DEPLOYPATH
     - /bin/cp -R DQ $DEPLOYPATH
     - /bin/cp -R NewUI $DEPLOYPATH
+    - /bin/cp -R NewLoginFlow $DEPLOYPATH
+    - /bin/cp -R inserts $DEPLOYPATH
+    - /bin/cp *.php $DEPLOYPATH
+    - /bin/cp *.txt $DEPLOYPATH
+
