@@ -236,7 +236,7 @@
 				</div>
 		<!--	</div>
 
-			<div class="row">
+
 			<div class="row p-3 mb-2 text-center"> -->
 				<form name='getanswers' method='POST' action='DQSaveAnswers.php/' onsubmit="valid()">
 					<h5 class="w-100 text-danger text-capitalize">Here are todays questions</h5>
@@ -381,7 +381,6 @@
 	</div>
 	<!-- row -->
 
-	</div>
 		<!-- Footer -->
 		<?php include '../footer.php'; ?>
 		<!-- js -->
