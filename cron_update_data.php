@@ -1,5 +1,7 @@
 <?php
 require_once "updatePlayerMatchDetails.php";
+include "dbConnect.php";
+global $conn;
 /**
 $matches_url="http://cricapi.com/api/matches?&apikey=wEjKd5SIYLgDkKGUlW3LjXk66hE3";
 $matchesRaw = file_get_contents($matches_url);
@@ -24,14 +26,26 @@ foreach($yesterdays_matches as $match){
  	echo "script completed for ".$matchid."<br>";
 }
 **/
-// This is to be changed everyday till we pass it as param
-$matchid1=1237181;
+// This is now pulling from iplschedule; the matchid must be populated there based on criapi database
+// and this myst be run the next day of the match; if we miss it; or if we need to run it for specific matches
+// then we need to commment below and uncomment the hardcoded matchid part.
+$count=0;
+$matchid=[];
+$sql="select matchid,srno,matchstr,matchdate from iplschedule where matchdate=curdate()-1";
+$result = mysqli_query($conn,$sql) ;
+while( $row = mysqli_fetch_array( $result ) )
+{
+  $matchid[$count]=$row[0];
+}
+//$matchid1=1237181;
 //$matchid2=1216530;
+foreach ($matchid as $value) {
+  echo "Running script for matchid " . $value . "<br>";
+  run($value);
+  echo "script completed for ".$value . "<br>";
+  echo " **********************************<br>";
 
-echo "Running script for matchid ".$matchid1."<br>";
-run($matchid1);
-echo "script completed for ".$matchid1."<br>";
-echo " **********************************<br>";
+}
 /**
 echo "Running script for matchid ".$matchid2."<br>";
 run($matchid2);
