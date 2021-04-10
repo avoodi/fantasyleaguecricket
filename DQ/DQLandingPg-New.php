@@ -175,72 +175,73 @@
 		<!-- Navigation -->
 		<?php include 'DQnavbar.php';?>
 
-		<div class="container bg-white p-3 pt-1 ">
+	<div class="container bg-white p-3 pt-1 ">
 	<!-- Section -->
-	<div class="row">
-		<div class="col-lg-12 col-12 mb-1">
-			<h5 class="w-100 text-center text-danger text-uppercase">Your Daily Predictions Home Page</h5>
-		</div>
-
-		<div class="col-lg-3 col-3 mb-4">
-			<div class="card h-100 bg-danger">
-				<h6 class="card-header text-white display">Welcome</h6>
-				<div class="card-footer text-right">
-				<span class="badge bg-white">
-					<? echo $uname; ?></span>
-				</div>
-			</div>
-		</div>
-		<div class="col-lg-3 col-3 mb-4">
-			<div class="card h-100 bg-warning">
-				<h6 class="card-header text-white display">Your Group Name</h6>
-				<div class="card-footer text-right">
-				<span class="badge bg-white">
-					<? echo $groupname; ?></span>
-				</div>
-			</div>
-		</div>
-		<div class="col-lg-3 col-3 mb-4">
-			<div class="card h-100 bg-primary">
-				<h6 class="card-header text-white display">Your Total Score</h6>
-				<div class="card-footer text-right">
-					<span class="badge bg-white">
-					<?echo $myScore; ?></span>
-				</div>
-			</div>
-		</div>
-		<div class="col-lg-3 col-3 mb-4">
-			<div class="card h-100 bg-success">
-				<div class="card-footer text-right">
-					<h6 class="card-header text-white display">Todays First Match</h6>
-					<span class="badge bg-white">
-						<? echo $teams[0] ; ?> vs
-						<?echo $teams[1] ;?>
-					</span>
+		<div class="row">
+				<div class="col-lg-12 col-12 mb-1">
+					<h5 class="w-100 text-center text-danger text-uppercase">Your Daily Predictions Home Page</h5>
 				</div>
 
-				<? if ($teams[2]) { ?>
-					<div class="card-footer text-right">
-					<h6 class="card-header text-white display">Todays Second Match</h6>
-													<span class="badge bg-white"><? if ($teams[2]) {echo $teams[2] ;} ?> vs <? if ($teams[2]) {echo $teams[3] ;}?></span>
-										<? } ?>
+				<div class="col-lg-3 col-3 mb-4">
+					<div class="card h-100 bg-danger">
+						<h6 class="card-header text-white display">Welcome</h6>
+						<div class="card-footer text-right">
+						<span class="badge bg-white">
+							<? echo $uname; ?></span>
+						</div>
 					</div>
+				</div>
+				<div class="col-lg-3 col-3 mb-4">
+					<div class="card h-100 bg-warning">
+						<h6 class="card-header text-white display">Your Group Name</h6>
+						<div class="card-footer text-right">
+							<span class="badge bg-white">
+								<? echo $groupname; ?></span>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-3 col-3 mb-4">
+					<div class="card h-100 bg-primary">
+						<h6 class="card-header text-white display">Your Total Score</h6>
+						<div class="card-footer text-right">
+							<span class="badge bg-white">
+								<?echo $myScore; ?></span>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-3 col-3 mb-4">
+					<div class="card h-100 bg-success">
+						<div class="card-footer text-right">
+							<h6 class="card-header text-white display">Todays First Match</h6>
+							<span class="badge bg-white">
+								<? echo $teams[0] ; ?> vs
+								<?echo $teams[1] ;?>
+							</span>
+						</div>
+
+						<? if ($teams[2]) { ?>
+							<div class="card-footer text-right">
+								<h6 class="card-header text-white display">Todays Second Match</h6>
+													<span class="badge bg-white"><? if ($teams[2]) {echo $teams[2] ;} ?> vs <? if ($teams[2]) {echo $teams[3] ;}?></span>
+						<? } ?>
+							</div>
+					</div>
+				</div>
 			</div>
-		</div>
-	</div>
 		<!-- /.row -->
 
-		<div class="row">
-			<div class="col-lg-12 col-12 mb-1 text-center">
-				<button type="button" class="btn btn-xs btn-success " onClick="Javascript:window.location.href = 'DQpointstable.php';">Leaderboard for your group</button>
+			<div class="row">
+				<div class="col-lg-12 col-12 mb-1 text-center">
+					<button type="button" class="btn btn-xs btn-success " onClick="Javascript:window.location.href = 'DQpointstable.php';">Leaderboard for your group</button>
+				</div>
 			</div>
-		</div>
 
-		<div class="row p-3 mb-2 text-center">
-			<form name='getanswers' method='POST' action='DQSaveAnswers.php/' onsubmit="valid()">
-				<h5 class="w-100 text-danger text-capitalize">Here are todays questions</h5>
-				<table id="table" align="center" class="table table-sm table-light table-bordered border-danger text-center">
-					<thead class="bg-fantasy text-danger" style="font-size:small">
+			<div class="row">
+			<div class="row p-3 mb-2 text-center">
+				<form name='getanswers' method='POST' action='DQSaveAnswers.php/' onsubmit="valid()">
+					<h5 class="w-100 text-danger text-capitalize">Here are todays questions</h5>
+					<table id="table" align="center" class="table table-sm table-light table-bordered border-danger text-center">
+						<thead class="bg-fantasy text-danger" style="font-size:small">
 						<tr>
 							<th>Question</th>
 							<th>Your Answer</th>
@@ -381,7 +382,8 @@
 				</table>
 			</form>
 		</div>
-
+	</div>
+	<!-- row -->
 
 		</div>
 		<!-- Footer -->
