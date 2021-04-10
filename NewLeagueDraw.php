@@ -114,6 +114,8 @@ for ($cnt=1; $cnt<=$daysforOurLeague ;$cnt++ ) {
 
 echo "at the end of loop " . $reverseCnt. " and total rows is ". $totalRows. "for ipl match num " . $iplmatchnum . "our mt ". $ourmatchnum . "</br>";
 	$iplmatchnum++; //important
+
+
 }
 
 /*
