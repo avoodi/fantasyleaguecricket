@@ -1,9 +1,7 @@
-<!DOCTYPE html>
 <?
 	session_start();
 	include "dbConnect.php";
 	global $conn;
-
 
 	$owneremail=$_SESSION['username']; //on login page we have user name field which is actually email entered at registration time
 	$leaguename=$_SESSION['leaguename'];
@@ -12,7 +10,7 @@
 	$teamownername=$_SESSION['teamownername'];
 	$iplday=$_SESSION['iplday'];
 
-	//echo "leaguename is ". $leaguename " and owner name is " . $teamownername;
+	echo "leaguename is ". $leaguename. " and owner name is " . $teamownername;
 
 	//$servername = "localhost:3306";
 	//$dbusername = "fanta_avad";
@@ -53,7 +51,7 @@
 		$Owner=$row[0];
 		$drawdone=$row[1];
 	}
-	//echo "league is " .$leaguename. " and teamowner is ". $isOwner;
+	echo "league is " .$leaguename. " and teamowner is ". $isOwner;
 
 	if ($Owner == $teamownername)
 	{
