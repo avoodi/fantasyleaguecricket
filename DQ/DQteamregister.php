@@ -75,11 +75,11 @@ $_SESSION['grouppwd']=$grouppwd;
 		}
 	//	echo " record added to league mst now add to leaguerules ";
 			$i=0;
-$sql_1="insert into DQMaster (question, qId, groupname, qPoints) values ('who will win today(Match1)', 1, '$groupname',10)";
-$sql_2="insert into DQMaster (question, qId, groupname, qPoints) values ('who will be the man of the match((Match1- pl copy/paste from list below))', 2, '$groupname',10)";
-$sql_3="insert into DQMaster (question, qId, groupname, qPoints) values ('how many sixers will be hit(Match1)', 3, '$groupname',10)";
+$sql_1="insert into DQMaster (question, qId, groupname, qPoints) values ('who will win today', 1, '$groupname',10)";
+$sql_2="insert into DQMaster (question, qId, groupname, qPoints) values ('who will be the man of the match', 2, '$groupname',10)";
+$sql_3="insert into DQMaster (question, qId, groupname, qPoints) values ('how many sixers will be hit', 3, '$groupname',10)";
 $sql_4="insert into DQMaster (question, qId, groupname, qPoints) values ('who will win today(Match2)', 4, '$groupname',10)";
-$sql_5="insert into DQMaster (question, qId, groupname, qPoints) values ('who will be the man of the match((Match2- pl copy/paste from list below))', 5, '$groupname',10) ";
+$sql_5="insert into DQMaster (question, qId, groupname, qPoints) values ('who will be the man of the match(Match2)', 5, '$groupname',10) ";
 $sql_6="insert into DQMaster (question, qId, groupname, qPoints) values ('how many sixers will be hit(Match2)', 6, '$groupname',10)";
 
 if(! mysqli_query($conn,$sql_1) )
