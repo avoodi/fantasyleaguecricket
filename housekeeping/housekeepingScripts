@@ -1,0 +1,68 @@
+
+=================================================
+**steps to insert a missing player or new player **
+
+insert into playermst (`playername`,`speciality`,`reserveprice`,`score`,`numberof4`,`numberof6`,`numberof1`,
+`numberof2`,`numberof3`,`numberofcatches`,`numberofrunouts`,`outcatch`,`outbowled`,`outrunout`,`outlbw`,
+`outstumped`,`outothers`,`manofthematch`,`wickets`,`overs`,`runsconsided`,`ballsfaced`,`points`,`iplteam`,
+`maidenover`,`oditotalmatches`,`oditotalruns`,`oditotalwickets`,`oditotalcatches`,`oditotal4`,`oditotal6`,
+`oditotalmom`,`wctotalmatches`,`wctotalruns`,`wctotalwickets`,`odibatavg`,`PID`)
+VALUES
+('Kuldeep Yadav','Bowler',500000,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,559235);
+
+update playermst set iplteam='KKR' where pid=559235
+
+insert into leagueauctionresults (leaguename,playername,currenthighestbid,ownerteam,bidsoldyn,inplaying11,ccaptainyn,pid) values
+('VVS','Kuldeep Yadav',500000,null,null,null,null,559235)
+do this above insert for all leagues !!
+
+=========================================================
+
+updating the reservprice incase we need to reset some league or some players within the league
+
+update leagueauctionresults set  where leaguename='PMOLeague' and ownerteam in ('MM221080','MO221080')
+pdate leagueauctionresults inner join playermst p
+on p.pid=leagueauctionresults.pid
+set leagueauctionresults.currenthighestbid=p.reserveprice where
+leagueauctionresults.leaguename='PMOLeague' and leagueauctionresults.ownerteam in ('MM221080','MO221080')
+
+====================================================
+reset teams bidding situation to start from scratch
+
+update leagueauctionresults set bidsoldyn=null , ownerteam=null where leaguename='VVS';
+
+update leagueteamsdetails set numberofplayers=0, currentbidamount=0, virtualpurchasepower=15000000;
+
+delete from biddingdetails where leaguename='VVS';
+
+==========================================================
+After the league matches are over and playoffs are starting
+insert into iplschedule (SrNo, team1, team2, matchdate, iplday,matchstr) values (57,'MI','DC','2020-11-05',48,'MI-DC');
+insert into iplschedule (SrNo, team1, team2, matchdate, iplday,matchstr) values (58,'RCB','SRH','2020-11-06',49,'RCB-SRH');
+insert into iplschedule (SrNo, team1, team2, matchdate, iplday,matchstr) values (57,'TBD','TBD','2020-11-08',51,'TBD-TBD');
+insert into iplschedule (SrNo, team1, team2, matchdate, iplday,matchstr) values (57,'TBD','TBD','2020-11-10',53,'TBD-TBD');
+
+
+insert into leaguedraw (leaguename, iplmatchnum, ourmatchnum, team1name, team2name) VALUES ('VVS',48,211,'Epic1231','SRH');
+insert into leaguedraw (leaguename, iplmatchnum, ourmatchnum, team1name, team2name) VALUES ('VVS',48,212,'ADTG','Master Blaster');
+insert into leaguedraw (leaguename, iplmatchnum, ourmatchnum, team1name, team2name) VALUES ('VVS',49,213,'ADTG','SRH');
+insert into leaguedraw (leaguename, iplmatchnum, ourmatchnum, team1name, team2name) VALUES ('VVS',49,214,'Master Blaster','Epic1231');
+insert into leaguedraw (leaguename, iplmatchnum, ourmatchnum, team1name, team2name) VALUES ('VVS',51,215,'ADTG','Epic1231');
+insert into leaguedraw (leaguename, iplmatchnum, ourmatchnum, team1name, team2name) VALUES ('VVS',51,216,'SRH','Master Blaster');
+insert into leaguedraw (leaguename, iplmatchnum, ourmatchnum, team1name, team2name) VALUES ('VVS',53,217,'ADTG','Master Blaster');
+insert into leaguedraw (leaguename, iplmatchnum, ourmatchnum, team1name, team2name) VALUES ('VVS',53,218,'SRH','Epic1231');
+
+insert into leaguedraw (leaguename, iplmatchnum, ourmatchnum, team1name, team2name) VALUES ('PMOLeague',48,124,'winners','Indian Avengers');
+insert into leaguedraw (leaguename, iplmatchnum, ourmatchnum, team1name, team2name) VALUES ('PMOLeague',48,125,'My IPL team','Lord');
+insert into leaguedraw (leaguename, iplmatchnum, ourmatchnum, team1name, team2name) VALUES ('PMOLeague',49,126,'Lord','winners');
+insert into leaguedraw (leaguename, iplmatchnum, ourmatchnum, team1name, team2name) VALUES ('PMOLeague',49,127,'Indian Avengers','My IPL team');
+insert into leaguedraw (leaguename, iplmatchnum, ourmatchnum, team1name, team2name) VALUES ('PMOLeague',51,128,'My IPL team','winners');
+insert into leaguedraw (leaguename, iplmatchnum, ourmatchnum, team1name, team2name) VALUES ('PMOLeague',51,129,'Lord','Indian Avengers');
+insert into leaguedraw (leaguename, iplmatchnum, ourmatchnum, team1name, team2name) VALUES ('PMOLeague',53,130,'winners','Indian Avengers');
+insert into leaguedraw (leaguename, iplmatchnum, ourmatchnum, team1name, team2name) VALUES ('PMOLeague',53,131,'My IPL team','Lord');
+
+==============
+if scroing update goes wrong, these are rollback scripts to update points
+update leagueteamsdetails set totalteamscore=totalteamscore-40, matcheswon=matcheswon-1, points= points-2 where leaguename='PMOLeague' and teamname='Indian Avengers' ;
+update leagueteamsdetails set totalteamscore=totalteamscore+0, matcheslost=matcheslost-1 where leaguename='PMOLeague' and teamname='Lord';
