@@ -68,9 +68,9 @@
                     <ul class="steps-font text-white">
                         <li>(Someone) creates a league</li>
                         <li>Friends/family/colleague join that league</li>
-                        <li> To acquire players, League decides to go for bidding process(optional, but lot of fun) OR system can help ‘random allocation’ of players to every team in your league</li>
+                        <li> To acquire players, League decides to go for bidding process(optional, but lot of fun) OR can opt for ‘random allocation’ of players to every team in your league</li>
                         <li>The league creator puts up the draw(schedule of league matches), all of this with just click of button</li>
-                        <li>Teams select players, captain based on actual IPL match (based on league draw - can be done in one go for all future matches)</li>
+                        <li>With above steps league is on its way; after that Teams select players,captain based on actual IPL match (can be done in one go for all future matches)</li>
                         <li>Every team has one-one match with some other team everyday, earns points based on how players performed in actual IPL match</li>
                         <li>Winner/looser, league standing gets decided based on total points</li>
                         <li>Buy, sell players if required - Try it its lot of fun</li>

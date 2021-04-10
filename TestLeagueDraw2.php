@@ -8,7 +8,8 @@ else { echo "all good with db";}
 
       # XXX check for int
 
-  $teamnames='Indian Avengers|MM221080|UnitedIndia|Lord|My IPL team|winners';
+//  $teamnames='Indian Avengers|MM221080|UnitedIndia|Lord|My IPL team|winners';
+  $teamnames='Epic1231|ADTG|Legends|Master Blaster|Anhad|Twelfth Man|SRH|Ruk|KXIP';
 
 //T1|T2|T3|T4|T5|T6';
 
@@ -24,7 +25,7 @@ function nums($n) {
 
 function show_fixtures($names) {
     $teams = sizeof($names);
-    $leaguename="PMOLeague";
+    $leaguename="VVS";
     global $conn;
     if ($conn == false) {
       echo "Sorry, site is temporarily experiencing database connectivity issues; should be sorted soon, please check again in some time";
@@ -53,7 +54,7 @@ $startofIPL = 262; // ipl starting on 19th sep of the year
 $startofOurLeague = ($today-$startofIPL)+1;
 $endofIPL =307; // the ipl league matches end on 3rd nov which is 125th day
 $daysforOurLeague=$endofIPL-$today;
-$ourmatchnum=7;//for leagues starting new this should be 1 ,this needs to adjusted based on the league we are running this
+$ourmatchnum=16;//for leagues starting new this should be 1 ,this needs to adjusted based on the league we are running this
 echo $startofOurLeague ." and ".$daysforOurLeague ;
 $iplmatchnum=$startofOurLeague;
 $totalIPLDays=$endofIPL - $startofIPL;
@@ -130,7 +131,7 @@ $totalIPLDays=$endofIPL - $startofIPL;
             $teamsforprint = explode(' v ', flip($r));
         //     echo "team 1 " . $teams[1]  ." and team 2 " . $teams[0] ."<br />";
                $sql3= " insert into leaguedraw(leaguename, iplmatchnum, ourmatchnum, team1name, team2name) values('$leaguename',$iplmatchnum, $ourmatchnum,'$teamsforprint[0]', '$teamsforprint[1]' )" ;
-               			if(! mysqli_query($conn,$sql3) )
+               		if(! mysqli_query($conn,$sql3) )
                     {
                       die('error sql3');
                     }
