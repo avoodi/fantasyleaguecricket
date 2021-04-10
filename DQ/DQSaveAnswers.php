@@ -1,4 +1,6 @@
 <?
+session_start();
+
 include "dbConnect.php";
 global $conn;
 
@@ -8,7 +10,6 @@ global $conn;
 
 //print_r($_POST['myAnswers']);
 
-session_start();
 $uname=$_SESSION['uname'];
 $pwd=$_SESSION['pwd'];
 $groupname=$_SESSION['groupname'];
@@ -46,7 +47,7 @@ $recordExists='N';
 
 date_default_timezone_set('Asia/Kolkata');
 $today=date("z"); //if we put draws before the tournament actual start date(testing) then we need to add that many days to this count
-$startofIPL = 262; // ipl started on 23rd mar  so 82nd day of the year
+$startofIPL = 98; // ipl started on 23rd mar  so 82nd day of the year
 $iplday = ($today-$startofIPL)+1;
 //echo "in save " .$iplday;
 
@@ -84,7 +85,7 @@ if($recordExists=='N'){
 }
 echo '<script type="text/javascript">
      window.alert("your changes have been saved");
-           window.location.href = "/DQLandingPg.php";
+          window.location.href = "/DQLandingPg-New.php";
         </script>';
 
 ?>
