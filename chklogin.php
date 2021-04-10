@@ -1,12 +1,13 @@
 #!/usr/bin/php
 <?
+  session_start();
 include "dbConnect.php";
 global $conn;
 //if ($_SERVER['REQUEST_METHOD'] === 'POST')
   //  {
         //Ok we got a POST, probably from a FORM, read from $_POST.
         //var_dump($_POST); //Use this to see what info we got!
-        session_start();
+
         $_SESSION['username']=$_POST['username'];
         $_SESSION['pwd']=$_POST['pass'];
         $_SESSION['leaguename']=$_POST['leaguename'];
@@ -39,7 +40,7 @@ if (!$conn) {
 }
 
 $sql="SELECT teamname,teamownername  FROM leagueteamsdetails WHERE leaguename= '$leaguename' and TEAMOWNEREMAIL='$username' AND TEAM_PASSWORD ='$pwd' ";
-//echo $sql ;
+echo $sql ;
 
 $result = mysqli_query($conn,$sql) ;
 while( $row = mysqli_fetch_array( $result ) )
@@ -55,7 +56,7 @@ while( $row = mysqli_fetch_array( $result ) )
 if ($isPresent ==1) {
   date_default_timezone_set('Asia/Kolkata');
   $today=date("z");
-  $startofIPL = 262; // ipl started on 4th apr so 96th day of the year
+  $startofIPL = 98; // ipl started on 9th apr so 96th day of the year
   $iplday = ($today-$startofIPL)+1;
   $_SESSION['iplday']=$iplday;
 
