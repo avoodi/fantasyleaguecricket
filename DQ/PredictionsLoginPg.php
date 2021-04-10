@@ -4,7 +4,7 @@
 <head>
     <title>Log In</title>
 
-    <link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <style>
         .form-signin {
