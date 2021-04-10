@@ -193,7 +193,7 @@
 		</div>
 		<div class="col-lg-3 col-3 mb-4">
 			<div class="card h-100 bg-warning">
-				<h6 class="card-header text-white display">Group Name</h6>
+				<h6 class="card-header text-white display">Your Group Name</h6>
 				<div class="card-footer text-right">
 				<span class="badge bg-white">
 					<? echo $groupname; ?></span>

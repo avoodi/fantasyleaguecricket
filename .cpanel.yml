@@ -1,0 +1,7 @@
+---
+deployment:
+  tasks:
+    - export DEPLOYPATH=/home4/fantaycc/public_html/
+    - /bin/cp -R assets $DEPLOYPATH
+    - /bin/cp -R DQ $DEPLOYPATH
+    - /bin/cp -R NewUI $DEPLOYPATH
