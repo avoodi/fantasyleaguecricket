@@ -32,7 +32,7 @@ if ($conn == false) {
 
 //change below when we have 2 matches scores
 $sql="select pid,matchid,playername,ifnull(runs_scored,0),ifnull(balls_played,0),ifnull(fours_hit,0),ifnull(sixes_hit,0),ifnull(catches_taken,0),ifnull(runouts,0),ifnull(wickets_taken,0),ifnull(overs_bowled,0),ifnull(maiden_overs,0),ifnull(runs_given,0),ifnull(mom,0) from player_details_per_match where matchid=$matchid and pid>0"  ;
-//$sql="select pid,matchid,playername,ifnull(runs_scored,0),ifnull(balls_played,0),ifnull(fours_hit,0),ifnull(sixes_hit,0),ifnull(catches_taken,0),ifnull(runouts,0),ifnull(wickets_taken,0),ifnull(overs_bowled,0),ifnull(maiden_overs,0),ifnull(runs_given,0),ifnull(mom,0) from player_details_per_match where matchid in (1175357,1175358) and pid>0" ;
+//$sql="select pid,matchid,playername,ifnull(runs_scored,0),ifnull(balls_played,0),ifnull(fours_hit,0),ifnull(sixes_hit,0),ifnull(catches_taken,0),ifnull(runouts,0),ifnull(wickets_taken,0),ifnull(overs_bowled,0),ifnull(maiden_overs,0),ifnull(runs_given,0),ifnull(mom,0) from player_details_per_match where matchid in (1216506,1216530) and pid>0" ;
 
 echo $sql;
 $i=0;
