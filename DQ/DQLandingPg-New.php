@@ -239,7 +239,7 @@
 		<div class="row p-3 mb-2 text-center">
 			<form name='getanswers' method='POST' action='DQSaveAnswers.php/' onsubmit="valid()">
 				<h5 class="w-100 text-danger text-capitalize">Here are todays questions</h5>
-				<table id="table" class="table table-sm table-light table-bordered border-danger text-center">
+				<table id="table" align="center" class="table table-sm table-light table-bordered border-danger text-center">
 					<thead class="bg-fantasy text-danger" style="font-size:small">
 						<tr>
 							<th>Question</th>
