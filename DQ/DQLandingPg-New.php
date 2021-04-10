@@ -234,9 +234,9 @@
 				<div class="col-lg-12 col-12 mb-1 text-center">
 					<button type="button" class="btn btn-xs btn-success " onClick="Javascript:window.location.href = 'DQpointstable.php';">Leaderboard for your group</button>
 				</div>
-			</div>
+		<!--	</div>
 
-			<div class="row">
+			<div class="row"> -->
 			<div class="row p-3 mb-2 text-center">
 				<form name='getanswers' method='POST' action='DQSaveAnswers.php/' onsubmit="valid()">
 					<h5 class="w-100 text-danger text-capitalize">Here are todays questions</h5>
@@ -249,8 +249,6 @@
 							<th>Look What others think</th>
 						</tr>
 					</thead>
-
-					<tbody>
 						<tr>
 									<td >
 										<?echo $question[0] ;?>
@@ -377,8 +375,6 @@
 								</td>
 							<? } ?>
 						</tr>
-					</tbody>
-
 				</table>
 			</form>
 		</div>
