@@ -12,7 +12,7 @@ $arr1[3]='t3';
 $arr1[4]='t4';
 $arr1[5]='t5';
 $arr1[6]='t6';
-$arr1[7]='t7';
+//$arr1[7]='t7';
 
 $arr2[1]='t1';
 $arr2[2]='t2';
@@ -20,7 +20,7 @@ $arr2[3]='t3';
 $arr2[4]='t4';
 $arr2[5]='t5';
 $arr2[6]='t6';
-$arr2[7]='t7';
+//$arr2[7]='t7';
 
 $today=date("j m");
 
@@ -40,9 +40,9 @@ $j=1;
 //echo "now count is ". $j;
 //foreach($arr2 as $team){
 //	echo "fromarray2 " . $team . "</br>";
-//:wq
+//
 }
-
+*/
 $totalRows=$i;
 $reverseCnt=$totalRows;
 $days=14;
@@ -79,4 +79,3 @@ for ($cnt=1; $cnt<=$days ;$cnt++ ) {
 sqlsrv_close($conn);
 */
 ?>
-
