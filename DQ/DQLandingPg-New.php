@@ -179,7 +179,7 @@
 	<!-- Section -->
 	<div class="row">
 		<div class="col-lg-12 col-12 mb-1">
-			<h5 class="w-100 text-center text-danger text-uppercase">Your Daily Questions Home Page</h5>
+			<h5 class="w-100 text-center text-danger text-uppercase">Your Daily Predictions Home Page</h5>
 		</div>
 
 		<div class="col-lg-3 col-3 mb-4">
@@ -193,7 +193,7 @@
 		</div>
 		<div class="col-lg-3 col-3 mb-4">
 			<div class="card h-100 bg-warning">
-				<h6 class="card-header text-white display">Group Name</h6>
+				<h6 class="card-header text-white display">Your Group Name</h6>
 				<div class="card-footer text-right">
 				<span class="badge bg-white">
 					<? echo $groupname; ?></span>
@@ -385,7 +385,7 @@
 
 		</div>
 		<!-- Footer -->
-		<?php include 'footer.php'; ?>
+		<?php include '../footer.php'; ?>
 		<!-- js -->
 
 		<script type="text/javascript">
