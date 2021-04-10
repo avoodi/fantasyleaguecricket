@@ -229,8 +229,9 @@
 				</div>
 			</div>
 		<!-- /.row -->
-
-			<div class="row">
+	</div>
+	<div class="container bg-white p-3 pt-1 ">
+				<div class="row">
 				<div class="col-lg-12 col-12 mb-1 text-center">
 					<button type="button" class="btn btn-xs btn-success " onClick="Javascript:window.location.href = 'DQpointstable.php';">Leaderboard for your group</button>
 				</div>
