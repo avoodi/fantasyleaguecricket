@@ -1,14 +1,13 @@
-<!DOCTYPE html>
 <?
-
+	session_start();
 		include "dbConnect.php";
 		global $conn;
 
-		session_start();
 		$uname=$_SESSION['uname'];
 		$pwd=$_SESSION['pwd'];
 		$groupname=$_SESSION['groupname'];
-		$grouppwd=$_SESSION['grouppwd'];
+		//$grouppwd=$_SESSION['grouppwd'];
+	//	echo " in landing pg ". $groupname ." and " . $uname . "\n";
 		// Check connection
 		if ($conn == false) {
 			echo "Sorry, site is temporarily experiencing database connectivity issues; should be sorted soon, please check again in some time";
@@ -29,7 +28,7 @@
 
 		date_default_timezone_set('Asia/Kolkata');
 		$today=date("z"); //if we put draws before the tournament actual start date(testing) then we need to add that many days to this count
-		$startofIPL = 262; // ipl started on 23rd mar  so 82nd day of the year
+		$startofIPL = 98; // ipl started on 9th apr so 99th day of the year
 		$iplday = ($today-$startofIPL)+1;
 		$currentHr=date('H');
 		//echo $iplday;
@@ -37,7 +36,7 @@
 		 $team2=[];
 		$matches=0;
 		$sql= "select team1,team2, matchstr from iplschedule where iplday=$iplday";
-
+// echo $sql;
 		$result = mysqli_query($conn,$sql) ;
 		while( $row = mysqli_fetch_array( $result ) )
 		{
@@ -141,10 +140,10 @@
 
 <head>
 	<title>Daily Question</title>
-	<link rel="icon" href="../assets/dist/img/favicon.ico" type="image/ico" sizes="16x16">
-	<link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet">
-	<link href="../assets/dist/css/style.css" rel="stylesheet">
-	<link href="../assets/dist/css/colors.css" rel="stylesheet">
+	<link rel="icon" href="assets/dist/img/favicon.ico" type="image/ico" sizes="16x16">
+	<link href="assets/dist/css/bootstrap.min.css" rel="stylesheet">
+	<link href="assets/dist/css/style.css" rel="stylesheet">
+	<link href="assets/dist/css/colors.css" rel="stylesheet">
 </head>
 
 <body class="bg-fantasy">
@@ -207,22 +206,29 @@
 		<!-- /.row -->
 
 		<div class="row">
-			<div class="col-lg-12 col-12 mb-1">
+			<div class="col-lg-12 col-12 mb-1 text-center">
 				<button type="button" class="btn btn-xs btn-success " onClick="Javascript:window.location.href = 'DQpointstable.php';">Leaderboard for your group</button>
 			</div>
 		</div>
-		<div class="row p-3 mb-2">
-			<form name='getanswers' method='POST' action='DQSaveAnswers.php/' onsubmit="valid()">
+
+		<div class="row p-3 mb-2 text-center">
+			<form name='getanswers' method='POST' action='DQSaveAnswers.php/' onsubmit="valid()" align="center">
 				<h5 class="w-100 text-danger text-capitalize">Here are todays questions</h5>
 				<table id="table" class="table table-sm table-light table-bordered border-danger text-center">
 					<thead class="bg-fantasy text-danger" style="font-size:small">
 						<tr>
-							<th  >Question</th>
-							<th >Your Answer</th>
-							<th >Points if you get it right</th>
-							<th >Look What others think</th>
+							<th>Question</th>
+							<th>Your Answer</th>
+							<th>Points if you get it right</th>
+							<th>Look What others think</th>
 						</tr>
 					</thead>
+
+					<?
+					$row_list[0]='DC';
+					$row_list[1]='RCB';
+					$select="DC";
+					?>
 
 					<? 	for($i=0; $i<3 ; $i++) {
 						?>
@@ -231,7 +237,8 @@
 							<td >
 								<?echo $question[$i] ;?>
 							</td>
-							<td > <input type="text" name="myAnswer[]" class=" form-control" id="myAnswer[]" value="<?echo $myCurrentAnswers[$i+1];?>"> </td>
+							<td >
+							<input type="text" name="myAnswer[]" class=" form-control" id="myAnswer[]" value="<?echo $myCurrentAnswers[$i+1];?>"> </td>
 							<td >
 								<?echo $qPoints[$i] ;?>
 							</td>
@@ -343,8 +350,8 @@
 			});
 		</script>
 		<!-- Bootstrap core JavaScript -->
-		<script src="../assets/dist/js/jquery/jquery.min.js"></script>
-		<script src="../assets/dist/js/bootstrap/bootstrap.bundle.min.js"></script>
+		<script src="assets/dist/js/jquery/jquery.min.js"></script>
+		<script src="assets/dist/js/bootstrap/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>
