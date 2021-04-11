@@ -379,6 +379,15 @@
 				</table>
 			</form>
 		</div>
+			<div class="blockquote border border-dangers rounded p-2">
+				<p class="m-0 text-danger"> <small>Please note</small></p>
+				<ul class="list text-muted">
+					<li> The Question for #of Sixers gets you full points if your answer matches exactly </li>
+					<li> if your answer is within +/- 1 you get 80% points for that question </li>
+					<li> if your answer is within +/-2 you get 50% points for that question </li>
+					<li> for everthing else there is, try again for the next match :)</li>
+				</ul>
+			</div>
 	</div>
 	<!-- row -->
 

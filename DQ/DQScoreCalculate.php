@@ -48,6 +48,8 @@ for($count=0; $count<$groupCount; $count++) {
   $sql="select qId, username, result, ifnull(score,0) from DQanswersdetails where groupname='$groupnameArray[$count]' and iplday=$iplday-1";
   echo $sql."</br>";
   $ansCount=0;
+  $lessPoints=0;
+  $halfpoints=0;
   $result = mysqli_query($conn,$sql) ;
   while( $row = mysqli_fetch_array( $result ) )
   {
@@ -70,8 +72,9 @@ for($count=0; $count<$groupCount; $count++) {
           if($ansCount==2 || $ansCount==5){
             if(($youranswer[$ansCount] == $answermaster[$key]+1) ||($youranswer[$ansCount] == $answermaster[$key]-1)) {
               #full points even for +/- 1
-              echo " you got the answer +/-1 right so you get ".$qPointsDQMaster[$keypoints]." points </br>";
-              $sqlUpdt="update DQanswersdetails set score=$qPointsDQMaster[$keypoints] where groupname='$groupnameArray[$count]' and iplday=$iplday-1 and qId=$answerDqId[$ansCount] and username='$uname[$ansCount]' ";
+              $lessPoints=$qPointsDQMaster[$keypoints]*0.80;
+              echo " you got the answer +/-1 right so you get ".$lessPoints." points </br>";
+              $sqlUpdt="update DQanswersdetails set score=$lessPoints where groupname='$groupnameArray[$count]' and iplday=$iplday-1 and qId=$answerDqId[$ansCount] and username='$uname[$ansCount]' ";
             }
             elseif(($youranswer[$ansCount] == $answermaster[$key]+2) ||($youranswer[$ansCount] == $answermaster[$key]-2)) {
               #half points even for +/- 2

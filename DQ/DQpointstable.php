@@ -70,7 +70,7 @@ $questionCompare=$i;
 							<!-- //nav_agile_w3l -->
 							<li class="second logo admin">
 									<h1>
-											<a href="DQLandingPg.php">
+											<a href="DQLandingPg-New.php">
 													<i class="fa fa-graduation-cap" aria-hidden="true"></i>Team </a>
 									</h1>
 							</li>
