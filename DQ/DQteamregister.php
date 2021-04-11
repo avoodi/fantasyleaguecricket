@@ -25,6 +25,9 @@ $count=0;
 if (isset($_POST['selGroupName']) )
 {
 	$groupname = $_POST['selGroupName'];
+	if($groupname=='') {
+		echo '<script type="text/javascript">alert("Oops, looks like you did a mistake in selecting/entering leaguename; Please hit refresh on browser and start again."); window.location = "./DQteamlogin.php" </script>';
+	}
 	$_SESSION['groupname']=$groupname;
 	// if user selected existing league then stop him from creating team with same name
 	$sql="select count(*) from leagueteamsdetails where leaguename='$groupname' and teamname='$uname' ";
