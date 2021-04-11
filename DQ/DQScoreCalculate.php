@@ -1,5 +1,4 @@
 <?
-
 include "dbConnect.php";
 global $conn;
 
@@ -45,7 +44,6 @@ while( $row = mysqli_fetch_array( $result ) )
 }
 mysqli_free_result($result);
 
-
 for($count=0; $count<$groupCount; $count++) {
   $sql="select qId, username, result, ifnull(score,0) from DQanswersdetails where groupname='$groupnameArray[$count]' and iplday=$iplday-1";
   echo $sql."</br>";
@@ -70,15 +68,16 @@ for($count=0; $count<$groupCount; $count++) {
         else {
           #the ans is not matching exactly, but for the sixer question we should check closest match and give points accordingly
           if($ansCount==2 || $ansCount==5){
-            if(($youranswer[$ansCount] == $answermaster[$key]+1) ||($youranswer[$ansCount] == $answermaster[$key]-1) {
+            if(($youranswer[$ansCount] == $answermaster[$key]+1) ||($youranswer[$ansCount] == $answermaster[$key]-1)) {
               #full points even for +/- 1
               echo " you got the answer +/-1 right so you get ".$qPointsDQMaster[$keypoints]." points </br>";
               $sqlUpdt="update DQanswersdetails set score=$qPointsDQMaster[$keypoints] where groupname='$groupnameArray[$count]' and iplday=$iplday-1 and qId=$answerDqId[$ansCount] and username='$uname[$ansCount]' ";
             }
-            elseif(($youranswer[$ansCount] == $answermaster[$key]+2) ||($youranswer[$ansCount] == $answermaster[$key]-2) {
+            elseif(($youranswer[$ansCount] == $answermaster[$key]+2) ||($youranswer[$ansCount] == $answermaster[$key]-2)) {
               #half points even for +/- 2
-              echo " you got the answer +/-2 right so you get ".$qPointsDQMaster[$keypoints]/2." points </br>";
-              $sqlUpdt="update DQanswersdetails set score=$qPointsDQMaster[$keypoints]/2 where groupname='$groupnameArray[$count]' and iplday=$iplday-1 and qId=$answerDqId[$ansCount] and username='$uname[$ansCount]' ";
+              $halfpoints=$qPointsDQMaster[$keypoints]/2;
+              echo " you got the answer +/-2 right so you get ".$halfpoints." points </br>";
+              $sqlUpdt="update DQanswersdetails set score=$halfpoints where groupname='$groupnameArray[$count]' and iplday=$iplday-1 and qId=$answerDqId[$ansCount] and username='$uname[$ansCount]' ";
             }
             else {
               $sqlUpdt="update DQanswersdetails set score=0 where groupname='$groupnameArray[$count]' and iplday=$iplday-1 and qId=$answerDqId[$ansCount] and username='$uname[$ansCount]' ";
