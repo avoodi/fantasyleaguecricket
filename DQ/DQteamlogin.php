@@ -157,21 +157,21 @@ function validate()
 valid=true;
 
 let optionselected = document.getElementById("selGroupName").value;
-let value = document.getElementById("ExistingGroup").checked;
-alert("The value is : "+value);
+let checkboxvalue = document.getElementById("ExistingGroup").checked;
+alert("The value is : "+checkboxvalue);
 alert("The selected is : "+optionselected);
 
-//if(optionsLength == 1 && document.frmreg.existingLeagueCheck.checked ==true){
-//if(document.frmreg.selGroupName.options.length == 0){
-//		alert('Oops, looks like you did a mistake in selecting/entering leaguename; Lets hit cancel button and try doing it again.');
+if(optionselected=='dummy' && checkboxvalue=='true'){
+		alert('Oops, looks like you did a mistake in selecting/entering leaguename; Lets hit cancel button and try doing it again.');
 //		valid=false;
 		//	location.href="DQteamlogin.php";
-//	}
-//	else {
+	}
+	else {
+		alert('nice all good ');
 //		valid=true;
 		//document.getElementById('formID').submit();
 		//return(true);
-//	}
+	}
 	return valid;
 }
 //-->
