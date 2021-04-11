@@ -54,7 +54,7 @@ while( $row = mysqli_fetch_array( $result ) )
 																	</div>
 																	<div class="col-sm-11" style="padding-right:0px; padding-left:0px;" >
 																		<select name="selGroupName" id='selGroupName' class="form-control1" >
-																			<option value="">Select Group</option>
+																			<option value="dummy">Select Group</option>
 																			<?
 																			foreach($arr1 as $lname) {
 																			?>
@@ -156,9 +156,10 @@ function validate()
 valid=true;
 cked='no';
 let optionsLength = document.getElementById("selGroupName").length;
+let value = document.getElementById("selGroupName").value;
+alert("The value is : "+value);
 
-alert("The Length is : "+optionsLength);
-if(optionsLength == 1 && document.frmreg.existingLeagueCheck.checked ==true){
+//if(optionsLength == 1 && document.frmreg.existingLeagueCheck.checked ==true){
 //if(document.frmreg.selGroupName.options.length == 0){
 		alert('Oops, looks like you did a mistake in selecting/entering leaguename; Lets hit cancel button and try doing it again.');
 		valid=false;
