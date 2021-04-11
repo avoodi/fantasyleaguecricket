@@ -151,7 +151,8 @@ function Refreshpage()
 	location.href="DQteamlogin.php";
 }
 function validate()
-{
+{		alert('HI The selectbox contains 0 items');
+
 	if(document.frmreg.selGroupName.options.length == 0){
 		alert('The selectbox contains 0 items');
 	}
