@@ -72,7 +72,7 @@ while( $row = mysqli_fetch_array( $result ) )
 																<div class="tp">
 																	<div class="row">
 																		<div class="col-md-6 ">
-																			<button type="button" class="btn btn-primary pull-right">cancel</button>
+																			<button type="button" class="btn btn-primary pull-right" onClick="Refreshpage();">cancel</button>
 																		</div>
 																		<div class="col-md-6">
 																			<button type="submit" class="btn btn-success pull-left">Sign Up</button>
@@ -111,18 +111,31 @@ while( $row = mysqli_fetch_array( $result ) )
 
 <script language="JavaScript" type="text/JavaScript">
 <!--
+//function EnableDisControl(theField)
+//{
+//  if(theField.name == "ExistingGroup")
+//  {
+//  	if(theField.checked == true)
+//  	{
+//            document.frmreg.selGroupName.disabled = false;
+//  	 		document.frmreg.groupname.disabled = true;
+//
+//     }
+//  }
+//}
+
 function EnableDisControl(theField)
 {
-  if(theField.name == "ExistingGroup")
-  {
-  	if(theField.checked == true)
-  	{
-            document.frmreg.selGroupName.disabled = false;
-  	 		document.frmreg.groupname.disabled = true;
-
-     }
-  }
-
+	if(theField.checked == true)
+	{
+			document.frmreg.selGroupName.disabled = false;
+			document.frmreg.groupname.disabled = true;
+	}
+	if(theField.checked == false)
+	{
+			document.frmreg.selGroupName.disabled = false;
+			document.frmreg.groupname.disabled = true;
+	}
 }
 
 function DisSel(theField)
