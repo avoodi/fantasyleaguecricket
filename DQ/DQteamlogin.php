@@ -50,7 +50,7 @@ while( $row = mysqli_fetch_array( $result ) )
 																<label > Want to join existing group? </label>
 																<div class="form-group">
 																	<div class="checkbox block col-sm-1 control-label" style="padding-right:0px; padding-left:0px;">
-																		<label><input type="checkbox" name="ExistingGroup" onClick="EnableDisControl(this);"></label>
+																		<label><input type="checkbox" name="ExistingGroup" id='ExistingGroup' onClick="EnableDisControl(this);"></label>
 																	</div>
 																	<div class="col-sm-11" style="padding-right:0px; padding-left:0px;" >
 																		<select name="selGroupName" id='selGroupName' class="form-control1" >
@@ -154,7 +154,7 @@ function validate()
 {		//alert('HI The selectbox contains 0 items');
 let optionsLength = document.getElementById("selGroupName").length;
 //alert("The Length is : "+optionsLength);
-if(optionsLength == 1){
+if(optionsLength == 1 && document.frmreg.existingLeagueCheck.checked ==true){
 //if(document.frmreg.selGroupName.options.length == 0){
 		alert('Oops, looks like you did a mistake in selecting/entering leaguename; Lets hit cancel button and try doing it again.');
 		return false;
