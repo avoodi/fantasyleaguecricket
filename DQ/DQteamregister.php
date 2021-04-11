@@ -22,10 +22,12 @@ if ($conn == false) {
 	echo "Sorry, site is temporarily experiencing database connectivity issues; should be sorted soon, please check again in some time";
 }
 $count=0;
+$blankgroupname=0;
 if (isset($_POST['selGroupName']) )
 {
 	$groupname = $_POST['selGroupName'];
 	if($groupname=='') {
+		$blankgroupname=1;
 		echo '<script type="text/javascript">alert("Oops, looks like you did a mistake in selecting/entering leaguename; Lets try doing it again."); window.location = "./DQteamlogin.php" </script>';
 	}
 	$_SESSION['groupname']=$groupname;
@@ -65,7 +67,7 @@ else {
 
 //echo " the session vars are  " . $_SESSION['teamname'] . " and " . $_SESSION['leaguename']  ."<br/>" ;
 
-if ($existinggroup=="no" && $count==0 && $groupname!=''){
+if ($existinggroup=="no" && $count==0 && $blankgroupname==0 ){
 // this means its a new league - and then we have to set it up by inserting into 3 tables
 // lets first set this user as leaguecreator
 $_SESSION['groupname']=$groupname;
