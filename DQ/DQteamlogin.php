@@ -49,8 +49,8 @@ while( $row = mysqli_fetch_array( $result ) )
 																	<!--input type="password" name="password" placeholder="Confirm Password" required=""-->
 																<label > Want to join existing group? </label>
 																<div class="form-group">
-																	<div class="radio block col-sm-1 control-label" style="padding-right:0px; padding-left:0px;">
-																		<label><input type="radio" name="ExistingGroup" onClick="EnableDisControl(this);"></label>
+																	<div class="checkbox block col-sm-1 control-label" style="padding-right:0px; padding-left:0px;">
+																		<label><input type="checkbox" name="ExistingGroup" onClick="EnableDisControl(this);"></label>
 																	</div>
 																	<div class="col-sm-11" style="padding-right:0px; padding-left:0px;" >
 																		<select name="selGroupName"  class="form-control1" >
