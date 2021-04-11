@@ -42,7 +42,7 @@ while( $row = mysqli_fetch_array( $result ) )
 												<div class="signin-form profile">
 													<h2>Register</h2>
 													<div class="login-form">
-														<form name="frmreg" method="post" action="DQteamregister.php" >
+														<form name="frmreg" method="post" action="DQteamregister.php" onsubmit="return validate(this)" >
 															<input type="text" name="uname" placeholder="User Name" required="">
 															<input type="password" name="userpassword" placeholder="Your password" required="">
 
@@ -75,7 +75,7 @@ while( $row = mysqli_fetch_array( $result ) )
 																			<button type="button" class="btn btn-primary pull-right" onClick="Refreshpage();">cancel</button>
 																		</div>
 																		<div class="col-md-6">
-																			<button type="submit" class="btn btn-success pull-left" onclick="validate();">Sign Up</button>
+																			<button type="submit" class="btn btn-success pull-left" >Sign Up</button>
 																		</div>
 
 																	</div>
@@ -157,6 +157,7 @@ let optionsLength = document.getElementById("selGroupName").length;
 if(optionsLength == 1){
 //if(document.frmreg.selGroupName.options.length == 0){
 		alert('Oops, looks like you did a mistake in selecting/entering leaguename; Lets try doing it again.');
+		return false;
 		location.href="DQteamlogin.php";
 	}
 }
