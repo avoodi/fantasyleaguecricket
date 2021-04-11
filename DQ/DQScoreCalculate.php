@@ -61,15 +61,36 @@ for($count=0; $count<$groupCount; $count++) {
     $keypoints=array_search($answerDqId[$ansCount].$groupnameArray[$count],$qIdDQMaster);
     echo "the key is ". $key . " and the key point is ". $keypoints ."</br>";
     echo "the actual answer is ". $answermaster[$key] . "and your answer is ". $youranswer[$ansCount] ."and poins for this ans are ".$qPointsDQMaster[$keypoints]."</br>";
-    if ( $answermaster[$key]==$youranswer[$ansCount] )
-     {
-       echo " you got the answer right so you get ".$qPointsDQMaster[$keypoints]." points </br>";
-       $sqlUpdt="update DQanswersdetails set score=$qPointsDQMaster[$keypoints] where groupname='$groupnameArray[$count]' and iplday=$iplday-1 and qId=$answerDqId[$ansCount] and username='$uname[$ansCount]' ";
-     }
-    else {
-      $sqlUpdt="update DQanswersdetails set score=0 where groupname='$groupnameArray[$count]' and iplday=$iplday-1 and qId=$answerDqId[$ansCount] and username='$uname[$ansCount]' ";
-      echo " your answer is incorrect </br>";
-    }
+
+        if ( $answermaster[$key]==$youranswer[$ansCount] )
+         {
+           echo " you got the answer right so you get ".$qPointsDQMaster[$keypoints]." points </br>";
+           $sqlUpdt="update DQanswersdetails set score=$qPointsDQMaster[$keypoints] where groupname='$groupnameArray[$count]' and iplday=$iplday-1 and qId=$answerDqId[$ansCount] and username='$uname[$ansCount]' ";
+         }
+        else {
+          #the ans is not matching exactly, but for the sixer question we should check closest match and give points accordingly
+          if($ansCount==2 || $ansCount==5){
+            if(($youranswer[$ansCount] == $answermaster[$key]+1) ||($youranswer[$ansCount] == $answermaster[$key]-1) {
+              #full points even for +/- 1
+              echo " you got the answer +/-1 right so you get ".$qPointsDQMaster[$keypoints]." points </br>";
+              $sqlUpdt="update DQanswersdetails set score=$qPointsDQMaster[$keypoints] where groupname='$groupnameArray[$count]' and iplday=$iplday-1 and qId=$answerDqId[$ansCount] and username='$uname[$ansCount]' ";
+            }
+            elseif(($youranswer[$ansCount] == $answermaster[$key]+2) ||($youranswer[$ansCount] == $answermaster[$key]-2) {
+              #half points even for +/- 2
+              echo " you got the answer +/-2 right so you get ".$qPointsDQMaster[$keypoints]/2." points </br>";
+              $sqlUpdt="update DQanswersdetails set score=$qPointsDQMaster[$keypoints]/2 where groupname='$groupnameArray[$count]' and iplday=$iplday-1 and qId=$answerDqId[$ansCount] and username='$uname[$ansCount]' ";
+            }
+            else {
+              $sqlUpdt="update DQanswersdetails set score=0 where groupname='$groupnameArray[$count]' and iplday=$iplday-1 and qId=$answerDqId[$ansCount] and username='$uname[$ansCount]' ";
+              echo " your answer is incorrect </br>";
+            }
+          }
+          else {
+          $sqlUpdt="update DQanswersdetails set score=0 where groupname='$groupnameArray[$count]' and iplday=$iplday-1 and qId=$answerDqId[$ansCount] and username='$uname[$ansCount]' ";
+          echo " your answer is incorrect </br>";
+          }
+        }
+
     echo $sqlUpdt ."</br>";
     if(!mysqli_query($conn,$sqlUpdt) )
       {

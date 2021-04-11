@@ -1,5 +1,6 @@
 #!/usr/bin/php
 <?
+session_start();
 //echo $_POST['teamname']. " and " . $_POST['OwnerName'] . " and " . $_POST['OwnerEmail'] . " and " . $_POST['leaguename']. " and pass is ". $_POST['Pass'];
 $uname=$_POST['uname'];
 $userpassword=$_POST['userpassword'];
@@ -12,7 +13,7 @@ include "dbConnect.php";
 global $conn;
 //echo " now user name ".$uname;
 //set session vars
-session_start();
+
 $_SESSION['uname']=$uname;
 $_SESSION['userpassword']=$userpassword;
 $_SESSION['grouppwd'] = $grouppwd;
@@ -136,12 +137,16 @@ if ($count ==0 ) {
 		<td align="center"><strong>Thanks</strong>For Registration.</td>
 	</tr>
 	<tr>
-		<td align="center">You can continue by visting your team page link given below :</td>
+		<td align="center">By clicking on the link below You will be taken to your home page where you can find daily questions to predict, scoreboard and other info</td>
 	</tr>
 	<tr>
-		<td align="center">Login URL :<a href="DQLandingPg.php"><strong>Click Here?</strong></a> </td>
-	</tr>	<tr>
-			<td align="center"> If you have any questions please write to avoodi@gmail.com </td>
+		<td align="center">The questions are open till 7PM on days when 1 match is there and till 3pm when 2 matches are there</td>
+	</tr>
+	<tr>
+		<td align="center"><a href="DQLandingPg-New.php"><strong>click here</strong></a> </td>
+	</tr>
+	<tr>
+			<td align="center"> If you have any questions please write to avoodi@gmail.com or WA me :)</td>
 		</tr>
 </table>
 
