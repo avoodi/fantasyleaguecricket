@@ -116,7 +116,7 @@ if(! mysqli_query($conn,$sql_6) )
 
 if ($count ==0 ) {
 // need to insert team details to leagueteamdetails
-//	$sql3= "insert into leagueteamsdetails (teamname, leaguename, teamownername, teamowneremail,team_password, purchasepower, numberofplayers, totalteamscore, matcheswon, matcheslost, matchesdrawn, averagescore, currentbidamount, virtualpurchasepower, points, averagestrikerate) values('$uname','$groupname','$uname','$grouppwd','$userpassword',0,0,0,0,0,0,0,0,0,0,0)";
+	$sql3= "insert into leagueteamsdetails (teamname, leaguename, teamownername, teamowneremail,team_password, purchasepower, numberofplayers, totalteamscore, matcheswon, matcheslost, matchesdrawn, averagescore, currentbidamount, virtualpurchasepower, points, averagestrikerate) values('$uname','$groupname','$uname','$grouppwd','$userpassword',0,0,0,0,0,0,0,0,0,0,0)";
 //echo $sql3 ."\n";
 	if(! mysqli_query($conn,$sql3) )
 	{
