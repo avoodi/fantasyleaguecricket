@@ -194,8 +194,14 @@
 				<div class="row p-3">
 					<? if ($isOwner=='No') {?>
 						<? if ($drawdone =='N') {?>
-							<code class="text-monospace text-danger bg-light p-1 mb-1"> <small>Match schedule for your team will appear below, after your league has enough teams and league creator has clicked on 'create draws' ! </small> </code>
-							<code class="text-monospace text-danger bg-light p-1"> <small> May be your league is still bidding for players ? Talk to the league creator ; and should you need any help/have questions , do write to <a href="mailto:avoodi@gmail.com" class="text-success"> avoodi@gmail.com </a></small></code>
+							<div class="blockquote border border-dangers rounded p-2">
+								<ul class="list text-muted">
+									<li>Match schedule for your team will appear below, after your league has enough teams and league creator has clicked on 'create draws' ! </li>
+									<li>May be your league is still bidding for players ? Talk to the league creator ; and should you need any help/have questions , do write to <a href="mailto:avoodi@gmail.com" class="text-success"> avoodi@gmail.com</li>
+									</ul>
+								</div>
+							<!--code class="text-monospace text-danger bg-light p-1 mb-1"> <small>Match schedule for your team will appear below, after your league has enough teams and league creator has clicked on 'create draws' ! </small> </code>
+							<code class="text-monospace text-danger bg-light p-1"> <small> May be your league is still bidding for players ? Talk to the league creator ; and should you need any help/have questions , do write to <a href="mailto:avoodi@gmail.com" class="text-success"> avoodi@gmail.com </a></small></code-->
 						<? } ?>
 					<? } ?>
 				</div>

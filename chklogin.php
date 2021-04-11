@@ -40,7 +40,7 @@ if (!$conn) {
 }
 
 $sql="SELECT teamname,teamownername  FROM leagueteamsdetails WHERE leaguename= '$leaguename' and TEAMOWNEREMAIL='$username' AND TEAM_PASSWORD ='$pwd' ";
-echo $sql ;
+//echo $sql ;
 
 $result = mysqli_query($conn,$sql) ;
 while( $row = mysqli_fetch_array( $result ) )
