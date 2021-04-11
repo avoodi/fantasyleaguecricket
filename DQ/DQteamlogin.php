@@ -154,10 +154,11 @@ function Refreshpage()
 function validate()
 {		alert('HI The selectbox ');
 valid=true;
-cked='no';
-let optionsLength = document.getElementById("selGroupName").length;
-let value = document.getElementById("selGroupName").value;
+
+let optionselected = document.getElementById("selGroupName").value;
+let value = document.getElementById("ExistingGroup").checked;
 alert("The value is : "+value);
+alert("The selected is : "+optionselected);
 
 //if(optionsLength == 1 && document.frmreg.existingLeagueCheck.checked ==true){
 //if(document.frmreg.selGroupName.options.length == 0){
