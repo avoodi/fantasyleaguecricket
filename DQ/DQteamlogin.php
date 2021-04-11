@@ -75,7 +75,7 @@ while( $row = mysqli_fetch_array( $result ) )
 																			<button type="button" class="btn btn-primary pull-right" onClick="Refreshpage();">cancel</button>
 																		</div>
 																		<div class="col-md-6">
-																			<button type="submit" class="btn btn-success pull-left">Sign Up</button>
+																			<button type="submit" class="btn btn-success pull-left" onclick="validate();">Sign Up</button>
 																		</div>
 
 																	</div>
@@ -140,7 +140,6 @@ function EnableDisControl(theField)
 
 function DisSel(theField)
 {
-
   if(theField.name == "groupname")
   {
   		document.frmreg.selGroupName.disabled = true;
@@ -150,6 +149,12 @@ function DisSel(theField)
 function Refreshpage()
 {
 	location.href="DQteamlogin.php";
+}
+function validate()
+{
+	if(document.frmreg.selGroupName.options.length == 0){
+		alert('The selectbox contains 0 items');
+	}
 }
 //-->
 </script>
