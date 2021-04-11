@@ -53,7 +53,7 @@ while( $row = mysqli_fetch_array( $result ) )
 																		<label><input type="checkbox" name="ExistingGroup" onClick="EnableDisControl(this);"></label>
 																	</div>
 																	<div class="col-sm-11" style="padding-right:0px; padding-left:0px;" >
-																		<select name="selGroupName"  class="form-control1" >
+																		<select name="selGroupName" id='selGroupName' class="form-control1" >
 																			<option value="">Select Group</option>
 																			<?
 																			foreach($arr1 as $lname) {
