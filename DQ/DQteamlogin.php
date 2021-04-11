@@ -153,21 +153,21 @@ function Refreshpage()
 }
 
 function validate()
-{		alert('HI The selectbox ');
+{		//alert('HI The selectbox ');
 valid=true;
 
 optionselected = document.getElementById("selGroupName").value;
 checkboxvalue = document.getElementById("ExistingGroup").checked;
-alert("The value is : "+checkboxvalue);
-alert("The selected is : "+optionselected);
+//alert("The value is : "+checkboxvalue);
+//alert("The selected is : "+optionselected);
 if(optionselected === 'dummy' && checkboxvalue === 'true'){
-		alert('Oops, looks like you did a mistake in selecting/entering leaguename; Lets hit cancel button and try doing it again.');
-//		valid=false;
+	//	alert('Oops, looks like you did a mistake in selecting/entering leaguename; Lets hit cancel button and try doing it again.');
+	valid=false;
 		//	location.href="DQteamlogin.php";
 	}
 	else {
-		alert('nice all good ');
-//		valid=true;
+//		alert('nice all good ');
+		valid=true;
 		//document.getElementById('formID').submit();
 		//return(true);
 	}
