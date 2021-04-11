@@ -151,12 +151,13 @@ function Refreshpage()
 	location.href="DQteamlogin.php";
 }
 function validate()
-{		alert('HI The selectbox contains 0 items');
+{		//alert('HI The selectbox contains 0 items');
 let optionsLength = document.getElementById("selGroupName").length;
-alert("The Length is : "+optionsLength);
-if(optionsLength == 0){
+//alert("The Length is : "+optionsLength);
+if(optionsLength == 1){
 //if(document.frmreg.selGroupName.options.length == 0){
-		alert('The selectbox contains 0 items');
+		alert('Oops, looks like you did a mistake in selecting/entering leaguename; Lets try doing it again.');
+		location.href="DQteamlogin.php";
 	}
 }
 //-->
