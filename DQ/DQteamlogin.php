@@ -42,7 +42,7 @@ while( $row = mysqli_fetch_array( $result ) )
 												<div class="signin-form profile">
 													<h2>Register</h2>
 													<div class="login-form">
-														<form name="frmreg" method="post" action="DQteamregister.php" onsubmit="return validate(this)" >
+														<form name="frmreg" method="post" id="formID" action="DQteamregister.php" >
 															<input type="text" name="uname" placeholder="User Name" required="">
 															<input type="password" name="userpassword" placeholder="Your password" required="">
 
@@ -75,7 +75,8 @@ while( $row = mysqli_fetch_array( $result ) )
 																			<button type="button" class="btn btn-primary pull-right" onClick="Refreshpage();">cancel</button>
 																		</div>
 																		<div class="col-md-6">
-																			<button type="submit" class="btn btn-success pull-left" >Sign Up</button>
+																			<!--button type="submit" class="btn btn-success pull-left" onclick="JavaScript:return validate();">Sign Up</button-->
+																			<input type="button" class="btn btn-success pull-left" onclick="JavaScript:return validate();">Sign Up</button>
 																		</div>
 
 																	</div>
@@ -157,8 +158,12 @@ let optionsLength = document.getElementById("selGroupName").length;
 if(optionsLength == 1 && document.frmreg.existingLeagueCheck.checked ==true){
 //if(document.frmreg.selGroupName.options.length == 0){
 		alert('Oops, looks like you did a mistake in selecting/entering leaguename; Lets hit cancel button and try doing it again.');
-		return false;
+		return(false);
 		location.href="DQteamlogin.php";
+	}
+	else {
+		document.getElementById('formID').submit();
+		return(true);
 	}
 }
 //-->
