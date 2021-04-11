@@ -66,7 +66,7 @@ else {
 }
 
 //echo " the session vars are  " . $_SESSION['teamname'] . " and " . $_SESSION['leaguename']  ."<br/>" ;
-
+echo "before insert the blank count is".$blankgroupname ." how is it </br>";
 if ($existinggroup=="no" && $count==0 && $blankgroupname==0 ){
 // this means its a new league - and then we have to set it up by inserting into 3 tables
 // lets first set this user as leaguecreator
