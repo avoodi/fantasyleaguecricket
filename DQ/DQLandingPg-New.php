@@ -265,7 +265,7 @@
 										<?echo $qPoints[0] ;?>
 									</td>
 									<td > <!-- need to check this 4/10 should this be $i+1 or just 0+1?  -->
-										<?echo $otherAnswers[$i+1]; ?>
+										<?echo $otherAnswers[1]; ?>
 									</td>
 									<td> <input type="hidden" name="qId[]" value="<?echo $qId[0];?>"> </td>
 									<td> <input type="hidden" name="question[]" value="<?echo $question[0];?>"> </td>
@@ -285,7 +285,7 @@
 											<?echo $qPoints[1] ;?>
 									</td>
 									<td > <!-- need to check this 4/10 should this be $i+1 or just 0+1?  -->
-											<?echo $otherAnswers[$i+1]; ?>
+											<?echo $otherAnswers[2]; ?>
 									</td>
 									<td> <input type="hidden" name="qId[]" value="<?echo $qId[1];?>"> </td>
 									<td> <input type="hidden" name="question[]" value="<?echo $question[1];?>"> </td>
@@ -300,7 +300,7 @@
 									<?echo $qPoints[2] ;?>
 								</td>
 								<td ><!-- need to check this 4/10 should this be $i+1 or just 0+1?  -->
-									<?echo $otherAnswers[$i+1]; ?>
+									<?echo $otherAnswers[3]; ?>
 								</td>
 								<td> <input type="hidden" name="qId[]" value="<?echo $qId[2];?>"> </td>
 								<td> <input type="hidden" name="question[]" value="<?echo $question[2];?>"> </td>
@@ -326,7 +326,7 @@
 										<?echo $qPoints[3] ;?>
 									</td>
 									<td > <!-- need to check this 4/10 should this be $i+1 or just 0+1?  -->
-										<?echo $otherAnswers[$i+1]; ?>
+										<?echo $otherAnswers[4]; ?>
 									</td>
 									<td> <input type="hidden" name="qId[]" value="<?echo $qId[3];?>"> </td>
 									<td> <input type="hidden" name="question[]" value="<?echo $question[3];?>"> </td>
@@ -346,7 +346,7 @@
 											<?echo $qPoints[4] ;?>
 									</td>
 									<td > <!-- need to check this 4/10 should this be $i+1 or just 0+1?  -->
-											<?echo $otherAnswers[$i+1]; ?>
+											<?echo $otherAnswers[5]; ?>
 									</td>
 									<td> <input type="hidden" name="qId[]" value="<?echo $qId[4];?>"> </td>
 									<td> <input type="hidden" name="question[]" value="<?echo $question[4];?>"> </td>
@@ -361,7 +361,7 @@
 									<?echo $qPoints[5] ;?>
 								</td>
 								<td ><!-- need to check this 4/10 should this be $i+1 or just 0+1?  -->
-									<?echo $otherAnswers[$i+1]; ?>
+									<?echo $otherAnswers[6]; ?>
 								</td>
 								<td> <input type="hidden" name="qId[]" value="<?echo $qId[5];?>"> </td>
 								<td> <input type="hidden" name="question[]" value="<?echo $question[5];?>"> </td>
