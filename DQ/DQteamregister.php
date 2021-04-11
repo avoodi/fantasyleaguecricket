@@ -26,7 +26,7 @@ $blankgroupname=0;
 if (isset($_POST['selGroupName']) )
 {
 	$groupname = $_POST['selGroupName'];
-	if($groupname=='') {
+	if($groupname=='') { // we are checking this in DQteamlogin so pl remove it after few days
 		$blankgroupname=1;
 		echo '<script type="text/javascript">alert("Oops, looks like you did a mistake in selecting/entering leaguename; Lets try doing it again."); window.location = "./DQteamlogin.php" </script>';
 	}
@@ -66,8 +66,7 @@ else {
 }
 
 //echo " the session vars are  " . $_SESSION['teamname'] . " and " . $_SESSION['leaguename']  ."<br/>" ;
-echo "before insert the blank count is".$blankgroupname ." how is it </br>";
-if ($existinggroup=="no" && $count==0 && $blankgroupname==0 ){
+if ($existinggroup=="no" && $count==0){
 // this means its a new league - and then we have to set it up by inserting into 3 tables
 // lets first set this user as leaguecreator
 $_SESSION['groupname']=$groupname;
@@ -117,8 +116,8 @@ if(! mysqli_query($conn,$sql_6) )
 
 if ($count ==0 ) {
 // need to insert team details to leagueteamdetails
-	$sql3= "insert into leagueteamsdetails (teamname, leaguename, teamownername, teamowneremail,team_password, purchasepower, numberofplayers, totalteamscore, matcheswon, matcheslost, matchesdrawn, averagescore, currentbidamount, virtualpurchasepower, points, averagestrikerate) values('$uname','$groupname','$uname','$grouppwd','$userpassword',0,0,0,0,0,0,0,0,0,0,0)";
-echo $sql3 ."\n";
+//	$sql3= "insert into leagueteamsdetails (teamname, leaguename, teamownername, teamowneremail,team_password, purchasepower, numberofplayers, totalteamscore, matcheswon, matcheslost, matchesdrawn, averagescore, currentbidamount, virtualpurchasepower, points, averagestrikerate) values('$uname','$groupname','$uname','$grouppwd','$userpassword',0,0,0,0,0,0,0,0,0,0,0)";
+//echo $sql3 ."\n";
 	if(! mysqli_query($conn,$sql3) )
 	{
 		die('error sql3');

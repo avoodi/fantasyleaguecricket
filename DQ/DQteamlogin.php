@@ -156,7 +156,7 @@ let optionsLength = document.getElementById("selGroupName").length;
 //alert("The Length is : "+optionsLength);
 if(optionsLength == 1){
 //if(document.frmreg.selGroupName.options.length == 0){
-		alert('Oops, looks like you did a mistake in selecting/entering leaguename; Lets try doing it again.');
+		alert('Oops, looks like you did a mistake in selecting/entering leaguename; Lets hit cancel button and try doing it again.');
 		return false;
 		location.href="DQteamlogin.php";
 	}
