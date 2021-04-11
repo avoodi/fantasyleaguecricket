@@ -75,8 +75,8 @@ while( $row = mysqli_fetch_array( $result ) )
 																			<button type="button" class="btn btn-primary pull-right" onClick="Refreshpage();">cancel</button>
 																		</div>
 																		<div class="col-md-6">
-																			<!--button type="submit" class="btn btn-success pull-left" onclick="JavaScript:return validate();">Sign Up</button-->
-																			<button type="button" class="btn btn-success pull-left" >Sign Up</button>
+																			<button type="submit" class="btn btn-success pull-left" >Sign Up</button>
+																			<!--button type="button" class="btn btn-success pull-left" >Sign Up</button-->
 																		</div>
 
 																	</div>
