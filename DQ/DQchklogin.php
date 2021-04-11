@@ -7,12 +7,12 @@
         $_SESSION['uname']=$_POST['username'];
         $_SESSION['pwd']=$_POST['pass'];
         $_SESSION['groupname']=$_POST['groupname'];
-        $_SESSION['grouppwd']=$_POST['grouppwd'];
+        //$_SESSION['grouppwd']=$_POST['grouppwd'];
 
     $uname=$_SESSION['uname'];
     $pwd=$_SESSION['pwd'];
     $groupname=$_SESSION['groupname'];
-    $grouppwd=$_SESSION['grouppwd'];
+    //$grouppwd=$_SESSION['grouppwd'];
 
     $isPresent=0;
     //echo "in chck login " . $uname . " " .$pwd . " " .$groupname. "</br>";
@@ -22,9 +22,9 @@ if (!$conn) {
     die("Connection failed: " . mysqli_connect_error());
 }
 
-$sql="SELECT teamname  FROM leagueteamsdetails WHERE leaguename= '$groupname' and teamname='$uname' and team_password='$pwd' ANd teamowneremail='$grouppwd' ";
+//$sql="SELECT teamname  FROM leagueteamsdetails WHERE leaguename= '$groupname' and teamname='$uname' and team_password='$pwd' ANd teamowneremail='$grouppwd' ";
 //removing group password
-//$sql="SELECT teamname  FROM leagueteamsdetails WHERE leaguename= '$groupname' and teamname='$uname' and team_password='$pwd' ";
+$sql="SELECT teamname  FROM leagueteamsdetails WHERE leaguename= '$groupname' and teamname='$uname' and team_password='$pwd' ";
 
 //echo $sql ;
 
