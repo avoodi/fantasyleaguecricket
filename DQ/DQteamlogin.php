@@ -151,6 +151,7 @@ function Refreshpage()
 {
 	location.href="DQteamlogin.php";
 }
+
 function validate()
 {		alert('HI The selectbox ');
 valid=true;
@@ -162,15 +163,15 @@ alert("The selected is : "+optionselected);
 
 //if(optionsLength == 1 && document.frmreg.existingLeagueCheck.checked ==true){
 //if(document.frmreg.selGroupName.options.length == 0){
-		alert('Oops, looks like you did a mistake in selecting/entering leaguename; Lets hit cancel button and try doing it again.');
-		valid=false;
+//		alert('Oops, looks like you did a mistake in selecting/entering leaguename; Lets hit cancel button and try doing it again.');
+//		valid=false;
 		//	location.href="DQteamlogin.php";
-	}
-	else {
-		valid=true;
+//	}
+//	else {
+//		valid=true;
 		//document.getElementById('formID').submit();
 		//return(true);
-	}
+//	}
 	return valid;
 }
 //-->
