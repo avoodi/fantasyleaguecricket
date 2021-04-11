@@ -156,12 +156,12 @@ function validate()
 {		alert('HI The selectbox ');
 valid=true;
 
-let optionselected = document.getElementById("selGroupName").value;
-let checkboxvalue = document.getElementById("ExistingGroup").checked;
+optionselected = document.getElementById("selGroupName").value;
+checkboxvalue = document.getElementById("ExistingGroup").checked;
 alert("The value is : "+checkboxvalue);
 alert("The selected is : "+optionselected);
 
-if(optionselected=="dummy" && checkboxvalue=="true"){
+if(optionselected == "dummy" && checkboxvalue == "true"){
 		alert('Oops, looks like you did a mistake in selecting/entering leaguename; Lets hit cancel button and try doing it again.');
 //		valid=false;
 		//	location.href="DQteamlogin.php";
