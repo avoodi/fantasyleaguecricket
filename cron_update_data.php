@@ -37,7 +37,8 @@ while( $row = mysqli_fetch_array( $result ) )
 {
   $matchid[$count]=$row[0];
   echo "collected matchid in array ".$matchid[$count];
-}
+  $count++;
+  }
 //$matchid1=1237181;
 //$matchid2=1216530;
 foreach ($matchid as $value) {
